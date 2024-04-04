@@ -1,21 +1,17 @@
 package service;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import bean.UserBean;
+import dto.LoggedUser;
 import dto.PasswordDto;
-import dto.Task;
 import dto.User;
 import dto.UserDto;
-import entities.UserEntity;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.hibernate.query.sqm.function.SelfRenderingOrderedSetAggregateFunctionSqlAstExpression;
 import utilities.EncryptHelper;
 
 
@@ -114,6 +110,7 @@ public class UserService {
             return Response.status(403).entity("Forbidden").build();
         }
         User user = userBean.getUserByUsername(username);
+
         UserDto userDto = userBean.convertUsertoUserDto(user);
         return Response.status(200).entity(userDto).build();
     }
@@ -174,11 +171,11 @@ public class UserService {
        if(!userBean.userNameExists(username)){
            return Response.status(404).entity("User with this username is not found").build();
        }
-        String token = userBean.login(username, password);
-        if (token == null) {
+        LoggedUser loggedUser = userBean.login(username, password);
+        if (loggedUser == null) {
             return Response.status(403).entity("User is not active").build();
         } else {
-            return Response.status(200).entity(token).build();
+            return Response.status(200).entity(loggedUser).build();
 
         }
     }

@@ -377,7 +377,7 @@ public class TaskService {
     @Path("")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFilteredTasks(@HeaderParam("token") String token, @QueryParam("active") Boolean active, @QueryParam("category") String category, @QueryParam("username") String username, @QueryParam("id") String taskId) {
-        System.out.println("task id: " + taskId);
+
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(401).entity("Unauthorized").build();

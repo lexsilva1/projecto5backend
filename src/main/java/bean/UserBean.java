@@ -4,13 +4,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
 
+import dao.MessageDao;
 import dao.UserDao;
-import dto.PasswordDto;
-import dto.Task;
-import dto.UserDto;
+
+import dto.*;
+import entities.MessageEntity;
 import entities.TaskEntity;
 import entities.UserEntity;
 import jakarta.ejb.EJB;
@@ -18,12 +21,13 @@ import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.ApplicationScoped;
-import dto.User;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.json.bind.JsonbConfig;
 import jakarta.security.enterprise.credential.Password;
 import utilities.EncryptHelper;
+
+import static jakarta.xml.bind.DatatypeConverter.parseDate;
 
 @Singleton
 public class UserBean {
@@ -34,6 +38,8 @@ public class UserBean {
     UserDao userDao;
     @EJB
     TaskBean taskDao;
+    @EJB
+    MessageDao MessageDao;
     @EJB
     EncryptHelper EncryptHelper;
 
@@ -136,7 +142,7 @@ public class UserBean {
         return a != null;
     }
 
-    public String login(String username, String password) {
+    public LoggedUser login(String username, String password) {
         UserEntity user = userDao.findUserByUsername(username);
         String password1 = EncryptHelper.encryptPassword(password);
         if (user != null && user.isActive()) {
@@ -150,7 +156,7 @@ public class UserBean {
             }
             user.setToken(token);
             userDao.updateToken(user);
-            return token;
+            return convertEntityToLoggedUser(user);
         }
         return null;
     }
@@ -401,6 +407,34 @@ public class UserBean {
         return usersDto;
 
     }
+    public void sendMessage( MessageDto messageDto) {
+        UserEntity sender = userDao.findUserByUsername(messageDto.getSender());
+        UserEntity receiver = userDao.findUserByUsername(messageDto.getReceiver());
+        if (sender != null && receiver != null) {
+            MessageEntity message = new MessageEntity();
+            message.setSender(sender);
+            message.setReceiver(receiver);
+            message.setMessage(messageDto.getMessage());
+            message.setTimestamp(LocalDateTime.parse(messageDto.getSendDate()));
+            message.setRead(false);
+            System.out.println("Message sent from " + sender.getUsername() + " to " + receiver.getUsername() + " at " + message.getTimestamp());
+            MessageDao.persist(message);
+
+        }
+
+    }
+    public LoggedUser convertEntityToLoggedUser(UserEntity userEntity) {
+        LoggedUser loggedUser = new LoggedUser();
+        loggedUser.setUsername(userEntity.getUsername());
+        loggedUser.setName(userEntity.getName());
+        loggedUser.setEmail(userEntity.getEmail());
+        loggedUser.setContactNumber(userEntity.getContactNumber());
+        loggedUser.setUserPhoto(userEntity.getUserPhoto());
+        loggedUser.setRole(userEntity.getRole());
+        loggedUser.setToken(userEntity.getToken());
+        return loggedUser;
+    }
+
 }
 
 
