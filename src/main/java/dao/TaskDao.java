@@ -150,6 +150,15 @@ public class TaskDao extends AbstractDao<TaskEntity>{
             return null;
         }
     }
+    public List<TaskEntity> findTasksByUserAndStatus(UserEntity userEntity, int status) {
+        try {
+            List<TaskEntity> taskEntityEntities = (List<TaskEntity>) em.createNamedQuery("Task.findTasksByUserAndStatus").setParameter("user", userEntity).setParameter("status", status).getResultList();
+            return taskEntityEntities;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
 
 }

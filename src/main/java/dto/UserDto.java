@@ -10,7 +10,10 @@ public class UserDto {
     private String ContactNumber;
     private String role;
     private String userPhoto;
-
+    private int tasks;
+    private int todoTasks;
+    private int doingTasks;
+    private int doneTasks;
     private String username;
 
     public UserDto() {
@@ -62,5 +65,35 @@ public class UserDto {
     public void setUsername(String username) {
         this.username = username;
     }
+    @XmlElement
+    public int getTasks() {
+        return tasks;
+    }
+    public void setTasks(int tasks) {
+        this.tasks = tasks;
+    }
 
+    public int getTodoTasks() {
+        return todoTasks;
+    }
+
+    public void setTodoTasks(int todoTasks) {
+        this.todoTasks = todoTasks;
+    }
+
+    public int getDoingTasks() {
+        return doingTasks;
+    }
+
+    public void setDoingTasks(int doingTasks) {
+        this.doingTasks = doingTasks;
+    }
+
+    public int getDoneTasks() {
+        return doneTasks;
+    }
+
+    public void setDoneTasks(int doneTasks) {
+        this.doneTasks = doneTasks;
+    }
 }

@@ -2,10 +2,7 @@ package service;
 
 import bean.TaskBean;
 import bean.UserBean;
-import dto.Category;
-import dto.Task;
-import dto.TaskCreator;
-import dto.User;
+import dto.*;
 import entities.TaskEntity;
 import entities.UserEntity;
 import entities.CategoryEntity;
@@ -75,25 +72,7 @@ public class TaskService {
         }
     }
 
-    @GET
-    @Path("/byUser/{username}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getTasksByUser(@HeaderParam("token") String token, @PathParam("username") String username) {
-        boolean authorized = userBean.isUserAuthorized(token);
-        if (!authorized) {
-            return Response.status(401).entity("Unauthorized").build();
-        } else {
-            User user = userBean.getUserByUsername(username);
-            ArrayList<Task> taskList = new ArrayList<>();
-            for (TaskEntity taskEntity : taskBean.getTasksByUser(userBean.convertToEntity(user))) {
-                if (taskEntity.isActive()) {
-                    taskList.add(taskBean.convertToDto(taskEntity));
-                }
-            }
-            taskList.sort(Comparator.comparing(Task::getPriority, Comparator.reverseOrder()).thenComparing(Comparator.comparing(Task::getStartDate).thenComparing(Task::getEndDate)));
-            return Response.status(200).entity(taskList).build();
-        }
-    }
+
 
     @GET
     @Path("/byCategory/{category}")
@@ -124,8 +103,8 @@ public class TaskService {
         if (!authorized) {
             return Response.status(401).entity("Unauthorized").build();
         } else {
-            User user = userBean.getUserByUsername(username);
-            boolean removed = taskBean.deleteAllTasksByUser(userBean.convertToEntity(user));
+            UserEntity user = userBean.getUserEntityByUsername(username);
+            boolean removed = taskBean.deleteAllTasksByUser(user);
             if (!removed) {
                 return Response.status(400).entity("Failed. Tasks not removed").build();
             } else {

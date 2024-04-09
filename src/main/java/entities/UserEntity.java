@@ -32,6 +32,9 @@ public class UserEntity implements Serializable{
     String role;
     @Column (name="active", nullable = false, unique = false)
     boolean active;
+    @Column (name="confirmed", nullable = false, unique = false)
+    boolean confirmed;
+
     public String getUsername() {
         return username;
     }
@@ -98,6 +101,12 @@ public class UserEntity implements Serializable{
     }
     public void setActive(boolean active) {
         this.active = active;
+    }
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+    public void setConfirmed() {
+        this.confirmed = !this.confirmed;
     }
 }
 

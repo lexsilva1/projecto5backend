@@ -109,10 +109,11 @@ public class UserService {
         }else if(userBean.getUser(token).getRole().equals("developer") && !userBean.getUser(token).getUsername().equals(username)){
             return Response.status(403).entity("Forbidden").build();
         }
-        User user = userBean.getUserByUsername(username);
+        UserDto user = userBean.getUserByUsername(username);
+        System.out.println(user.getDoingTasks()+" "+user.getTodoTasks()+" "+user.getDoingTasks());
 
-        UserDto userDto = userBean.convertUsertoUserDto(user);
-        return Response.status(200).entity(userDto).build();
+
+        return Response.status(200).entity(user).build();
     }
     @PUT
     @Path("")

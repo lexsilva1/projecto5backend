@@ -10,7 +10,9 @@ import java.util.List;
 import java.sql.Timestamp;
 
 import dao.MessageDao;
+import dao.TaskDao;
 import dao.UserDao;
+import bean.TaskBean;
 
 import dto.*;
 import entities.MessageEntity;
@@ -37,7 +39,9 @@ public class UserBean {
     @EJB
     UserDao userDao;
     @EJB
-    TaskBean taskDao;
+    TaskDao taskDao;
+    @EJB
+    TaskBean taskBean;
     @EJB
     MessageDao MessageDao;
     @EJB
@@ -197,9 +201,13 @@ public class UserBean {
         return true;
     }
 
-    public User getUserByUsername(String username) {
+    public UserDto getUserByUsername(String username) {
         UserEntity userEntity = userDao.findUserByUsername(username);
-        return convertToDto(userEntity);
+        return convertEntitytoUserDto(userEntity);
+    }
+    public UserEntity getUserEntityByUsername(String username) {
+        UserEntity userEntity = userDao.findUserByUsername(username);
+        return userEntity;
     }
 
     public UserEntity convertToEntity(User user) {
@@ -258,7 +266,7 @@ public class UserBean {
         }
         if (responsible.getRole().equals("Owner") && !user.isActive()) {
             if (doesUserHaveTasks(username)) {
-                List<TaskEntity> tasks = taskDao.getTasksByUser(user);
+                List<TaskEntity> tasks = taskBean.getTasksByUser(user);
                 UserEntity deletedUser = userDao.findUserByUsername("deleted");
                 for (TaskEntity task : tasks) {
                     task.setUser(deletedUser);
@@ -287,6 +295,21 @@ public class UserBean {
         userDto.setUsername(user.getUsername());
         return userDto;
     }
+    public UserDto convertEntitytoUserDto(UserEntity user) {
+        UserDto userDto = new UserDto();
+        userDto.setName(user.getName());
+        userDto.setEmail(user.getEmail());
+        userDto.setContactNumber(user.getContactNumber());
+        userDto.setRole(user.getRole());
+        userDto.setUserPhoto(user.getUserPhoto());
+        userDto.setUsername(user.getUsername());
+        userDto.setRole(user.getRole());
+        userDto.setTasks(taskBean.getTasksByUser(user).size());
+        userDto.setTodoTasks(taskDao.findTasksByUserAndStatus(user, 10).size());
+        userDto.setDoingTasks(taskDao.findTasksByUserAndStatus(user, 20).size());
+        userDto.setDoneTasks(taskDao.findTasksByUserAndStatus(user, 30).size());
+        return userDto;
+    }
 
     public boolean isUserOwner(String token) {
         UserEntity a = userDao.findUserByToken(token);
@@ -308,7 +331,7 @@ public class UserBean {
 
     public boolean doesUserHaveTasks(String username) {
         UserEntity a = userDao.findUserByUsername(username);
-        List<TaskEntity> tasks = taskDao.getTasksByUser(a);
+        List<TaskEntity> tasks = taskBean.getTasksByUser(a);
         if (tasks.size() > 0) {
             return true;
         } else {
