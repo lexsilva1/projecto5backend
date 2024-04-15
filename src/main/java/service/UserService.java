@@ -1,11 +1,10 @@
 package service;
 import java.util.ArrayList;
 import java.util.List;
+
+import bean.EmailBean;
 import bean.UserBean;
-import dto.LoggedUser;
-import dto.PasswordDto;
-import dto.User;
-import dto.UserDto;
+import dto.*;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.ws.rs.*;
@@ -21,6 +20,8 @@ public class UserService {
     private HttpServletRequest request;
     @Inject
     UserBean userBean;
+    @Inject
+    EmailBean emailBean;
     @Inject
     EncryptHelper encryptHelper;
     /*@GET
@@ -62,8 +63,12 @@ public class UserService {
     @POST
     @Path("")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addUser(User a) {
-       boolean valid = userBean.isUserValid(a);
+    public Response addUser(User a, @HeaderParam("token") String token) {
+        boolean unconfirmed = userBean.isUserUnconfirmed(token);
+        if (!unconfirmed) {
+            return Response.status(403).entity("Forbidden").build();
+        }
+        boolean valid = userBean.isUserValid(a);
         if (!valid) {
             return Response.status(400).entity("All elements are required are required").build();
         }
@@ -72,12 +77,15 @@ public class UserService {
 
             return Response.status(409).entity("User with this username is already exists").build();
         } else {
-            if(a.getRole() == null || a.getRole().isEmpty()){
+            if (a.getRole() == null || a.getRole().isEmpty()) {
                 a.setRole("developer");
             }
 
-            userBean.addUser(a);
-            return Response.status(201).entity("A new user is created").build();
+            if (userBean.addUser(a) && userBean.removeUnconfirmedUser(token)) {
+                return Response.status(201).entity("A new user is created").build();
+            } else {
+                return Response.status(400).entity("Failed. User not added").build();
+            }
         }
     }
 
@@ -250,6 +258,40 @@ public class UserService {
             System.out.println(users.size());
             return Response.status(200).entity(users).build();
         }
+    }
+    @POST
+    @Path("/unconfirmedUser")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addUnconfirmedUser(User a, @HeaderParam("token") String token) {
+        boolean authorized = userBean.isUserOwner(token);
+        if (!authorized) {
+            return Response.status(403).entity("Forbidden").build();
+        }
+        boolean user = userBean.userNameExists(a.getUsername());
+        if (user) {
+            return Response.status(409).entity("User with this username is already exists").build();
+        } else {
+            if(a.getRole() == null || a.getRole().isEmpty()){
+                a.setRole("developer");
+            }
+            boolean added = userBean.addUnconfirmedUser(a);
+            if(!added) {
+                return Response.status(400).entity("Failed. User not added").build();
+            }
+            UnconfirmedUser unconfirmedUser= userBean.getUnconfirmedUser(a.getUsername());
+            emailBean.sendConfirmationEmail(unconfirmedUser, unconfirmedUser.getToken(), unconfirmedUser.getCreationDate());
+            return Response.status(201).entity("A new user is created").build();
+        }
+    }
+    @GET
+    @Path("/unconfirmedUser/{token}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUnconfirmedUser(@PathParam("token") String token) {
+        UnconfirmedUser unconfirmedUser = userBean.getUnconfirmedUserByToken(token);
+        if (unconfirmedUser == null) {
+            return Response.status(404).entity("User with this token is not found").build();
+        }
+        return Response.status(200).entity(unconfirmedUser).build();
     }
 
 }

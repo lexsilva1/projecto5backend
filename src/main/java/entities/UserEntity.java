@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 @Entity
@@ -33,7 +34,7 @@ public class UserEntity implements Serializable{
     @Column (name="active", nullable = false, unique = false)
     boolean active;
     @Column (name="confirmed", nullable = false, unique = false)
-    boolean confirmed;
+    LocalDateTime confirmed;
 
     public String getUsername() {
         return username;
@@ -102,11 +103,13 @@ public class UserEntity implements Serializable{
     public void setActive(boolean active) {
         this.active = active;
     }
-    public boolean isConfirmed() {
+
+    public LocalDateTime getConfirmed() {
         return confirmed;
     }
-    public void setConfirmed() {
-        this.confirmed = !this.confirmed;
+
+    public void setConfirmed(LocalDateTime confirmed) {
+        this.confirmed = confirmed;
     }
 }
 

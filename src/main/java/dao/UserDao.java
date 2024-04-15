@@ -55,4 +55,5 @@ public class UserDao extends AbstractDao<UserEntity>{
     public List<UserEntity> findAllUsers() {
         return em.createNamedQuery("User.findAllUsers").getResultList();
     }
+
 }

@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 @Singleton
 @ServerEndpoint("/websocket/chat/{username}")
 public class Chat {
+
     HashMap<String, Session> sessions = new HashMap<String, Session>();
     @EJB
     private MessageDao messageDao;

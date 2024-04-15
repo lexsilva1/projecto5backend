@@ -11,12 +11,14 @@ import java.sql.Timestamp;
 
 import dao.MessageDao;
 import dao.TaskDao;
+import dao.UnconfirmedUSerDao;
 import dao.UserDao;
 import bean.TaskBean;
 
 import dto.*;
 import entities.MessageEntity;
 import entities.TaskEntity;
+import entities.UnconfirmedUserEntity;
 import entities.UserEntity;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
@@ -39,6 +41,8 @@ public class UserBean {
     @EJB
     UserDao userDao;
     @EJB
+    UnconfirmedUSerDao unconfirmedUSerDao;
+    @EJB
     TaskDao taskDao;
     @EJB
     TaskBean taskBean;
@@ -47,10 +51,17 @@ public class UserBean {
     @EJB
     EncryptHelper EncryptHelper;
 
-    public void addUser(User a) {
+    public boolean addUser(User a) {
+        if (a.getUsername().isBlank() || a.getName().isBlank() || a.getEmail().isBlank() || a.getContactNumber().isBlank() || a.getUserPhoto().isBlank()) {
+            return false;
+        } else if (a.getUsername() == null || a.getName() == null || a.getEmail() == null || a.getContactNumber() == null || a.getUserPhoto() == null) {
+            return false;
+        }
         a.setPassword(EncryptHelper.encryptPassword(a.getPassword()));
         UserEntity userEntity = convertToEntity(a);
+        userEntity.setConfirmed(LocalDateTime.now());
         userDao.persist(userEntity);
+        return true;
     }
 
     public User getUser(String token) {
@@ -83,6 +94,14 @@ public class UserBean {
         UserEntity a = userDao.findUserByUsername(username);
         if (a != null) {
             userDao.remove(a);
+            return true;
+        }
+        return false;
+    }
+    public boolean removeUnconfirmedUser(String token) {
+        UnconfirmedUserEntity a = unconfirmedUSerDao.findUserByToken(token);
+        if (a != null) {
+            unconfirmedUSerDao.remove(a);
             return true;
         }
         return false;
@@ -350,6 +369,7 @@ public class UserBean {
             userEntity.setUserPhoto("https://cdn-icons-png.freepik.com/512/10015/10015419.png");
             userEntity.setRole("Owner");
             userEntity.setActive(true);
+            userEntity.setConfirmed(LocalDateTime.now());
             userDao.persist(userEntity);
         }
         if (userDao.findUserByUsername("deleted") == null) {
@@ -363,6 +383,7 @@ public class UserBean {
             userEntity1.setUserPhoto("https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png");
             userEntity1.setRole("developer");
             userEntity1.setActive(true);
+            userEntity1.setConfirmed(LocalDateTime.now());
             userDao.persist(userEntity1);
         }
     }
@@ -457,8 +478,58 @@ public class UserBean {
         loggedUser.setToken(userEntity.getToken());
         return loggedUser;
     }
+    public boolean addUnconfirmedUser(User user){
+        UnconfirmedUserEntity unconfirmedUserEntity = new UnconfirmedUserEntity();
+        if(userDao.findUserByUsername(user.getUsername())!=null || user.getUsername() == null || user.getEmail() == null){
+            return false;
+        }else if(unconfirmedUSerDao.findUserByUsername(user.getUsername())!=null){
+            return false;
+            }else{
+                unconfirmedUserEntity.setUsername(user.getUsername());
+                unconfirmedUserEntity.setEmail(user.getEmail());
+                unconfirmedUserEntity.setRole(user.getRole());
+                unconfirmedUserEntity.setToken(generateToken());
+                unconfirmedUserEntity.setExpirationDate(LocalDateTime.now().plusHours(48));
+                unconfirmedUserEntity.setCreationDate(LocalDateTime.now());
+                unconfirmedUSerDao.addUnconfirmedUser(unconfirmedUserEntity);
+                return true;
+            }
+        }
+    public UnconfirmedUser getUnconfirmedUser(String username){
+        UnconfirmedUserEntity unconfirmedUserEntity = unconfirmedUSerDao.findUserByUsername(username);
+        UnconfirmedUser user = new UnconfirmedUser();
+        user.setUsername(unconfirmedUserEntity.getUsername());
+        user.setEmail(unconfirmedUserEntity.getEmail());
+        user.setRole(unconfirmedUserEntity.getRole());
+        user.setToken(unconfirmedUserEntity.getToken());
+        user.setCreationDate(unconfirmedUserEntity.getCreationDate());
+        user.setExpirationDate(unconfirmedUserEntity.getExpirationDate());
+        return user;
+    }
+        public boolean isUserUnconfirmed(String token){
+        UnconfirmedUserEntity a = unconfirmedUSerDao.findUserByToken(token);
+        if(a!=null){
+        return true;
 
-}
+        }else
+        return false;
+        }
+
+        public UnconfirmedUser getUnconfirmedUserByToken(String token){
+        UnconfirmedUserEntity unconfirmedUserEntity = unconfirmedUSerDao.findUserByToken(token);
+        UnconfirmedUser user = new UnconfirmedUser();
+        user.setUsername(unconfirmedUserEntity.getUsername());
+        user.setEmail(unconfirmedUserEntity.getEmail());
+        user.setRole(unconfirmedUserEntity.getRole());
+        user.setToken(unconfirmedUserEntity.getToken());
+        user.setCreationDate(unconfirmedUserEntity.getCreationDate());
+        user.setExpirationDate(unconfirmedUserEntity.getExpirationDate());
+        return user;
+
+        }
+    }
+
+
 
 
 

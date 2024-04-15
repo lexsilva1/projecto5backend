@@ -159,7 +159,7 @@ public class TaskService {
     @Path("/Categories")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createCategory(Category category, @HeaderParam("token") String token) {
-        System.out.println("category: " + category.getName());
+
         boolean authorized = userBean.isUserOwner(token);
         User user = userBean.getUser(token);
         if (!authorized) {
