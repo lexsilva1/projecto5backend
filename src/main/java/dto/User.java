@@ -20,6 +20,7 @@ public class User {
     String userPhoto;
     String token;
     boolean active = true;
+    String passwordResetToken;
 
     public User() {
     }
@@ -101,29 +102,6 @@ public class User {
     }
 
 
-    /*public ArrayList<Task> orderedtasks() {
-        ArrayList<Task> status10 = new ArrayList<Task>();
-        ArrayList<Task> status20 = new ArrayList<Task>();
-        ArrayList<Task> status30 = new ArrayList<Task>();
-        for (Task a : tasks) {
-            if (a.getStatus() == 10) {
-                status10.add(a);
-            } else if (a.getStatus() == 20) {
-                status20.add(a);
-            } else if (a.getStatus() == 30) {
-                status30.add(a);
-            }
-        }
-        status10.sort(Comparator.comparing(Task::getPriority,Comparator.reverseOrder()).thenComparing(Comparator.comparing(Task::getStartDate).thenComparing(Task::getEndDate)));
-        status20.sort(Comparator.comparing(Task::getPriority,Comparator.reverseOrder()).thenComparing(Comparator.comparing(Task::getStartDate).thenComparing(Task::getEndDate)));
-        status30.sort(Comparator.comparing(Task::getPriority,Comparator.reverseOrder()).thenComparing(Comparator.comparing(Task::getStartDate).thenComparing(Task::getEndDate)));
-        ArrayList<Task> orderedTasks = new ArrayList<Task>();
-        orderedTasks.addAll(status10);
-        orderedTasks.addAll(status20);
-        orderedTasks.addAll(status30);
-        return orderedTasks;
-    }*/
-
     @XmlElement
     public String getToken() {
         return token;
@@ -138,5 +116,13 @@ public class User {
     }
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getPasswordResetToken() {
+        return passwordResetToken;
+    }
+
+    public void setPasswordResetToken(String passwordResetToken) {
+        this.passwordResetToken = passwordResetToken;
     }
 }

@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 @Entity
 @Table(name="UnconfirmedUsers")
+@NamedQuery(name = "UnconfirmedUser.findAll", query = "SELECT u FROM UnconfirmedUserEntity u")
 @NamedQuery(name = "UnconfirmedUser.findUserByToken", query = "SELECT u FROM UnconfirmedUserEntity u WHERE u.token = :token")
 @NamedQuery(name = "UnconfirmedUser.findUserByUsername", query = "SELECT u FROM UnconfirmedUserEntity u WHERE u.username = :username")
 public class UnconfirmedUserEntity implements Serializable {

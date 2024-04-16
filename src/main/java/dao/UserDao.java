@@ -55,5 +55,26 @@ public class UserDao extends AbstractDao<UserEntity>{
     public List<UserEntity> findAllUsers() {
         return em.createNamedQuery("User.findAllUsers").getResultList();
     }
+    public List<Object[]> countConfirmedUsersByDate() {
+        return em.createNamedQuery("UnconfirmedUser.countConfirmedUsersByDate").getResultList();
+    }
+    public UserEntity findUserByEmail(String email) {
+        try {
+            return (UserEntity) em.createNamedQuery("User.findUserByEmail").setParameter("email", email)
+                    .getSingleResult();
+
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    public UserEntity findUserByPasswordResetToken(String passwordResetToken) {
+        try {
+            return (UserEntity) em.createNamedQuery("User.FindUserByPasswordResetToken").setParameter("passwordResetToken", passwordResetToken)
+                    .getSingleResult();
+
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 
 }

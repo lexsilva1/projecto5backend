@@ -293,6 +293,49 @@ public class UserService {
         }
         return Response.status(200).entity(unconfirmedUser).build();
     }
+    @GET
+    @Path("/Statistics")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getStatistics(@HeaderParam("token") String token) {
+        boolean authorized = userBean.isUserAuthorized(token);
+        if (!authorized) {
+            return Response.status(403).entity("Forbidden").build();
+        }else {
+            UserStatisticsDto statistics = userBean.getStatistics();
+            return Response.status(200).entity(statistics).build();
+        }
+    }
+    @POST
+    @Path("/passwordRecovery")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response passwordRecovery(@HeaderParam("email") String email) {
 
-}
+        User user = userBean.emailExists(email);
+        if (user == null) {
+            return Response.status(404).entity("User with this email is not found").build();
+        }else {
+            boolean emailsent = emailBean.sendPasswordResetEmail(user);
+            if(!emailsent) {
+                return Response.status(400).entity("Failed. Email not sent").build();
+            }
+            return Response.status(200).entity("Email sent").build();
+        }
+    }
+    @PATCH
+    @Path("/passwordReset/{token}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response passwordReset(@PathParam("token") String token, PasswordDto password) {
+
+            boolean valid = userBean.isResetPasswordValid(password);
+            if (!valid) {
+                return Response.status(406).entity("Password is not valid").build();
+            }
+            boolean updated = userBean.passwordReset(token, password.getPassword());
+            if (!updated) {
+                return Response.status(400).entity("Failed. Password not updated").build();
+            }
+            return Response.status(200).entity("Password updated").build();
+        }
+    }
+
 

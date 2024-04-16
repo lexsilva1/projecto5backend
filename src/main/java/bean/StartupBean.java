@@ -19,5 +19,6 @@ public class StartupBean {
         userBean.createDefaultUsers();
         taskBean.createDefaultCategories();
         taskBean.createDefaultTasks();
+        userBean.startRemovingExpiredUsers();
     }
 }

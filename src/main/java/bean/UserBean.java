@@ -1,19 +1,12 @@
 package bean;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Timestamp;
 
 import dao.MessageDao;
 import dao.TaskDao;
 import dao.UnconfirmedUSerDao;
 import dao.UserDao;
-import bean.TaskBean;
 
 import dto.*;
 import entities.MessageEntity;
@@ -22,16 +15,11 @@ import entities.UnconfirmedUserEntity;
 import entities.UserEntity;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
-import jakarta.ejb.Startup;
-import jakarta.ejb.Stateless;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.json.bind.Jsonb;
-import jakarta.json.bind.JsonbBuilder;
-import jakarta.json.bind.JsonbConfig;
-import jakarta.security.enterprise.credential.Password;
 import utilities.EncryptHelper;
-
-import static jakarta.xml.bind.DatatypeConverter.parseDate;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Singleton
 public class UserBean {
@@ -50,6 +38,7 @@ public class UserBean {
     MessageDao MessageDao;
     @EJB
     EncryptHelper EncryptHelper;
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public boolean addUser(User a) {
         if (a.getUsername().isBlank() || a.getName().isBlank() || a.getEmail().isBlank() || a.getContactNumber().isBlank() || a.getUserPhoto().isBlank()) {
@@ -62,6 +51,24 @@ public class UserBean {
         userEntity.setConfirmed(LocalDateTime.now());
         userDao.persist(userEntity);
         return true;
+    }
+
+    public void startRemovingExpiredUsers() {
+        final Runnable remover = new Runnable() {
+            public void run() {
+                removeExpiredUnconfirmedUsers();
+            }
+        };
+        scheduler.scheduleAtFixedRate(remover, 0, 1, TimeUnit.HOURS);
+    }
+
+    public void removeExpiredUnconfirmedUsers() {
+        List<UnconfirmedUserEntity> unconfirmedUsers = unconfirmedUSerDao.findAll();
+        for (UnconfirmedUserEntity unconfirmedUser : unconfirmedUsers) {
+            if (unconfirmedUser.getExpirationDate().isBefore(LocalDateTime.now())) {
+                unconfirmedUSerDao.remove(unconfirmedUser);
+            }
+        }
     }
 
     public User getUser(String token) {
@@ -98,6 +105,7 @@ public class UserBean {
         }
         return false;
     }
+
     public boolean removeUnconfirmedUser(String token) {
         UnconfirmedUserEntity a = unconfirmedUSerDao.findUserByToken(token);
         if (a != null) {
@@ -155,6 +163,14 @@ public class UserBean {
         if (password.getPassword().isBlank() || password.getNewPassword().isBlank()) {
             return false;
         } else if (password.getPassword() == null || password.getNewPassword() == null) {
+            return false;
+        }
+        return true;
+    }
+    public boolean isResetPasswordValid(PasswordDto password) {
+        if (password.getPassword().isBlank()) {
+            return false;
+        } else if (password.getPassword() == null) {
             return false;
         }
         return true;
@@ -224,6 +240,7 @@ public class UserBean {
         UserEntity userEntity = userDao.findUserByUsername(username);
         return convertEntitytoUserDto(userEntity);
     }
+
     public UserEntity getUserEntityByUsername(String username) {
         UserEntity userEntity = userDao.findUserByUsername(username);
         return userEntity;
@@ -254,6 +271,7 @@ public class UserBean {
         user.setToken(userEntity.getToken());
         user.setRole(userEntity.getRole());
         user.setActive(userEntity.isActive());
+        user.setPasswordResetToken(userEntity.getPasswordResetToken());
         return user;
     }
 
@@ -314,6 +332,7 @@ public class UserBean {
         userDto.setUsername(user.getUsername());
         return userDto;
     }
+
     public UserDto convertEntitytoUserDto(UserEntity user) {
         UserDto userDto = new UserDto();
         userDto.setName(user.getName());
@@ -407,27 +426,28 @@ public class UserBean {
         }
         return usersDto;
     }
+
     public ArrayList<User> getAllUsers() {
         List<UserEntity> users = userDao.findAllUsers();
         ArrayList<User> usersDto = new ArrayList<>();
         for (UserEntity user : users) {
-                usersDto.add(convertToDto(user));
+            usersDto.add(convertToDto(user));
         }
         return usersDto;
     }
 
     public ArrayList<User> getFilteredUsers(String role, Boolean active) {
         ArrayList<User> usersDto = new ArrayList<>();
-        if(active==null && role==null){
+        if (active == null && role == null) {
             return getAllUsers();
         }
-        if (active && role == null ) {
+        if (active && role == null) {
             return getActiveUsers();
-        } else if (!active && role == null ) {
+        } else if (!active && role == null) {
             return getDeletedUsers();
 
-        } else if (active && role != null ) {
-            List<UserEntity> users = userDao.getUsersByRole(role,active);
+        } else if (active && role != null) {
+            List<UserEntity> users = userDao.getUsersByRole(role, active);
             for (UserEntity user : users) {
                 usersDto.add(convertToDto(user));
             }
@@ -441,7 +461,7 @@ public class UserBean {
                 }
             }
             return usersDto;
-        } else if (!active && role == null ) {
+        } else if (!active && role == null) {
             List<UserEntity> users = userDao.getDeletedUsers();
             for (UserEntity user : users) {
                 usersDto.add(convertToDto(user));
@@ -451,7 +471,8 @@ public class UserBean {
         return usersDto;
 
     }
-    public void sendMessage( MessageDto messageDto) {
+
+    public void sendMessage(MessageDto messageDto) {
         UserEntity sender = userDao.findUserByUsername(messageDto.getSender());
         UserEntity receiver = userDao.findUserByUsername(messageDto.getReceiver());
         if (sender != null && receiver != null) {
@@ -467,6 +488,7 @@ public class UserBean {
         }
 
     }
+
     public LoggedUser convertEntityToLoggedUser(UserEntity userEntity) {
         LoggedUser loggedUser = new LoggedUser();
         loggedUser.setUsername(userEntity.getUsername());
@@ -478,24 +500,26 @@ public class UserBean {
         loggedUser.setToken(userEntity.getToken());
         return loggedUser;
     }
-    public boolean addUnconfirmedUser(User user){
+
+    public boolean addUnconfirmedUser(User user) {
         UnconfirmedUserEntity unconfirmedUserEntity = new UnconfirmedUserEntity();
-        if(userDao.findUserByUsername(user.getUsername())!=null || user.getUsername() == null || user.getEmail() == null){
+        if (userDao.findUserByUsername(user.getUsername()) != null || user.getUsername() == null || user.getEmail() == null) {
             return false;
-        }else if(unconfirmedUSerDao.findUserByUsername(user.getUsername())!=null){
+        } else if (unconfirmedUSerDao.findUserByUsername(user.getUsername()) != null) {
             return false;
-            }else{
-                unconfirmedUserEntity.setUsername(user.getUsername());
-                unconfirmedUserEntity.setEmail(user.getEmail());
-                unconfirmedUserEntity.setRole(user.getRole());
-                unconfirmedUserEntity.setToken(generateToken());
-                unconfirmedUserEntity.setExpirationDate(LocalDateTime.now().plusHours(48));
-                unconfirmedUserEntity.setCreationDate(LocalDateTime.now());
-                unconfirmedUSerDao.addUnconfirmedUser(unconfirmedUserEntity);
-                return true;
-            }
+        } else {
+            unconfirmedUserEntity.setUsername(user.getUsername());
+            unconfirmedUserEntity.setEmail(user.getEmail());
+            unconfirmedUserEntity.setRole(user.getRole());
+            unconfirmedUserEntity.setToken(generateToken());
+            unconfirmedUserEntity.setExpirationDate(LocalDateTime.now().plusHours(48));
+            unconfirmedUserEntity.setCreationDate(LocalDateTime.now());
+            unconfirmedUSerDao.addUnconfirmedUser(unconfirmedUserEntity);
+            return true;
         }
-    public UnconfirmedUser getUnconfirmedUser(String username){
+    }
+
+    public UnconfirmedUser getUnconfirmedUser(String username) {
         UnconfirmedUserEntity unconfirmedUserEntity = unconfirmedUSerDao.findUserByUsername(username);
         UnconfirmedUser user = new UnconfirmedUser();
         user.setUsername(unconfirmedUserEntity.getUsername());
@@ -506,16 +530,17 @@ public class UserBean {
         user.setExpirationDate(unconfirmedUserEntity.getExpirationDate());
         return user;
     }
-        public boolean isUserUnconfirmed(String token){
+
+    public boolean isUserUnconfirmed(String token) {
         UnconfirmedUserEntity a = unconfirmedUSerDao.findUserByToken(token);
-        if(a!=null){
-        return true;
+        if (a != null) {
+            return true;
 
-        }else
-        return false;
-        }
+        } else
+            return false;
+    }
 
-        public UnconfirmedUser getUnconfirmedUserByToken(String token){
+    public UnconfirmedUser getUnconfirmedUserByToken(String token) {
         UnconfirmedUserEntity unconfirmedUserEntity = unconfirmedUSerDao.findUserByToken(token);
         UnconfirmedUser user = new UnconfirmedUser();
         user.setUsername(unconfirmedUserEntity.getUsername());
@@ -526,8 +551,44 @@ public class UserBean {
         user.setExpirationDate(unconfirmedUserEntity.getExpirationDate());
         return user;
 
-        }
     }
+
+    public UserStatisticsDto getStatistics() {
+        UserStatisticsDto statisticsDto = new UserStatisticsDto();
+        statisticsDto.setTotalUsers(userDao.findAll().size() + unconfirmedUSerDao.findAll().size());
+        statisticsDto.setTotalConfirmedusers(userDao.getActiveUsers().size());
+        statisticsDto.setTotalUnconfirmedUsers(unconfirmedUSerDao.findAll().size());
+        statisticsDto.setConfirmedUsersByDate(countConfirmedUsersByDate());
+        return statisticsDto;
+    }
+
+    public List<ConfirmedUserDto> countConfirmedUsersByDate() {
+        List<Object[]> results = userDao.countConfirmedUsersByDate();
+        return results.stream()
+                .map(result -> new ConfirmedUserDto((LocalDateTime) result[0], (Long) result[1]))
+                .collect(Collectors.toList());
+    }
+
+    public User emailExists(String email) {
+        UserEntity a = userDao.findUserByEmail(email);
+        if (a != null) {
+            a.setPasswordResetToken(generateToken());
+            return convertToDto(a);
+        }
+        return null;
+    }
+
+    public boolean passwordReset(String token, String password) {
+        UserEntity a = userDao.findUserByPasswordResetToken(token);
+        if (a != null) {
+            a.setPassword(EncryptHelper.encryptPassword(password));
+            a.setPasswordResetToken(null);
+            userDao.updateUser(a);
+            return true;
+        }
+        return false;
+    }
+}
 
 
 

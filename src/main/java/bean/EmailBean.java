@@ -82,4 +82,19 @@ public class EmailBean {
         }
         return sent;
     }
+   public boolean sendPasswordResetEmail(User user) {
+        boolean sent = false;
+
+        String userEmail = user.getEmail();
+        String subject = "Scrum - Password Reset";
+        String resetLink = "http://localhost:5173/PasswordReset/" + user.getPasswordResetToken();
+        String body = "You have requested a password reset for your Scrum Platform account " + user.getName() + ",\n\n"
+                + "Please click on the link below to reset your password.\n\n"
+                + "Password Reset Link: " + resetLink;
+
+        if (sendEmail(userEmail, subject, body)) {
+            sent = true;
+        }
+        return sent;
+    }
 }

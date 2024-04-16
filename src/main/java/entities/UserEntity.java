@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 @Entity
 @Table(name="Users")
+
+@NamedQuery(name = "User.countConfirmedUsersByDate", query = "SELECT u.confirmed, COUNT(u) FROM UserEntity u GROUP BY u.confirmed")
 @NamedQuery(name = "User.findUserByRole", query = "SELECT u FROM UserEntity u WHERE u.active = :active AND u.role = :role")
 @NamedQuery(name = "User.findDeletedUsers", query = "SELECT u FROM UserEntity u WHERE u.active = false")
 @NamedQuery(name = "User.findActiveUsers", query = "SELECT u FROM UserEntity u WHERE u.active = true")
@@ -13,6 +15,8 @@ import jakarta.persistence.*;
 @NamedQuery(name = "User.findUserByUsername", query = "SELECT u FROM UserEntity u WHERE u.username = :username")
 @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM UserEntity u")
 @NamedQuery(name = "User.updateToken", query = "UPDATE UserEntity u SET u.token = :token WHERE u.username = :username")
+@NamedQuery(name = "User.findUserByEmail", query = "SELECT u FROM UserEntity u WHERE u.email = :email")
+@NamedQuery(name = "User.FindUserByPasswordResetToken", query = "SELECT u FROM UserEntity u WHERE u.passwordResetToken = :passwordResetToken")
 public class UserEntity implements Serializable{
     @Id
     @Column (name="id", nullable = false, unique = true, updatable = false)
@@ -35,6 +39,8 @@ public class UserEntity implements Serializable{
     boolean active;
     @Column (name="confirmed", nullable = false, unique = false)
     LocalDateTime confirmed;
+    @Column (name="passwordResetToken", nullable = true, unique = true)
+    String passwordResetToken;
 
     public String getUsername() {
         return username;
@@ -110,6 +116,14 @@ public class UserEntity implements Serializable{
 
     public void setConfirmed(LocalDateTime confirmed) {
         this.confirmed = confirmed;
+    }
+
+    public String getPasswordResetToken() {
+        return passwordResetToken;
+    }
+
+    public void setPasswordResetToken(String passwordResetToken) {
+        this.passwordResetToken = passwordResetToken;
     }
 }
 
