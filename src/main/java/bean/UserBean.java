@@ -1,21 +1,23 @@
 package bean;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.MessageDao;
-import dao.TaskDao;
-import dao.UnconfirmedUSerDao;
-import dao.UserDao;
+import Websocket.Dashboard;
+import dao.*;
 
 import dto.*;
 import entities.MessageEntity;
 import entities.TaskEntity;
 import entities.UnconfirmedUserEntity;
 import entities.UserEntity;
+import entities.NotificationEntity;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
 import utilities.EncryptHelper;
+
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -29,6 +31,8 @@ public class UserBean {
     @EJB
     UserDao userDao;
     @EJB
+    NotificationDao notificationDao;
+    @EJB
     UnconfirmedUSerDao unconfirmedUSerDao;
     @EJB
     TaskDao taskDao;
@@ -38,6 +42,8 @@ public class UserBean {
     MessageDao MessageDao;
     @EJB
     EncryptHelper EncryptHelper;
+    @EJB
+    Dashboard dashboard;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public boolean addUser(User a) {
@@ -48,8 +54,9 @@ public class UserBean {
         }
         a.setPassword(EncryptHelper.encryptPassword(a.getPassword()));
         UserEntity userEntity = convertToEntity(a);
-        userEntity.setConfirmed(LocalDateTime.now());
+        userEntity.setConfirmed(LocalDate.now());
         userDao.persist(userEntity);
+        dashboard.send("ping");
         return true;
     }
 
@@ -92,6 +99,7 @@ public class UserBean {
         if (a != null) {
             a.setActive(false);
             userDao.updateUser(a);
+            dashboard.send("ping");
             return true;
         }
         return false;
@@ -101,6 +109,7 @@ public class UserBean {
         UserEntity a = userDao.findUserByUsername(username);
         if (a != null) {
             userDao.remove(a);
+            dashboard.send("ping");
             return true;
         }
         return false;
@@ -110,6 +119,7 @@ public class UserBean {
         UnconfirmedUserEntity a = unconfirmedUSerDao.findUserByToken(token);
         if (a != null) {
             unconfirmedUSerDao.remove(a);
+            dashboard.send("ping");
             return true;
         }
         return false;
@@ -299,6 +309,7 @@ public class UserBean {
             user.setActive(false);
             user.setToken(null);
             userDao.updateUser(user);
+            dashboard.send("ping");
             return true;
         }
         if (responsible.getRole().equals("Owner") && !user.isActive()) {
@@ -308,6 +319,7 @@ public class UserBean {
                 for (TaskEntity task : tasks) {
                     task.setUser(deletedUser);
                     taskDao.updateTask(task);
+                    dashboard.send("ping");
                 }
             }
             userDao.remove(user);
@@ -388,7 +400,7 @@ public class UserBean {
             userEntity.setUserPhoto("https://cdn-icons-png.freepik.com/512/10015/10015419.png");
             userEntity.setRole("Owner");
             userEntity.setActive(true);
-            userEntity.setConfirmed(LocalDateTime.now());
+            userEntity.setConfirmed(LocalDate.now());
             userDao.persist(userEntity);
         }
         if (userDao.findUserByUsername("deleted") == null) {
@@ -402,8 +414,34 @@ public class UserBean {
             userEntity1.setUserPhoto("https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png");
             userEntity1.setRole("developer");
             userEntity1.setActive(true);
-            userEntity1.setConfirmed(LocalDateTime.now());
+            userEntity1.setConfirmed(LocalDate.now());
             userDao.persist(userEntity1);
+        }
+        if(userDao.findUserByUsername("gabsmith") == null) {
+            UserEntity userEntity2 = new UserEntity();
+            userEntity2.setUsername("gabsmith");
+            userEntity2.setName("Gabrielle Smith");
+            userEntity2.setEmail("gabinacio@cenas.com");
+            userEntity2.setPassword(EncryptHelper.encryptPassword("password"));
+            userEntity2.setContactNumber("912334567");
+            userEntity2.setUserPhoto("https://www.shutterstock.com/image-photo/beautiful-female-african-american-business-600nw-1601707636.jpg");
+            userEntity2.setRole("developer");
+            userEntity2.setActive(true);
+            userEntity2.setConfirmed(LocalDate.of(2023, 12, 12));
+            userDao.persist(userEntity2);
+        }
+        if(userDao.findUserByUsername("johndoe") == null) {
+            UserEntity userEntity3 = new UserEntity();
+            userEntity3.setUsername("johndoe");
+            userEntity3.setName("John Doe");
+            userEntity3.setEmail("johndoe@coiso.com");
+            userEntity3.setPassword(EncryptHelper.encryptPassword("password"));
+            userEntity3.setContactNumber("912334567");
+            userEntity3.setUserPhoto("https://i.kym-cdn.com/entries/icons/facebook/000/016/546/hidethepainharold.jpg");
+            userEntity3.setRole("developer");
+            userEntity3.setActive(true);
+            userEntity3.setConfirmed(LocalDate.of(2024, 02, 29));
+            userDao.persist(userEntity3);
         }
     }
 
@@ -461,32 +499,51 @@ public class UserBean {
                 }
             }
             return usersDto;
-        } else if (!active && role == null) {
-            List<UserEntity> users = userDao.getDeletedUsers();
-            for (UserEntity user : users) {
-                usersDto.add(convertToDto(user));
-            }
-            return usersDto;
+        } else {
+            return null;
         }
-        return usersDto;
 
     }
 
-    public void sendMessage(MessageDto messageDto) {
-        UserEntity sender = userDao.findUserByUsername(messageDto.getSender());
-        UserEntity receiver = userDao.findUserByUsername(messageDto.getReceiver());
+    public MessageEntity sendMessage(MessageDto message) {
+        UserEntity sender = userDao.findUserByUsername(message.getSender());
+        UserEntity receiver = userDao.findUserByUsername(message.getReceiver());
         if (sender != null && receiver != null) {
-            MessageEntity message = new MessageEntity();
-            message.setSender(sender);
-            message.setReceiver(receiver);
-            message.setMessage(messageDto.getMessage());
-            message.setTimestamp(LocalDateTime.parse(messageDto.getSendDate()));
-            message.setRead(false);
-            System.out.println("Message sent from " + sender.getUsername() + " to " + receiver.getUsername() + " at " + message.getTimestamp());
-            MessageDao.persist(message);
-
+            MessageEntity messageEntity = new MessageEntity();
+            messageEntity.setSender(sender);
+            messageEntity.setReceiver(receiver);
+            messageEntity.setMessage(message.getMessage());
+            messageEntity.setTimestamp(LocalDateTime.now());
+            messageEntity.setRead(message.isRead());
+            MessageDao.persist(messageEntity);
+            return messageEntity;
         }
-
+    return null;
+    }
+    public List<MessageDto> getMessages(String token, String username) {
+        UserEntity sender = userDao.findUserByToken(token);
+        UserEntity receiver = userDao.findUserByUsername(username);
+        List<MessageEntity> messages = MessageDao.findMessageByUsers(sender, receiver);
+        List<MessageDto> messagesDto = new ArrayList<>();
+        for (MessageEntity message : messages) {
+            MessageDto messageDto = new MessageDto();
+            messageDto.setSender(message.getSender().getUsername());
+            messageDto.setReceiver(message.getReceiver().getUsername());
+            messageDto.setMessage(message.getMessage());
+            messageDto.setSendDate(message.getTimestamp().toString());
+            messageDto.setRead(message.isRead());
+            messagesDto.add(messageDto);
+        }
+        return messagesDto;
+    }
+    public MessageDto convertMessageEntityToDto(MessageEntity message) {
+        MessageDto messageDto = new MessageDto();
+        messageDto.setSender(message.getSender().getUsername());
+        messageDto.setReceiver(message.getReceiver().getUsername());
+        messageDto.setMessage(message.getMessage());
+        messageDto.setSendDate(message.getTimestamp().toString());
+        messageDto.setRead(message.isRead());
+        return messageDto;
     }
 
     public LoggedUser convertEntityToLoggedUser(UserEntity userEntity) {
@@ -557,16 +614,19 @@ public class UserBean {
         UserStatisticsDto statisticsDto = new UserStatisticsDto();
         statisticsDto.setTotalUsers(userDao.findAll().size() + unconfirmedUSerDao.findAll().size());
         statisticsDto.setTotalConfirmedusers(userDao.getActiveUsers().size());
+        statisticsDto.setTotalBlockedUsers(userDao.getDeletedUsers().size());
         statisticsDto.setTotalUnconfirmedUsers(unconfirmedUSerDao.findAll().size());
         statisticsDto.setConfirmedUsersByDate(countConfirmedUsersByDate());
         return statisticsDto;
     }
 
-    public List<ConfirmedUserDto> countConfirmedUsersByDate() {
+    public Map<LocalDate, Long> countConfirmedUsersByDate() {
         List<Object[]> results = userDao.countConfirmedUsersByDate();
         return results.stream()
-                .map(result -> new ConfirmedUserDto((LocalDateTime) result[0], (Long) result[1]))
-                .collect(Collectors.toList());
+                .collect(Collectors.toMap(
+                        result -> (LocalDate) result[0],
+                        result -> (Long) result[1]
+                ));
     }
 
     public User emailExists(String email) {
@@ -587,6 +647,34 @@ public class UserBean {
             return true;
         }
         return false;
+    }
+    public boolean sendNotification(String username, String message, String instance) {
+        UserEntity user = userDao.findUserByUsername(username);
+        if (user != null) {
+            NotificationEntity notificationEntity = new NotificationEntity();
+            notificationEntity.setUser(user);
+            notificationEntity.setMessage(message);
+            notificationEntity.setTimestamp(LocalDateTime.now());
+            notificationEntity.setRead(false);
+            notificationEntity.setInstance(instance);
+            notificationDao.createNotification(notificationEntity);
+            return true;
+        }
+        return false;
+    }
+    public List<NotificationDto> getNotifications(String token) {
+        UserEntity user = userDao.findUserByToken(token);
+        List<NotificationEntity> notifications = notificationDao.findUnreadNotificationsByUser(user, false);
+        List<NotificationDto> notificationsDto = new ArrayList<>();
+        for (NotificationEntity notification : notifications) {
+            NotificationDto notificationDto = new NotificationDto();
+            notificationDto.setMessage(notification.getMessage());
+            notificationDto.setInstance(notification.getInstance());
+            notificationDto.setUsername(notification.getUser().getUsername());
+            notificationDto.setId(notification.getId());
+            notificationsDto.add(notificationDto);
+        }
+        return notificationsDto;
     }
 }
 

@@ -24,6 +24,7 @@ public class UserService {
     EmailBean emailBean;
     @Inject
     EncryptHelper encryptHelper;
+
     /*@GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
@@ -43,11 +44,12 @@ public class UserService {
         boolean user = userBean.tokenExists(token);
         if (!user) {
             return Response.status(403).entity("User with this token is not found").build();
-        }else {
+        } else {
             List<User> users = userBean.getDeletedUsers();
             return Response.status(200).entity(users).build();
         }
     }
+
     @GET
     @Path("/Active")
     @Produces(MediaType.APPLICATION_JSON)
@@ -55,11 +57,12 @@ public class UserService {
         boolean user = userBean.tokenExists(token);
         if (!user) {
             return Response.status(403).entity("User with this token is not found").build();
-        }else {
+        } else {
             List<User> users = userBean.getActiveUsers();
             return Response.status(200).entity(users).build();
         }
     }
+
     @POST
     @Path("")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -97,11 +100,11 @@ public class UserService {
         boolean authorized = userBean.isUserAuthorized(token);
         if (!user) {
             return Response.status(404).entity("User with this username is not found").build();
-        }else if (!authorized) {
+        } else if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
         }
         User user1 = userBean.getUser(token);
-        if(user1.getUserPhoto() == null){
+        if (user1.getUserPhoto() == null) {
             return Response.status(400).entity("User with no photo").build();
         }
         return Response.status(200).entity(user1.getUserPhoto()).build();
@@ -110,19 +113,20 @@ public class UserService {
     @GET
     @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@HeaderParam("token")String token, @PathParam("username")String username) {
+    public Response getUser(@HeaderParam("token") String token, @PathParam("username") String username) {
         boolean exists = userBean.findOtherUserByUsername(username);
-        if (!exists){
+        if (!exists) {
             return Response.status(404).entity("User with this username is not found").build();
-        }else if(userBean.getUser(token).getRole().equals("developer") && !userBean.getUser(token).getUsername().equals(username)){
+        } else if (userBean.getUser(token).getRole().equals("developer") && !userBean.getUser(token).getUsername().equals(username)) {
             return Response.status(403).entity("Forbidden").build();
         }
         UserDto user = userBean.getUserByUsername(username);
-        System.out.println(user.getDoingTasks()+" "+user.getTodoTasks()+" "+user.getDoingTasks());
+        System.out.println(user.getDoingTasks() + " " + user.getTodoTasks() + " " + user.getDoingTasks());
 
 
         return Response.status(200).entity(user).build();
     }
+
     @PUT
     @Path("")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -143,8 +147,8 @@ public class UserService {
                 return Response.status(400).entity("Failed. User not updated").build();
             }
             return Response.status(200).entity("User updated").build();
-          
-        }else if (userBean.getUser(token).getRole().equals("Owner") && a.getRole() != null ) {
+
+        } else if (userBean.getUser(token).getRole().equals("Owner") && a.getRole() != null) {
             boolean updated = userBean.ownerupdateUser(token, a);
 
             if (!updated) {
@@ -152,8 +156,9 @@ public class UserService {
             }
             return Response.status(200).entity("User updated").build();
         }
-            return Response.status(403).entity("Forbidden").build();
+        return Response.status(403).entity("Forbidden").build();
     }
+
     @PATCH
     @Path("/password")
     @Produces(MediaType.APPLICATION_JSON)
@@ -162,9 +167,9 @@ public class UserService {
         boolean valid = userBean.isPasswordValid(password);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
-        }else if (!valid) {
+        } else if (!valid) {
             return Response.status(406).entity("Password is not valid").build();
-        }else {
+        } else {
             boolean updated = userBean.updatePassword(token, password);
             if (!updated) {
                 return Response.status(400).entity("Failed. Password not updated").build();
@@ -177,9 +182,9 @@ public class UserService {
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(@HeaderParam("username") String username, @HeaderParam("password") String password) {
-       if(!userBean.userNameExists(username)){
-           return Response.status(404).entity("User with this username is not found").build();
-       }
+        if (!userBean.userNameExists(username)) {
+            return Response.status(404).entity("User with this username is not found").build();
+        }
         LoggedUser loggedUser = userBean.login(username, password);
         if (loggedUser == null) {
             return Response.status(403).entity("User is not active").build();
@@ -192,31 +197,33 @@ public class UserService {
     @GET
     @Path("/logout")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response logout(@HeaderParam("token") String token){
+    public Response logout(@HeaderParam("token") String token) {
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(405).entity("Forbidden").build();
-        }else {
+        } else {
             userBean.logout(token);
             return Response.status(200).entity("Logged out").build();
         }
     }
+
     @DELETE
     @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteUser(@HeaderParam("token") String token,@PathParam("username") String username){
+    public Response deleteUser(@HeaderParam("token") String token, @PathParam("username") String username) {
         boolean authorized = userBean.isUserOwner(token);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
-        }else {
+        } else {
 
-            if(userBean.deleteUser(token,username)){
+            if (userBean.deleteUser(token, username)) {
                 return Response.status(200).entity("User deleted").build();
-            }else{
-            return Response.status(400).entity("User not deleted").build();
+            } else {
+                return Response.status(400).entity("User not deleted").build();
             }
         }
     }
+
     @GET
     @Path("/myUserDto")
     @Produces(MediaType.APPLICATION_JSON)
@@ -224,12 +231,13 @@ public class UserService {
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
-        }else {
+        } else {
             User user = userBean.getUser(token);
             UserDto userDto = userBean.convertUsertoUserDto(user);
             return Response.status(200).entity(userDto).build();
         }
     }
+
     @PATCH
     @Path("/active/{username}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -237,14 +245,15 @@ public class UserService {
         boolean authorized = userBean.isUserOwner(token);
         if (!authorized) {
             return Response.status(405).entity("Forbidden").build();
-        }else {
-            if (userBean.restoreUser(username)){
+        } else {
+            if (userBean.restoreUser(username)) {
                 return Response.status(200).entity("User restored").build();
-            }else{
+            } else {
                 return Response.status(400).entity("User not restored").build();
             }
         }
     }
+
     @GET
     @Path("")
     @Produces(MediaType.APPLICATION_JSON)
@@ -252,13 +261,14 @@ public class UserService {
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
-        }else {
+        } else {
 
             ArrayList<User> users = userBean.getFilteredUsers(role, active);
             System.out.println(users.size());
             return Response.status(200).entity(users).build();
         }
     }
+
     @POST
     @Path("/unconfirmedUser")
     @Produces(MediaType.APPLICATION_JSON)
@@ -271,18 +281,19 @@ public class UserService {
         if (user) {
             return Response.status(409).entity("User with this username is already exists").build();
         } else {
-            if(a.getRole() == null || a.getRole().isEmpty()){
+            if (a.getRole() == null || a.getRole().isEmpty()) {
                 a.setRole("developer");
             }
             boolean added = userBean.addUnconfirmedUser(a);
-            if(!added) {
+            if (!added) {
                 return Response.status(400).entity("Failed. User not added").build();
             }
-            UnconfirmedUser unconfirmedUser= userBean.getUnconfirmedUser(a.getUsername());
+            UnconfirmedUser unconfirmedUser = userBean.getUnconfirmedUser(a.getUsername());
             emailBean.sendConfirmationEmail(unconfirmedUser, unconfirmedUser.getToken(), unconfirmedUser.getCreationDate());
             return Response.status(201).entity("A new user is created").build();
         }
     }
+
     @GET
     @Path("/unconfirmedUser/{token}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -293,6 +304,7 @@ public class UserService {
         }
         return Response.status(200).entity(unconfirmedUser).build();
     }
+
     @GET
     @Path("/Statistics")
     @Produces(MediaType.APPLICATION_JSON)
@@ -300,11 +312,12 @@ public class UserService {
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
-        }else {
-            UserStatisticsDto statistics = userBean.getStatistics();
-            return Response.status(200).entity(statistics).build();
+        } else {
+            UserStatisticsDto userStatistics = userBean.getStatistics();
+            return Response.status(200).entity(userStatistics).build();
         }
     }
+
     @POST
     @Path("/passwordRecovery")
     @Produces(MediaType.APPLICATION_JSON)
@@ -313,29 +326,55 @@ public class UserService {
         User user = userBean.emailExists(email);
         if (user == null) {
             return Response.status(404).entity("User with this email is not found").build();
-        }else {
+        } else {
             boolean emailsent = emailBean.sendPasswordResetEmail(user);
-            if(!emailsent) {
+            if (!emailsent) {
                 return Response.status(400).entity("Failed. Email not sent").build();
             }
             return Response.status(200).entity("Email sent").build();
         }
     }
+
     @PATCH
     @Path("/passwordReset/{token}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response passwordReset(@PathParam("token") String token, PasswordDto password) {
 
-            boolean valid = userBean.isResetPasswordValid(password);
-            if (!valid) {
-                return Response.status(406).entity("Password is not valid").build();
-            }
-            boolean updated = userBean.passwordReset(token, password.getPassword());
-            if (!updated) {
-                return Response.status(400).entity("Failed. Password not updated").build();
-            }
-            return Response.status(200).entity("Password updated").build();
+        boolean valid = userBean.isResetPasswordValid(password);
+        if (!valid) {
+            return Response.status(406).entity("Password is not valid").build();
+        }
+        boolean updated = userBean.passwordReset(token, password.getPassword());
+        if (!updated) {
+            return Response.status(400).entity("Failed. Password not updated").build();
+        }
+        return Response.status(200).entity("Password updated").build();
+    }
+
+    @GET
+    @Path("/messages/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMessages(@HeaderParam("token") String token, @PathParam("username") String username) {
+        boolean authorized = userBean.isUserAuthorized(token);
+        if (!authorized) {
+            return Response.status(403).entity("Forbidden").build();
+        } else {
+            List<MessageDto> messages = userBean.getMessages(token, username);
+            return Response.status(200).entity(messages).build();
         }
     }
+    @GET
+    @Path("/notifications")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getNotifications(@HeaderParam("token") String token) {
+        boolean authorized = userBean.isUserAuthorized(token);
+        if (!authorized) {
+            return Response.status(403).entity("Forbidden").build();
+        } else {
+            List<NotificationDto> notifications = userBean.getNotifications(token);
+            return Response.status(200).entity(notifications).build();
+        }
+    }
+}
 
 

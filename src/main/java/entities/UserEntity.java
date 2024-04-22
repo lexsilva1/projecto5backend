@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
@@ -38,7 +39,7 @@ public class UserEntity implements Serializable{
     @Column (name="active", nullable = false, unique = false)
     boolean active;
     @Column (name="confirmed", nullable = false, unique = false)
-    LocalDateTime confirmed;
+    LocalDate confirmed;
     @Column (name="passwordResetToken", nullable = true, unique = true)
     String passwordResetToken;
 
@@ -110,11 +111,11 @@ public class UserEntity implements Serializable{
         this.active = active;
     }
 
-    public LocalDateTime getConfirmed() {
+    public LocalDate getConfirmed() {
         return confirmed;
     }
 
-    public void setConfirmed(LocalDateTime confirmed) {
+    public void setConfirmed(LocalDate confirmed) {
         this.confirmed = confirmed;
     }
 

@@ -56,7 +56,7 @@ public class UserDao extends AbstractDao<UserEntity>{
         return em.createNamedQuery("User.findAllUsers").getResultList();
     }
     public List<Object[]> countConfirmedUsersByDate() {
-        return em.createNamedQuery("UnconfirmedUser.countConfirmedUsersByDate").getResultList();
+        return em.createNamedQuery("User.countConfirmedUsersByDate").getResultList();
     }
     public UserEntity findUserByEmail(String email) {
         try {

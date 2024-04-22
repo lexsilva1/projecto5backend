@@ -272,6 +272,18 @@ public class TaskService {
             }
         }
     }
+    @GET
+    @Path("/Statistics")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getStatistics(@HeaderParam("token") String token) {
+        boolean authorized = userBean.isUserAuthorized(token);
+        if (!authorized) {
+            return Response.status(401).entity("Unauthorized").build();
+        } else {
+            TaskStatisticsDto statistics = taskBean.getTaskStatistics();
+            return Response.status(200).entity(statistics).build();
+        }
+    }
 
 
     /*@DELETE

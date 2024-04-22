@@ -1,23 +1,27 @@
 package bean;
-import dto.Category;
-import dto.TaskCreator;
+import Websocket.Chat;
+import Websocket.Dashboard;
+import Websocket.Tasks;
+import dto.*;
 import entities.UserEntity;
 import entities.CategoryEntity;
 import entities.TaskEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import dao.TaskDao;
 import dao.UserDao;
 import bean.UserBean;
-import dto.Task;
 import entities.CategoryEntity;
 import entities.TaskEntity;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 
 @Singleton
@@ -29,6 +33,12 @@ public class TaskBean {
     TaskDao taskDao;
     @EJB
     UserDao userDao;
+    @EJB
+    Chat chat;
+    @Inject
+    Dashboard dashboard;
+    @Inject
+    Tasks tasks;
 
     public TaskBean(TaskDao taskDao) {
         this.taskDao = taskDao;
@@ -56,20 +66,7 @@ public class TaskBean {
         taskEntity.setUser(taskDao.findTaskById(task.getId()).getUser());
         return taskEntity;
     }
-    public TaskEntity createTaskEntity(dto.Task task, String username) {
-        TaskEntity taskEntity = new TaskEntity();
-        taskEntity.setId(task.getId());
-        taskEntity.setTitle(task.getTitle());
-        taskEntity.setDescription(task.getDescription());
-        taskEntity.setStatus(task.getStatus());
-        taskEntity.setCategory(taskDao.findCategoryByName(task.getCategory()));
-        taskEntity.setStartDate(task.getStartDate());
-        taskEntity.setPriority(task.getPriority());
-        taskEntity.setEndDate(task.getEndDate());
-        taskEntity.setUser(userDao.findUserByUsername(username));
-        taskEntity.setActive(true);
-        return taskEntity;
-    }
+
     public TaskEntity createTaskEntity(dto.Task task, UserEntity userEntity) {
         TaskEntity taskEntity = new TaskEntity();
         taskEntity.setId(task.getId());
@@ -84,20 +81,28 @@ public class TaskBean {
         taskEntity.setActive(true);
         return taskEntity;
     }
+    public TaskSocketDto convertEntityToSocketDto(TaskEntity taskEntity) {
+        TaskSocketDto taskSocketDto = new TaskSocketDto();
+        taskSocketDto.setTask(convertToDto(taskEntity));
+
+        return taskSocketDto;
+    }
     public boolean restoreTask(String id) {
         TaskEntity a = taskDao.findTaskById(id);
         if (a != null) {
             a.setActive(true);
             taskDao.updateTask(a);
+            dashboard.send("ping");
+            TaskSocketDto taskSocketDto = convertEntityToSocketDto(a);
+            taskSocketDto.setAction("restore");
+            tasks.send(taskSocketDto);
+
+
             return true;
         }
         return false;
     }
-    public CategoryEntity convertCatToEntity(Category category) {
-        CategoryEntity categoryEntity= taskDao.findCategoryById(category.getId());
-        categoryEntity.setName(category.getName());
-        return categoryEntity;
-    }
+
     public Category convertCatToDto(CategoryEntity categoryEntity) {
         Category category = new Category();
         category.setId(categoryEntity.getId());
@@ -120,6 +125,10 @@ public class TaskBean {
 
     public void addTask(TaskEntity taskEntity) {
         taskDao.createTask(taskEntity);
+        dashboard.send("ping");
+        TaskSocketDto taskSocketDto = convertEntityToSocketDto(taskEntity);
+        taskSocketDto.setAction("add");
+        tasks.send(taskSocketDto);
     }
     public List<TaskEntity> getTasks() {
         return taskDao.findAll();
@@ -247,7 +256,9 @@ public class TaskBean {
         if (a != null) {
             a.setName(categoryEntity.getName());
             taskDao.updateCategory(a);
+            dashboard.send("ping");
             return true;
+
         }
         return false;
     }
@@ -256,6 +267,7 @@ public class TaskBean {
         categoryEntity.setName(name);
         categoryEntity.setCreator(creator);
         taskDao.createCategory(categoryEntity);
+        dashboard.send("ping");
     }
     public boolean removeCategory(String name) {
         List<TaskEntity> tasks = taskDao.findAll();
@@ -267,6 +279,7 @@ public class TaskBean {
         }
         if(tasksByCategory.isEmpty()) {
             taskDao.removeCategory(taskDao.findCategoryByName(name));
+            dashboard.send("ping");
             return true;
         }
         return false;
@@ -283,33 +296,17 @@ public class TaskBean {
             if(a.isActive() && !role.equals("developer")) {
                 a.setActive(false);
                 taskDao.updateTask(a);
+                dashboard.send("ping");
             }else if(!a.isActive()&& role.equals("Owner")) {
                 taskDao.remove(a);
+                dashboard.send("ping");
             }
             return true;
         }
         return false;
     }
-    public boolean removeTask(String id) {
-        TaskEntity a = taskDao.findTaskById(id);
-        if (a != null) {
-            taskDao.remove(a);
-            return true;
-        }
-        return false;
-    }
-    public List<TaskEntity> getTasksByCategory(String category) {
-        return taskDao.findTasksByCategory(category);
-    }
-    public boolean unblockTask(String id) {
-        TaskEntity a = taskDao.findTaskById(id);
-        if (a != null) {
-            a.setActive(true);
-            taskDao.updateTask(a);
-            return true;
-        }
-        return false;
-    }
+
+
     public List <TaskEntity> getBlockedTasks() {
         return taskDao.findBlockedTasks();
     }
@@ -324,6 +321,10 @@ public class TaskBean {
             a.setEndDate(task.getEndDate());
             a.setCategory(task.getCategory());
             taskDao.updateTask(a);
+            dashboard.send("ping");
+            TaskSocketDto taskSocketDto = convertEntityToSocketDto(a);
+            taskSocketDto.setAction("update");
+            tasks.send(taskSocketDto);
             return true;
         }
         return false;
@@ -331,23 +332,76 @@ public class TaskBean {
     public boolean changeStatus(String id, int status) {
         TaskEntity a = taskDao.findTaskById(id);
         if (a != null) {
+            if(a.getStatus() == 30){
+                a.setConclusionDate(null);
+            }
             a.setStatus(status);
+            if(status == 30){
+                a.setConclusionDate(LocalDate.now());
+            }
+            if(status == 20 && a.getDoingDate() == null){
+                a.setDoingDate(LocalDate.now());
+            }
             taskDao.updateTask(a);
+            dashboard.send("ping");
+            TaskSocketDto taskSocketDto = convertEntityToSocketDto(a);
+            taskSocketDto.setAction("status");
             return true;
+
         }
         return false;
     }
     public List<CategoryEntity> getAllCategories() {
         return taskDao.findAllCategories();
     }
-    public void setTaskDao(TaskDao taskDao) {
-        this.taskDao = taskDao;
-    }
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
+
     public void setInitialId(Task task){
         task.setId("Task" + System.currentTimeMillis());}
+
+
+public TaskStatisticsDto getTaskStatistics() {
+    TaskStatisticsDto taskStatisticsDto = new TaskStatisticsDto();
+    taskStatisticsDto.setTotaDoneTasks(taskDao.findTasksByStatus(30).toArray().length);
+    System.out.println("total done tasks: " + taskDao.findTasksByStatus(30).toArray().length);
+    taskStatisticsDto.setTotalTasks(taskDao.findAll().size());
+    taskStatisticsDto.setTotalDoingTasks(taskDao.findTasksByStatus(20).toArray().length);
+    taskStatisticsDto.setTotalToDoTasks(taskDao.findTasksByStatus(10).toArray().length);
+    taskStatisticsDto.setAverageTaskTime(getAverageTaskTime());
+    taskStatisticsDto.setAverageTasksPerUser(averageTasksPerUser());
+    taskStatisticsDto.setTasksByCategory(getTasksByCategory());
+    taskStatisticsDto.setTasksCompletedByDate(taskDao.getTasksCompletedByDate());
+    return taskStatisticsDto;
+}
+public HashMap<String,Long> getTasksByCategory() {
+     HashMap<String,Long> tasksByCategory = taskDao.getTaskCountPerCategory();
+
+    return tasksByCategory;
+}
+public int getAverageTaskTime() {
+    List<TaskEntity> tasks = taskDao.findAll();
+    int total = 0;
+    int count = 0;
+    for (TaskEntity task : tasks) {
+        if (task.getConclusionDate() != null) {
+            if (task.getDoingDate() == null) {
+                total += task.getStartDate().until(task.getConclusionDate()).getDays();
+                count++;
+            }else{
+                total += task.getDoingDate().until(task.getConclusionDate()).getDays();
+                count++;
+            }
+        }
+    }
+    if (count == 0) {
+        return 0;
+    }
+    return total / count;
+}
+public double averageTasksPerUser() {
+    List<UserEntity> users = userDao.findAll();
+    List<TaskEntity> tasks = taskDao.findAll();
+    return tasks.size() / users.size();
+}
 public void createDefaultCategories(){
         if(taskDao.findCategoryByName("Testing") == null){
             CategoryEntity categoryEntity = new CategoryEntity();
@@ -377,6 +431,7 @@ public void createDefaultCategories(){
         taskEntity.setStatus(20);
         taskEntity.setCategory(taskDao.findCategoryByName("Testing"));
         taskEntity.setStartDate(LocalDate.now());
+        taskEntity.setDoingDate(LocalDate.now());
         taskEntity.setPriority(100);
         taskEntity.setEndDate(LocalDate.of(2199, 12, 31));
         taskEntity.setUser(userDao.findUserByUsername("admin"));
@@ -404,10 +459,55 @@ public void createDefaultCategories(){
         taskEntity.setDescription("Create a new page");
         taskEntity.setStatus(30);
         taskEntity.setCategory(taskDao.findCategoryByName("Frontend"));
-        taskEntity.setStartDate(LocalDate.now());
+        taskEntity.setStartDate(LocalDate.of(2024,4,2));
+        taskEntity.setConclusionDate(LocalDate.now());
         taskEntity.setPriority(300);
         taskEntity.setEndDate(LocalDate.of(2199, 12, 31));
         taskEntity.setUser(userDao.findUserByUsername("admin"));
+        taskEntity.setActive(true);
+        taskDao.createTask(taskEntity);
+    }
+    if(taskDao.findTaskById("Task4") == null){
+        TaskEntity taskEntity = new TaskEntity();
+        taskEntity.setId("Task4");
+        taskEntity.setTitle("Render Page");
+        taskEntity.setDescription("Update compoenents and render page");
+        taskEntity.setStatus(10);
+        taskEntity.setCategory(taskDao.findCategoryByName("Frontend"));
+        taskEntity.setStartDate(LocalDate.of(2024,3,1));
+        taskEntity.setPriority(300);
+        taskEntity.setEndDate(LocalDate.of(2024, 5, 31));
+        taskEntity.setUser(userDao.findUserByUsername("johndoe"));
+        taskEntity.setActive(true);
+        taskDao.createTask(taskEntity);
+    }
+    if(taskDao.findTaskById("Task5") == null){
+        TaskEntity taskEntity = new TaskEntity();
+        taskEntity.setId("Task5");
+        taskEntity.setTitle("Websockets");
+        taskEntity.setDescription("Create a new Websockets feature");
+        taskEntity.setStatus(20);
+        taskEntity.setCategory(taskDao.findCategoryByName("Backend"));
+        taskEntity.setStartDate(LocalDate.of(2024,3,13));
+        taskEntity.setDoingDate(LocalDate.of(2024, 3, 13));
+        taskEntity.setPriority(200);
+        taskEntity.setEndDate(LocalDate.of(2024, 4, 29));
+        taskEntity.setUser(userDao.findUserByUsername("johndoe"));
+        taskEntity.setActive(false);
+        taskDao.createTask(taskEntity);
+    }
+    if(taskDao.findTaskById("Task6") == null){
+        TaskEntity taskEntity = new TaskEntity();
+        taskEntity.setId("Task6");
+        taskEntity.setTitle("Test Components");
+        taskEntity.setDescription("Test all the new Components");
+        taskEntity.setStatus(20);
+        taskEntity.setCategory(taskDao.findCategoryByName("Testing"));
+        taskEntity.setStartDate(LocalDate.of(2024,4,2));
+        taskEntity.setDoingDate(LocalDate.of(2024,4,2));
+        taskEntity.setPriority(100);
+        taskEntity.setEndDate(LocalDate.of(2024, 4, 29));
+        taskEntity.setUser(userDao.findUserByUsername("gabsmith"));
         taskEntity.setActive(true);
         taskDao.createTask(taskEntity);
     }

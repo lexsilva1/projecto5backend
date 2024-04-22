@@ -2,81 +2,65 @@ package entities;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="Messages")
-@NamedQuery(name="Message.findMessageByUsers", query="SELECT a FROM MessageEntity a WHERE a.sender = :sender AND a.receiver = :receiver OR a.sender = :receiver AND a.receiver = :sender order by a.timestamp asc")
-public class MessageEntity implements Serializable {
+@Table(name="Notifications")
+@NamedQuery(name="Notification.findNotificationByUser", query="SELECT a FROM NotificationEntity a WHERE a.user = :user")
+@NamedQuery(name="Notification.findUnreadNotificationsByUser", query="SELECT a FROM NotificationEntity a WHERE a.user = :user AND a.read = false")
+@NamedQuery(name="Notification.findNotificationById", query="SELECT a FROM NotificationEntity a WHERE a.id = :id")
+@NamedQuery(name="Notification.findLatestNotificationByUser", query="SELECT a FROM NotificationEntity a WHERE a.user = :user ORDER BY a.timestamp DESC ")
+
+public class NotificationEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", nullable = false, unique = true, updatable = false)
     private int id;
-
-    @JoinColumn (name="sender", nullable = false, unique = false)
+    @JoinColumn (name="user", nullable = false, unique = false)
     @ManyToOne
-    private UserEntity sender;
-
-    @JoinColumn (name="receiver", nullable = false, unique = false)
-    @ManyToOne
-    private UserEntity receiver;
-
+    private UserEntity user;
     @Column (name="message", nullable = false, unique = false, length = 65535, columnDefinition = "TEXT")
     private String message;
-
     @Column (name="timestamp", nullable = false, unique = false)
     private LocalDateTime timestamp;
     @Column (name="'read'", nullable = false, unique = false)
     private boolean read;
-
-
+    @Column (name="instance", nullable = false, unique = false)
+    private String instance;
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
-    public UserEntity getSender() {
-        return sender;
+    public UserEntity getUser() {
+        return user;
     }
-
-    public void setSender(UserEntity sender) {
-        this.sender = sender;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
-
-    public UserEntity getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(UserEntity receiver) {
-        this.receiver = receiver;
-    }
-
     public String getMessage() {
         return message;
     }
-
     public void setMessage(String message) {
         this.message = message;
     }
-
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
-
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
-
     public boolean isRead() {
         return read;
     }
-
     public void setRead(boolean read) {
         this.read = read;
+    }
+    public String getInstance() {
+        return instance;
+    }
+    public void setInstance(String instance) {
+        this.instance = instance;
     }
 }

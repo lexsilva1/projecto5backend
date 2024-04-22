@@ -2,6 +2,8 @@ package entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+
+import jakarta.inject.Named;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,6 +20,8 @@ import jakarta.persistence.*;
 @NamedQuery(name="Task.findAllActiveTasks", query="SELECT a FROM TaskEntity a WHERE a.active = true order by a.priority desc, a.startDate asc, a.endDate asc")
 @NamedQuery(name="Task.findDeletedTasks", query="SELECT a FROM TaskEntity a WHERE a.active = false")
 @NamedQuery(name="Task.findTasksByUserAndStatus", query="SELECT a FROM TaskEntity a WHERE a.user = :user and a.status = :status")
+@NamedQuery(name="Task.countTasksPerCategory", query="SELECT a.category, count(a) FROM TaskEntity a WHERE a.active = true group by a.category ORDER BY count(a) DESC")
+@NamedQuery(name="Task.countTasksCompletedByDate", query="SELECT a.conclusionDate, count(a) FROM TaskEntity a WHERE a.active = true and a.status = 30 group by a.conclusionDate ORDER BY a.conclusionDate DESC")
 public class TaskEntity implements Serializable {
     @Id
     @Column (name="id", nullable = false, unique = true, updatable = false)
@@ -42,6 +46,10 @@ public class TaskEntity implements Serializable {
     private CategoryEntity category;
     @Column (name="active", nullable = false, unique = false)
     private boolean active;
+    @Column (name="conclusionDate", nullable = true, unique = false)
+    private LocalDate conclusionDate;
+    @Column (name="doingDate", nullable = true, unique = false)
+    private LocalDate doingDate;
 
     public String getId() {
         return id;
@@ -119,6 +127,22 @@ public class TaskEntity implements Serializable {
     }
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public LocalDate getConclusionDate() {
+        return conclusionDate;
+    }
+
+    public void setConclusionDate(LocalDate conclusionDate) {
+        this.conclusionDate = conclusionDate;
+    }
+
+    public LocalDate getDoingDate() {
+        return doingDate;
+    }
+
+    public void setDoingDate(LocalDate doingDate) {
+        this.doingDate = doingDate;
     }
 }
 

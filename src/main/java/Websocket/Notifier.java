@@ -1,13 +1,20 @@
 package Websocket;
+import dao.NotificationDao;
+import dto.NotificationDto;
+import entities.NotificationEntity;
+import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.HashMap;
+import com.google.gson.Gson;
 @Singleton
 @ServerEndpoint("/websocket/notifier/{token}")
 public class Notifier {
+    @EJB
+    private NotificationDao notificationDao;
 
     HashMap<String, Session> sessions = new HashMap<String, Session>();
     public void send(String token, String msg){
@@ -21,6 +28,7 @@ public class Notifier {
             }
         }
     }
+    Gson gson = new Gson();
     @OnOpen
     public void toDoOnOpen(Session session, @PathParam("token") String token){
         System.out.println("A new WebSocket session is opened for client with token: "+ token);
@@ -36,11 +44,20 @@ public class Notifier {
     }
     @OnMessage
     public void toDoOnMessage(Session session, String msg){
-        System.out.println("A new message is received: "+ msg);
+        NotificationDto notificationDto = gson.fromJson(msg, NotificationDto.class);
+        NotificationEntity notificationEntity = notificationDao.findNotificationById(notificationDto.getId());
+        notificationEntity.setRead(true);
+        System.out.println(notificationEntity.isRead());
+        boolean read =notificationDao.update(notificationEntity);
+        System.out.println("is read: "+read);
+        if(read)
+            notificationDto.setRead(read);
         try {
-            session.getBasicRemote().sendText("ack");
+            session.getBasicRemote().sendText(gson.toJson(notificationDto));
         } catch (IOException e) {
             System.out.println("Something went wrong!");
         }
+
+
     }
 }

@@ -1,5 +1,7 @@
 package dao;
 
+import dto.Category;
+import dto.TaskStatisticsDto;
 import entities.CategoryEntity;
 import entities.TaskEntity;
 import entities.UserEntity;
@@ -8,8 +10,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Stateless
 public class TaskDao extends AbstractDao<TaskEntity>{
@@ -158,6 +164,43 @@ public class TaskDao extends AbstractDao<TaskEntity>{
             return null;
         }
     }
+    public List<TaskEntity> findTasksByStatus(int status) {
+        try {
+            List<TaskEntity> taskEntityEntities = (List<TaskEntity>) em.createNamedQuery("Task.findTaskByStatus").setParameter("status", status).getResultList();
+            return taskEntityEntities;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    public HashMap<String, Long> getTaskCountPerCategory() {
+        // Execute the named query
+        List<Object[]> results = em.createNamedQuery("Task.countTasksPerCategory").getResultList();
+
+        // Process the results into a Map
+        HashMap<String, Long> taskCountPerCategory = new HashMap<>();
+        for (Object[] result : results) {
+            String categoryName = ((CategoryEntity) result[0]).getName();
+            Long count = (Long) result[1];
+            taskCountPerCategory.put(categoryName, count);
+        }
+
+        return taskCountPerCategory;
+    }
+    public HashMap<LocalDate,Long> getTasksCompletedByDate() {
+        // Execute the named query
+        List<Object[]> results = em.createNamedQuery("Task.countTasksCompletedByDate").getResultList();
+
+        // Process the results into a Map
+        HashMap<LocalDate, Long> tasksCompletedByDate = new HashMap<>();
+        for (Object[] result : results) {
+            LocalDate date = (LocalDate) result[0];
+            Long count = (Long) result[1];
+            tasksCompletedByDate.put(date, count);
+        }
+        System.out.println("tasksCompletedByDate: " + tasksCompletedByDate);
+        return tasksCompletedByDate;
+    }
+
 
 
 

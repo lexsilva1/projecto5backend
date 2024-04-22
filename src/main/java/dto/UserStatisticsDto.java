@@ -1,12 +1,16 @@
 package dto;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class UserStatisticsDto {
     private int totalUsers;
     private int totalConfirmedusers;
     private int totalUnconfirmedUsers;
-    private List<ConfirmedUserDto> confirmedUsersByDate;
+    private int totalBlockedUsers;
+    private Map<LocalDate, Long> confirmedUsersByDate;
 
     public UserStatisticsDto() {
     }
@@ -35,11 +39,21 @@ public class UserStatisticsDto {
         this.totalUnconfirmedUsers = totalUnconfirmedUsers;
     }
 
-    public List<ConfirmedUserDto> getConfirmedUsersByDate() {
+    public Map<LocalDate
+
+            , Long> getConfirmedUsersByDate() {
         return confirmedUsersByDate;
     }
 
-    public void setConfirmedUsersByDate(List<ConfirmedUserDto> confirmedUsersByDate) {
+    public void setConfirmedUsersByDate(Map<LocalDate, Long> confirmedUsersByDate) {
         this.confirmedUsersByDate = confirmedUsersByDate;
+    }
+
+    public int getTotalBlockedUsers() {
+        return totalBlockedUsers;
+    }
+
+    public void setTotalBlockedUsers(int totalBlockedUsers) {
+        this.totalBlockedUsers = totalBlockedUsers;
     }
 }

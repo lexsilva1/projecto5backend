@@ -33,6 +33,9 @@ public class Task {
         this.active = true;
     }
 
+    public Task(int id, String name, String description, String category, String status, String creator, String assignedUser, String startDate, String endDate) {
+    }
+
     @XmlElement
     public String getId() {
         return id;
