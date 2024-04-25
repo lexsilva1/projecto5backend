@@ -25,18 +25,7 @@ public class UserService {
     @Inject
     EncryptHelper encryptHelper;
 
-    /*@GET
-    @Path("/all")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getUsers(@HeaderParam("token") String token) {
-        boolean user = userBean.tokenExists(token);
-        if (!user) {
-            return Response.status(403).entity("User with this token is not found").build();
-        }else {
-            List<UserEntity> users = userBean.getUsers();
-            return Response.status(200).entity(users).build();
-        }
-    }*/
+
     @GET
     @Path("/Deleted")
     @Produces(MediaType.APPLICATION_JSON)
@@ -114,16 +103,16 @@ public class UserService {
     @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@HeaderParam("token") String token, @PathParam("username") String username) {
+        boolean authorized = userBean.isUserAuthorized(token);
+        if (!authorized) {
+            return Response.status(403).entity("Forbidden").build();
+        }
         boolean exists = userBean.findOtherUserByUsername(username);
         if (!exists) {
             return Response.status(404).entity("User with this username is not found").build();
-        } else if (userBean.getUser(token).getRole().equals("developer") && !userBean.getUser(token).getUsername().equals(username)) {
-            return Response.status(403).entity("Forbidden").build();
         }
         UserDto user = userBean.getUserByUsername(username);
         System.out.println(user.getDoingTasks() + " " + user.getTodoTasks() + " " + user.getDoingTasks());
-
-
         return Response.status(200).entity(user).build();
     }
 
@@ -257,13 +246,13 @@ public class UserService {
     @GET
     @Path("")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getFilteredUsers(@HeaderParam("token") String token, @QueryParam("role") String role, @QueryParam("active") Boolean active) {
+    public Response getFilteredUsers(@HeaderParam("token") String token, @QueryParam("role") String role, @QueryParam("active") Boolean active, @QueryParam("name") String name) {
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
         } else {
 
-            ArrayList<User> users = userBean.getFilteredUsers(role, active);
+            ArrayList<User> users = userBean.getFilteredUsers(role, active, name);
             System.out.println(users.size());
             return Response.status(200).entity(users).build();
         }

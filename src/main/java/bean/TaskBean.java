@@ -120,6 +120,7 @@ public class TaskBean {
         task.setPriority(taskEntity.getPriority());
         task.setEndDate(taskEntity.getEndDate());
         task.setActive(taskEntity.isActive());
+        task.setCreator(taskEntity.getUser().getUsername());
         return task;
     }
 
@@ -140,6 +141,11 @@ public class TaskBean {
         List<TaskEntity> tasks = taskDao.findTasksByUser(userEntity);
         for(TaskEntity task: tasks){
             task.setActive(false);
+            taskDao.updateTask(task);
+            dashboard.send("ping");
+            TaskSocketDto taskSocketDto = convertEntityToSocketDto(task);
+            taskSocketDto.setAction("block");
+            this.tasks.send(taskSocketDto);
         }
         return true;
     }
@@ -297,9 +303,15 @@ public class TaskBean {
                 a.setActive(false);
                 taskDao.updateTask(a);
                 dashboard.send("ping");
+                TaskSocketDto taskSocketDto = convertEntityToSocketDto(a);
+                taskSocketDto.setAction("block");
+                tasks.send(taskSocketDto);
             }else if(!a.isActive()&& role.equals("Owner")) {
                 taskDao.remove(a);
                 dashboard.send("ping");
+                TaskSocketDto taskSocketDto = convertEntityToSocketDto(a);
+                taskSocketDto.setAction("delete");
+                tasks.send(taskSocketDto);
             }
             return true;
         }
@@ -307,9 +319,7 @@ public class TaskBean {
     }
 
 
-    public List <TaskEntity> getBlockedTasks() {
-        return taskDao.findBlockedTasks();
-    }
+
     public boolean updateTask(TaskEntity task) {
         TaskEntity a = taskDao.findTaskById(task.getId());
         if (a != null) {
@@ -346,6 +356,7 @@ public class TaskBean {
             dashboard.send("ping");
             TaskSocketDto taskSocketDto = convertEntityToSocketDto(a);
             taskSocketDto.setAction("status");
+            tasks.send(taskSocketDto);
             return true;
 
         }

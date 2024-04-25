@@ -32,7 +32,7 @@ public class NotificationDao extends AbstractDao<NotificationEntity> {
 
     }
 
-    public ArrayList<NotificationEntity> findNotificationByUser(UserEntity userEntity) {
+    public ArrayList<NotificationEntity> findNotificationsByUser(UserEntity userEntity) {
         try {
             ArrayList<NotificationEntity> notificationEntityEntities = (ArrayList<NotificationEntity>) em.createNamedQuery("Notification.findNotificationByUser").setParameter("user", userEntity).getResultList();
             return notificationEntityEntities;
@@ -81,5 +81,6 @@ public boolean update(NotificationEntity notificationEntity) {
             return null;
         }
     }
+
 }
 

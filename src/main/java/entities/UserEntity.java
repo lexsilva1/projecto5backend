@@ -17,6 +17,7 @@ import jakarta.persistence.*;
 @NamedQuery(name = "User.findAllUsers", query = "SELECT u FROM UserEntity u")
 @NamedQuery(name = "User.updateToken", query = "UPDATE UserEntity u SET u.token = :token WHERE u.username = :username")
 @NamedQuery(name = "User.findUserByEmail", query = "SELECT u FROM UserEntity u WHERE u.email = :email")
+@NamedQuery(name = "User.findUsersByName", query = "SELECT u FROM UserEntity u WHERE u.name LIKE :name")
 @NamedQuery(name = "User.FindUserByPasswordResetToken", query = "SELECT u FROM UserEntity u WHERE u.passwordResetToken = :passwordResetToken")
 public class UserEntity implements Serializable{
     @Id

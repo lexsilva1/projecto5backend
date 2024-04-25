@@ -76,5 +76,8 @@ public class UserDao extends AbstractDao<UserEntity>{
             return null;
         }
     }
+    public List<UserEntity> findUsersByName(String name) {
+        return em.createNamedQuery("User.findUsersByName").setParameter("name","%"+ name+"%").getResultList();
+    }
 
 }

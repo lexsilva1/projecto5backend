@@ -35,6 +35,11 @@ public class Chat {
     private NotificationDao notificationDao;
     @Inject
     private Notifier notifier;
+
+    public Session getSession(String token, String username) {
+        String conversationToken = token + "/" + username;
+        return sessions.get(conversationToken);
+    }
     public void send(String token, String msg) { // tem que se repetir para o sender também
         Session session = sessions.get(token);
         if (session != null) {
@@ -81,8 +86,7 @@ public class Chat {
 
         }
         MessageEntity sent = userBean.sendMessage(messageDto);
-        System.out.println("receiver session "+receiverSession);
-        System.out.println("sent message "+ sent);
+
         if (sent != null && receiverSession != null) {
             MessageDto sentDto = userBean.convertMessageEntityToDto(sent);
             String sentMessage = gson.toJson(sentDto);

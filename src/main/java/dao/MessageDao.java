@@ -26,5 +26,14 @@ public class MessageDao extends AbstractDao<MessageEntity> {
             return null;
         }
     }
+    public ArrayList<MessageEntity> findMessagesByUser(UserEntity user) {
+        try {
+            ArrayList<MessageEntity> messageEntities = (ArrayList<MessageEntity>) em.createNamedQuery("Message.findMessagesByUser").setParameter("user", user).getResultList();
+            return messageEntities;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
 }

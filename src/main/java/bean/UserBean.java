@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import Websocket.Chat;
 import Websocket.Dashboard;
 import dao.*;
 
@@ -15,8 +16,9 @@ import entities.UserEntity;
 import entities.NotificationEntity;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
+import jakarta.websocket.Session;
 import utilities.EncryptHelper;
-
+import com.google.gson.Gson;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -44,8 +46,10 @@ public class UserBean {
     EncryptHelper EncryptHelper;
     @EJB
     Dashboard dashboard;
+    @EJB
+    Chat chat;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
+    Gson gson = new Gson();
     public boolean addUser(User a) {
         if (a.getUsername().isBlank() || a.getName().isBlank() || a.getEmail().isBlank() || a.getContactNumber().isBlank() || a.getUserPhoto().isBlank()) {
             return false;
@@ -322,7 +326,23 @@ public class UserBean {
                     dashboard.send("ping");
                 }
             }
+            if(doesUserHaveNotifications(username)) {
+                List<NotificationEntity> notifications = notificationDao.findNotificationsByUser(user);
+                UserEntity deletedUser = userDao.findUserByUsername("deleted");
+                for (NotificationEntity notification : notifications) {
+                    notificationDao.remove(notification);
+                }
+            }
+            if(doesUserHaveMessages(username)) {
+                List<MessageEntity> messages = MessageDao.findMessagesByUser(user);
+                UserEntity deletedUser = userDao.findUserByUsername("deleted");
+                for (MessageEntity message : messages) {
+                    MessageDao.remove(message);
+                }
+            }
+
             userDao.remove(user);
+            dashboard.send("ping");
             return true;
         }
         return false;
@@ -383,6 +403,24 @@ public class UserBean {
         UserEntity a = userDao.findUserByUsername(username);
         List<TaskEntity> tasks = taskBean.getTasksByUser(a);
         if (tasks.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean doesUserHaveNotifications(String username) {
+        UserEntity a = userDao.findUserByUsername(username);
+        List<NotificationEntity> notifications = notificationDao.findNotificationsByUser(a);
+        if (notifications.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean doesUserHaveMessages(String username) {
+        UserEntity a = userDao.findUserByUsername(username);
+        List<MessageEntity> messages = MessageDao.findMessagesByUser(a);
+        if (messages.size() > 0) {
             return true;
         } else {
             return false;
@@ -469,41 +507,54 @@ public class UserBean {
         List<UserEntity> users = userDao.findAllUsers();
         ArrayList<User> usersDto = new ArrayList<>();
         for (UserEntity user : users) {
+            if(user.getUsername().equals("admin") ) {
+                continue;
+            }
             usersDto.add(convertToDto(user));
         }
         return usersDto;
     }
 
-    public ArrayList<User> getFilteredUsers(String role, Boolean active) {
+    public ArrayList<User> getFilteredUsers(String role, Boolean active, String name) {
         ArrayList<User> usersDto = new ArrayList<>();
-        if (active == null && role == null) {
-            return getAllUsers();
+        if (active == null && role == null && name != null) {
+            List<UserEntity> users = userDao.findUsersByName(name);
+            for (UserEntity user : users) {
+                usersDto.add(convertToDto(user));
+            }
+            return usersDto;
+        }else if(active == null && role == null && name == null) {
+       return getAllUsers();
         }
-        if (active && role == null) {
+
+        if (active && role == null && name == null) {
             return getActiveUsers();
-        } else if (!active && role == null) {
+        } else if (!active && role == null && name == null) {
             return getDeletedUsers();
 
-        } else if (active && role != null) {
+        } else if (active && role != null && name == null) {
             List<UserEntity> users = userDao.getUsersByRole(role, active);
             for (UserEntity user : users) {
                 usersDto.add(convertToDto(user));
             }
             return usersDto;
 
-        } else if (!active && role != null) {
+        } else if (!active && role != null && name == null) {
             List<UserEntity> users = userDao.getDeletedUsers();
             for (UserEntity user : users) {
                 if (user.getRole().equals(role)) {
                     usersDto.add(convertToDto(user));
                 }
+                return usersDto;
             }
-            return usersDto;
-        } else {
-            return null;
-        }
 
+        }
+        return null;
     }
+
+
+
+
 
     public MessageEntity sendMessage(MessageDto message) {
         UserEntity sender = userDao.findUserByUsername(message.getSender());
@@ -531,11 +582,25 @@ public class UserBean {
             messageDto.setReceiver(message.getReceiver().getUsername());
             messageDto.setMessage(message.getMessage());
             messageDto.setSendDate(message.getTimestamp().toString());
-            messageDto.setRead(message.isRead());
+            if(message.isRead() == false && message.getReceiver().getUsername().equals(sender.getUsername())) {
+                message.setRead(true);
+                MessageDao.merge(message);
+
+            } else {
+                messageDto.setRead(message.isRead());
+            }
             messagesDto.add(messageDto);
+            if(chat.getSession(receiver.getToken(),sender.getUsername()) != null) {
+                MessageDto updateRead = new MessageDto();
+                updateRead.setSender(receiver.getUsername());
+                updateRead.setReceiver(sender.getUsername());
+                updateRead.setMessage("Set All Read");
+                chat.send(receiver.getToken()+"/"+sender.getUsername(), gson.toJson(messageDto));
+            }
         }
         return messagesDto;
     }
+
     public MessageDto convertMessageEntityToDto(MessageEntity message) {
         MessageDto messageDto = new MessageDto();
         messageDto.setSender(message.getSender().getUsername());
@@ -545,6 +610,7 @@ public class UserBean {
         messageDto.setRead(message.isRead());
         return messageDto;
     }
+
 
     public LoggedUser convertEntityToLoggedUser(UserEntity userEntity) {
         LoggedUser loggedUser = new LoggedUser();

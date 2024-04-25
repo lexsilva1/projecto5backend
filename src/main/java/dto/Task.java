@@ -16,6 +16,7 @@ public class Task {
     LocalDate endDate;
     String category;
     boolean active = true;
+    String creator;
 
 
     private static final int low = 100;
@@ -101,4 +102,12 @@ public class Task {
     public void setActive(boolean active) {
         this.active = active;
     }
+    @XmlElement
+    public String getCreator() {
+        return creator;
+    }
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
 }

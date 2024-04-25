@@ -27,22 +27,7 @@ public class TaskService {
     @Inject
     UserBean userBean;
 
-    /*@GET
-    @Path("")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response isUserValid(@HeaderParam("token") String token) {
-        boolean authorized = userBean.isUserAuthorized(token);
-        if (!authorized) {
-            return Response.status(401).entity("Unauthorized").build();
-        } else {
-            ArrayList<Task> taskList = new ArrayList<>();
-            for (TaskEntity taskEntity : taskBean.getTasks()) {
-                taskList.add(taskBean.convertToDto(taskEntity));
-            }
-            taskList.sort(Comparator.comparing(Task::getPriority, Comparator.reverseOrder()).thenComparing(Comparator.comparing(Task::getStartDate).thenComparing(Task::getEndDate)));
-            return Response.status(200).entity(taskList).build();
-        }
-    }*/
+
 
     @GET
     @Path("/allActive")
@@ -285,23 +270,6 @@ public class TaskService {
         }
     }
 
-
-    /*@DELETE
-    @Path("/delete/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response removeTask(@HeaderParam("token") String token, @PathParam("id") String id) {
-        boolean authorized = userBean.isUserAuthorized(token);
-        if (!authorized) {
-            return Response.status(401).entity("Unauthorized").build();
-        } else {
-            boolean removed = taskBean.removeTask(id);
-            if (!removed) {
-                return Response.status(400).entity("Failed. Task not removed").build();
-            } else {
-                return Response.status(200).entity("Task removed").build();
-            }
-        }
-    }*/
 
     @DELETE
     @Path("/active/{id}")
