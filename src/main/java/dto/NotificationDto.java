@@ -1,11 +1,15 @@
 package dto;
 
+import java.time.LocalDateTime;
+
 public class NotificationDto {
-    private int id;
+
     private String message;
     private String instance;
     private String username;
     private boolean read;
+    private long count;
+    private LocalDateTime timestamp;
 
     public NotificationDto() {
     }
@@ -34,13 +38,7 @@ public class NotificationDto {
         this.username = username;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public boolean isRead() {
         return read;
@@ -48,5 +46,21 @@ public class NotificationDto {
 
     public void setRead(boolean read) {
         this.read = read;
+    }
+
+    public long getCount() {
+        return count;
+    }
+
+    public void setCount(long count) {
+        this.count = count;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 }

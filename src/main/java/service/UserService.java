@@ -43,6 +43,7 @@ public class UserService {
     @Path("/Active")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getActiveUsers(@HeaderParam("token") String token) {
+        userBean.setLastActivity(token);
         boolean user = userBean.tokenExists(token);
         if (!user) {
             return Response.status(403).entity("User with this token is not found").build();
@@ -56,6 +57,7 @@ public class UserService {
     @Path("")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addUser(User a, @HeaderParam("token") String token) {
+        userBean.setLastActivity(token);
         boolean unconfirmed = userBean.isUserUnconfirmed(token);
         if (!unconfirmed) {
             return Response.status(403).entity("Forbidden").build();
@@ -85,6 +87,7 @@ public class UserService {
     @Path("/photo")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPhoto(@HeaderParam("token") String token) {
+        userBean.setLastActivity(token);
         boolean user = userBean.userExists(token);
         boolean authorized = userBean.isUserAuthorized(token);
         if (!user) {
@@ -103,6 +106,7 @@ public class UserService {
     @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@HeaderParam("token") String token, @PathParam("username") String username) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
@@ -112,7 +116,6 @@ public class UserService {
             return Response.status(404).entity("User with this username is not found").build();
         }
         UserDto user = userBean.getUserByUsername(username);
-        System.out.println(user.getDoingTasks() + " " + user.getTodoTasks() + " " + user.getDoingTasks());
         return Response.status(200).entity(user).build();
     }
 
@@ -121,6 +124,7 @@ public class UserService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateUser(@HeaderParam("token") String token, User a) {
+        userBean.setLastActivity(token);
         boolean user = userBean.userNameExists(a.getUsername());
         boolean valid = userBean.isUserValid(a);
         if (!user) {
@@ -152,6 +156,7 @@ public class UserService {
     @Path("/password")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updatePassword(@HeaderParam("token") String token, PasswordDto password) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         boolean valid = userBean.isPasswordValid(password);
         if (!authorized) {
@@ -178,6 +183,7 @@ public class UserService {
         if (loggedUser == null) {
             return Response.status(403).entity("User is not active").build();
         } else {
+
             return Response.status(200).entity(loggedUser).build();
 
         }
@@ -200,6 +206,7 @@ public class UserService {
     @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteUser(@HeaderParam("token") String token, @PathParam("username") String username) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserOwner(token);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
@@ -217,6 +224,7 @@ public class UserService {
     @Path("/myUserDto")
     @Produces(MediaType.APPLICATION_JSON)
     public Response myProfile(@HeaderParam("token") String token) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
@@ -231,6 +239,7 @@ public class UserService {
     @Path("/active/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response restoreUser(@HeaderParam("token") String token, @PathParam("username") String username) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserOwner(token);
         if (!authorized) {
             return Response.status(405).entity("Forbidden").build();
@@ -248,6 +257,7 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFilteredUsers(@HeaderParam("token") String token, @QueryParam("role") String role, @QueryParam("active") Boolean active, @QueryParam("name") String name) {
         boolean authorized = userBean.isUserAuthorized(token);
+        userBean.setLastActivity(token);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
         } else {
@@ -262,6 +272,7 @@ public class UserService {
     @Path("/unconfirmedUser")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addUnconfirmedUser(User a, @HeaderParam("token") String token) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserOwner(token);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
@@ -287,6 +298,7 @@ public class UserService {
     @Path("/unconfirmedUser/{token}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUnconfirmedUser(@PathParam("token") String token) {
+        userBean.setLastActivity(token);
         UnconfirmedUser unconfirmedUser = userBean.getUnconfirmedUserByToken(token);
         if (unconfirmedUser == null) {
             return Response.status(404).entity("User with this token is not found").build();
@@ -298,6 +310,7 @@ public class UserService {
     @Path("/Statistics")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getStatistics(@HeaderParam("token") String token) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
@@ -328,6 +341,7 @@ public class UserService {
     @Path("/passwordReset/{token}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response passwordReset(@PathParam("token") String token, PasswordDto password) {
+        userBean.setLastActivity(token);
 
         boolean valid = userBean.isResetPasswordValid(password);
         if (!valid) {
@@ -344,6 +358,7 @@ public class UserService {
     @Path("/messages/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMessages(@HeaderParam("token") String token, @PathParam("username") String username) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
@@ -356,12 +371,27 @@ public class UserService {
     @Path("/notifications")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getNotifications(@HeaderParam("token") String token) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(403).entity("Forbidden").build();
         } else {
             List<NotificationDto> notifications = userBean.getNotifications(token);
             return Response.status(200).entity(notifications).build();
+        }
+    }
+    @PUT
+    @Path("/timeout")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response timeout(@HeaderParam("token") String token, Threshold timeout) {
+        userBean.setLastActivity(token);
+        boolean authorized = userBean.isUserOwner(token);
+        if (!authorized) {
+            return Response.status(403).entity("Forbidden").build();
+        } else {
+            System.out.println("timeout " +timeout);
+            userBean.timeout(timeout.getThreshold());
+            return Response.status(200).entity("Inactivity threshold set to " + timeout.getThreshold()/60 + "minutes").build();
         }
     }
 }

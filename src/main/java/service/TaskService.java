@@ -33,6 +33,7 @@ public class TaskService {
     @Path("/allActive")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllActiveTasks(@HeaderParam("token") String token) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(401).entity("Unauthorized").build();
@@ -47,6 +48,7 @@ public class TaskService {
     @Path("/allDeleted")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllDeletedTasks(@HeaderParam("token") String token) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(401).entity("Unauthorized").build();
@@ -63,6 +65,7 @@ public class TaskService {
     @Path("/byCategory/{category}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTasksByCategory(@HeaderParam("token") String token, @PathParam("category") String category) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(401).entity("Unauthorized").build();
@@ -84,6 +87,7 @@ public class TaskService {
     @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response removeAllTasks(@HeaderParam("token") String token, @PathParam("username") String username) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserOwner(token);
         if (!authorized) {
             return Response.status(401).entity("Unauthorized").build();
@@ -103,6 +107,7 @@ public class TaskService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addTask(Task task, @HeaderParam("token") String token) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(401).entity("Unauthorized").build();
@@ -127,6 +132,7 @@ public class TaskService {
     @Path("/active/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response restoreTask(@HeaderParam("token") String token, @PathParam("id") String id) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(401).entity("Unauthorized").build();
@@ -144,7 +150,7 @@ public class TaskService {
     @Path("/Categories")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createCategory(Category category, @HeaderParam("token") String token) {
-
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserOwner(token);
         User user = userBean.getUser(token);
         if (!authorized) {
@@ -164,6 +170,7 @@ public class TaskService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateCategory(Category category, @HeaderParam("token") String token) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserOwner(token);
         if (!authorized) {
             return Response.status(401).entity("Unauthorized").build();
@@ -186,6 +193,7 @@ public class TaskService {
     @Path("/Categories/{name}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response removeCategory(@HeaderParam("token") String token, @PathParam("name") String name) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserOwner(token);
         if (!authorized) {
             return Response.status(401).entity("Unauthorized").build();
@@ -208,6 +216,7 @@ public class TaskService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateTask(Task task, @HeaderParam("token") String token) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         User user = userBean.getUser(token);
         if (task.getEndDate() == null) {
@@ -243,6 +252,7 @@ public class TaskService {
     @Path("/Status/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response changeStatus(@HeaderParam("token") String token, @PathParam("id") String id, String status) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(401).entity("Unauthorized").build();
@@ -261,6 +271,7 @@ public class TaskService {
     @Path("/Statistics")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getStatistics(@HeaderParam("token") String token) {
+        userBean.setLastActivity(token);
         boolean authorized = userBean.isUserAuthorized(token);
         if (!authorized) {
             return Response.status(401).entity("Unauthorized").build();

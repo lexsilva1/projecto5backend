@@ -6,7 +6,7 @@ import dto.*;
 import entities.UserEntity;
 import entities.CategoryEntity;
 import entities.TaskEntity;
-
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -411,7 +411,10 @@ public int getAverageTaskTime() {
 public double averageTasksPerUser() {
     List<UserEntity> users = userDao.findAll();
     List<TaskEntity> tasks = taskDao.findAll();
-    return tasks.size() / users.size();
+    double average = (double) tasks.size() / users.size();
+
+    DecimalFormat df = new DecimalFormat("#.##");
+    return Double.parseDouble(df.format(average));
 }
 public void createDefaultCategories(){
         if(taskDao.findCategoryByName("Testing") == null){

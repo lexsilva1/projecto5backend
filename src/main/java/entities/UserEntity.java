@@ -19,6 +19,8 @@ import jakarta.persistence.*;
 @NamedQuery(name = "User.findUserByEmail", query = "SELECT u FROM UserEntity u WHERE u.email = :email")
 @NamedQuery(name = "User.findUsersByName", query = "SELECT u FROM UserEntity u WHERE u.name LIKE :name")
 @NamedQuery(name = "User.FindUserByPasswordResetToken", query = "SELECT u FROM UserEntity u WHERE u.passwordResetToken = :passwordResetToken")
+@NamedQuery(name = "User.findAllUsersByToken", query = "SELECT u FROM UserEntity u WHERE u.token = :token")
+@NamedQuery(name = "User.findAllTokensAndTimeouts", query = "SELECT u.token, u.lastActivity FROM UserEntity u")
 public class UserEntity implements Serializable{
     @Id
     @Column (name="id", nullable = false, unique = true, updatable = false)
@@ -43,6 +45,8 @@ public class UserEntity implements Serializable{
     LocalDate confirmed;
     @Column (name="passwordResetToken", nullable = true, unique = true)
     String passwordResetToken;
+    @Column (name="lastActivity", nullable = true, unique = false)
+    LocalDateTime lastActivity;
 
     public String getUsername() {
         return username;
@@ -126,6 +130,14 @@ public class UserEntity implements Serializable{
 
     public void setPasswordResetToken(String passwordResetToken) {
         this.passwordResetToken = passwordResetToken;
+    }
+
+    public LocalDateTime getLastActivity() {
+        return lastActivity;
+    }
+
+    public void setLastActivity(LocalDateTime lastActivity) {
+        this.lastActivity = lastActivity;
     }
 }
 

@@ -2,6 +2,7 @@ package bean;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import Websocket.Chat;
@@ -9,13 +10,11 @@ import Websocket.Dashboard;
 import dao.*;
 
 import dto.*;
-import entities.MessageEntity;
-import entities.TaskEntity;
-import entities.UnconfirmedUserEntity;
-import entities.UserEntity;
-import entities.NotificationEntity;
+import entities.*;
+import dao.*;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
+import jakarta.inject.Inject;
 import jakarta.websocket.Session;
 import utilities.EncryptHelper;
 import com.google.gson.Gson;
@@ -48,8 +47,11 @@ public class UserBean {
     Dashboard dashboard;
     @EJB
     Chat chat;
+    @Inject
+    TimeOutDao timeOutDao;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     Gson gson = new Gson();
+
     public boolean addUser(User a) {
         if (a.getUsername().isBlank() || a.getName().isBlank() || a.getEmail().isBlank() || a.getContactNumber().isBlank() || a.getUserPhoto().isBlank()) {
             return false;
@@ -71,6 +73,12 @@ public class UserBean {
             }
         };
         scheduler.scheduleAtFixedRate(remover, 0, 1, TimeUnit.HOURS);
+    }
+    public void forcedLogout(String token){
+        UserEntity user = userDao.findUserByToken(token);
+        user.setToken(null);
+        user.setLastActivity(null);
+        userDao.updateUser(user);
     }
 
     public void removeExpiredUnconfirmedUsers() {
@@ -208,6 +216,7 @@ public class UserBean {
                 return null;
             }
             user.setToken(token);
+            user.setLastActivity(LocalDateTime.now());
             userDao.updateToken(user);
             return convertEntityToLoggedUser(user);
         }
@@ -351,7 +360,13 @@ public class UserBean {
     public void logout(String token) {
         UserEntity user = userDao.findUserByToken(token);
         user.setToken(null);
+        user.setLastActivity(null);
         userDao.updateToken(user);
+    }
+    public void timeout(int timeout) {
+        TimeOutEntity timeOutEntity = timeOutDao.findTimeOutById(1);
+        timeOutEntity.setTimeout(timeout);
+        timeOutDao.updateTimeOut(timeOutEntity);
     }
 
     public UserDto convertUsertoUserDto(User user) {
@@ -362,6 +377,7 @@ public class UserBean {
         userDto.setRole(user.getRole());
         userDto.setUserPhoto(user.getUserPhoto());
         userDto.setUsername(user.getUsername());
+        userDto.setActive(user.isActive());
         return userDto;
     }
 
@@ -378,6 +394,7 @@ public class UserBean {
         userDto.setTodoTasks(taskDao.findTasksByUserAndStatus(user, 10).size());
         userDto.setDoingTasks(taskDao.findTasksByUserAndStatus(user, 20).size());
         userDto.setDoneTasks(taskDao.findTasksByUserAndStatus(user, 30).size());
+        userDto.setActive(user.isActive());
         return userDto;
     }
 
@@ -481,6 +498,11 @@ public class UserBean {
             userEntity3.setConfirmed(LocalDate.of(2024, 02, 29));
             userDao.persist(userEntity3);
         }
+    }
+    public void setLastActivity(String token) {
+        UserEntity user = userDao.findUserByToken(token);
+        user.setLastActivity(LocalDateTime.now());
+        userDao.updateUser(user);
     }
 
     public ArrayList<User> getDeletedUsers() {
@@ -731,13 +753,24 @@ public class UserBean {
     public List<NotificationDto> getNotifications(String token) {
         UserEntity user = userDao.findUserByToken(token);
         List<NotificationEntity> notifications = notificationDao.findUnreadNotificationsByUser(user, false);
+        Map<String, Long> unreadCounts = notificationDao.countUnreadNotificationsByUserAndInstance(user);
+
+        Map<String, List<NotificationEntity>> groupedNotifications = notifications.stream()
+                .collect(Collectors.groupingBy(NotificationEntity::getInstance));
+
         List<NotificationDto> notificationsDto = new ArrayList<>();
-        for (NotificationEntity notification : notifications) {
+        for (Map.Entry<String, List<NotificationEntity>> entry : groupedNotifications.entrySet()) {
+            NotificationEntity latestNotification = entry.getValue().stream()
+                    .max(Comparator.comparing(NotificationEntity::getTimestamp))
+                    .orElseThrow(); // or handle the situation when there's no notification
+
             NotificationDto notificationDto = new NotificationDto();
-            notificationDto.setMessage(notification.getMessage());
-            notificationDto.setInstance(notification.getInstance());
-            notificationDto.setUsername(notification.getUser().getUsername());
-            notificationDto.setId(notification.getId());
+            notificationDto.setMessage(latestNotification.getMessage());
+            notificationDto.setInstance(latestNotification.getInstance());
+            notificationDto.setUsername(latestNotification.getUser().getUsername());
+            notificationDto.setCount(unreadCounts.getOrDefault(latestNotification.getInstance(), 0L));
+            notificationDto.setTimestamp(latestNotification.getTimestamp());
+
             notificationsDto.add(notificationDto);
         }
         return notificationsDto;

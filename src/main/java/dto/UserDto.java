@@ -15,6 +15,7 @@ public class UserDto {
     private int doingTasks;
     private int doneTasks;
     private String username;
+    private boolean active;
 
     public UserDto() {
     }
@@ -72,7 +73,7 @@ public class UserDto {
     public void setTasks(int tasks) {
         this.tasks = tasks;
     }
-
+    @XmlElement
     public int getTodoTasks() {
         return todoTasks;
     }
@@ -80,7 +81,7 @@ public class UserDto {
     public void setTodoTasks(int todoTasks) {
         this.todoTasks = todoTasks;
     }
-
+    @XmlElement
     public int getDoingTasks() {
         return doingTasks;
     }
@@ -88,12 +89,20 @@ public class UserDto {
     public void setDoingTasks(int doingTasks) {
         this.doingTasks = doingTasks;
     }
-
+    @XmlElement
     public int getDoneTasks() {
         return doneTasks;
     }
 
     public void setDoneTasks(int doneTasks) {
         this.doneTasks = doneTasks;
+    }
+    @XmlElement
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

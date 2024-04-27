@@ -10,7 +10,9 @@ import java.time.LocalDateTime;
 @NamedQuery(name="Notification.findUnreadNotificationsByUser", query="SELECT a FROM NotificationEntity a WHERE a.user = :user AND a.read = false")
 @NamedQuery(name="Notification.findNotificationById", query="SELECT a FROM NotificationEntity a WHERE a.id = :id")
 @NamedQuery(name="Notification.findLatestNotificationByUser", query="SELECT a FROM NotificationEntity a WHERE a.user = :user ORDER BY a.timestamp DESC ")
-
+@NamedQuery(name="Notification.findLatestNotificationByUserAndInstance", query="SELECT a FROM NotificationEntity a WHERE a.user = :user AND a.instance = :instance ORDER BY a.timestamp DESC ")
+@NamedQuery(name="Notification.findUnreadNotificationsByUserAndInstance", query="SELECT a FROM NotificationEntity a WHERE a.user = :user AND a.read = false AND a.instance = :instance")
+@NamedQuery(name="Notification,countUnreadNotificationsByUserAndInstance", query="SELECT COUNT(a) FROM NotificationEntity a WHERE a.user = :user AND a.read = false AND a.instance = :instance")
 public class NotificationEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

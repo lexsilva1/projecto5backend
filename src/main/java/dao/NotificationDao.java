@@ -9,7 +9,11 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Stateless
 public class NotificationDao extends AbstractDao<NotificationEntity> {
     @PersistenceContext
@@ -77,6 +81,30 @@ public boolean update(NotificationEntity notificationEntity) {
                     .setParameter("user", userEntity)
                     .setMaxResults(1)
                     .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    public Map<String, Long> countUnreadNotificationsByUserAndInstance(UserEntity userEntity) {
+        try {
+            List<Object[]> results = em.createQuery("SELECT n.instance, COUNT(n) FROM NotificationEntity n WHERE n.user = :user AND n.read = false GROUP BY n.instance")
+                    .setParameter("user", userEntity)
+                    .getResultList();
+            return results.stream()
+                    .collect(Collectors.toMap(
+                            result -> (String) result[0],
+                            result -> (Long) result[1]
+                    ));
+        } catch (Exception e) {
+            return Collections.emptyMap();
+        }
+    }
+    public List<NotificationEntity> findUnreadNotificationsByUserAndInstance(UserEntity userEntity, String instance) {
+        try {
+            return em.createNamedQuery("Notification.findUnreadNotificationsByUserAndInstance", NotificationEntity.class)
+                    .setParameter("user", userEntity)
+                    .setParameter("instance", instance)
+                    .getResultList();
         } catch (NoResultException e) {
             return null;
         }

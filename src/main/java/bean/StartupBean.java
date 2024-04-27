@@ -11,6 +11,9 @@ public class StartupBean {
     UserBean userBean;
     @Inject
     TaskBean taskBean;
+    @Inject
+    TimerBean timerBean;
+
 
 
     @PostConstruct
@@ -20,5 +23,6 @@ public class StartupBean {
         taskBean.createDefaultCategories();
         taskBean.createDefaultTasks();
         userBean.startRemovingExpiredUsers();
+        timerBean.createTimeout(300);
     }
 }

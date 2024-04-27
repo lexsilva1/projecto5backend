@@ -1,4 +1,6 @@
 package Websocket;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.NotificationDao;
 import dto.MessageDto;
 import dto.User;
@@ -21,6 +23,7 @@ import jakarta.ejb.EJB;
 import bean.UserBean;
 import com.google.gson.Gson;
 import dto.NotificationDto;
+import service.ObjectMapperContextResolver;
 
 @Singleton
 @ServerEndpoint("/websocket/chat/{token}/{username}")
@@ -35,7 +38,7 @@ public class Chat {
     private NotificationDao notificationDao;
     @Inject
     private Notifier notifier;
-
+    private ObjectMapperContextResolver contextResolver = new ObjectMapperContextResolver();
     public Session getSession(String token, String username) {
         String conversationToken = token + "/" + username;
         return sessions.get(conversationToken);
@@ -69,10 +72,11 @@ public class Chat {
 
     @OnMessage
     public void toDoOnMessage(Session session, String message, @PathParam("token") String token, @PathParam("username") String username) {
-        System.out.println("Message received: " + message);
+        ObjectMapperContextResolver contextResolver = new ObjectMapperContextResolver();
         Gson gson = new Gson();
         MessageDto messageDto = gson.fromJson(message, MessageDto.class);
         User sender = userBean.getUser(token);
+        userBean.setLastActivity(token);
         messageDto.setSender(sender.getUsername());
         UserEntity receiver = (userBean.getUserEntityByUsername(messageDto.getReceiver()));
         String receiverToken = receiver.getToken();
@@ -97,15 +101,24 @@ public class Chat {
             send(myConversationToken, gson.toJson(sentDto));
             boolean sendNotification = userBean.sendNotification(receiver.getUsername(), "You have a new message from " + sender.getUsername(), sender.getUsername());
             System.out.println("Notification sent: " + sendNotification);
-            if (sendNotification) {
+            if (sendNotification && notifier.getSession(receiverToken) != null) {
                 NotificationEntity notificationEntity = notificationDao.findLatestNotificationByUser(receiver);
                 NotificationDto notificationDto = new NotificationDto();
-                notificationDto.setId(notificationEntity.getId());
+                notificationDto.setCount(1);
                 notificationDto.setMessage(notificationEntity.getMessage());
                 notificationDto.setInstance(notificationEntity.getInstance());
                 notificationDto.setUsername(notificationEntity.getUser().getUsername());
                 notificationDto.setRead(notificationEntity.isRead());
-                notifier.send(receiver.getToken(), gson.toJson(notificationDto));
+                notificationDto.setTimestamp(notificationEntity.getTimestamp());
+                try {
+                    ObjectMapper mapper = contextResolver.getContext(null);
+                    String notificationJson = mapper.writeValueAsString(notificationDto);
+                    notifier.send(receiverToken, notificationJson);
+                } catch (JsonProcessingException e) {
+                    System.out.println("Error in converting NotificationDto to JSON: " + e.getMessage());
+                    // Handle the error as needed
+                }
+
             }
 
         }

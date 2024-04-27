@@ -6,6 +6,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 @Stateless
@@ -79,5 +81,12 @@ public class UserDao extends AbstractDao<UserEntity>{
     public List<UserEntity> findUsersByName(String name) {
         return em.createNamedQuery("User.findUsersByName").setParameter("name","%"+ name+"%").getResultList();
     }
-
+    public HashMap<String, LocalDateTime> findAllTokensAndTimeouts() {
+        List<Object[]> results = em.createNamedQuery("User.findAllTokensAndTimeouts").getResultList();
+        HashMap<String, LocalDateTime> tokensAndTimeouts = new HashMap<>();
+        for (Object[] result : results) {
+            tokensAndTimeouts.put((String) result[0], (LocalDateTime) result[1]);
+        }
+        return tokensAndTimeouts;
+    }
 }
