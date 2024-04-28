@@ -6,6 +6,8 @@ import jakarta.ejb.Stateless;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 import java.time.LocalDateTime;
@@ -17,7 +19,7 @@ public class EmailBean {
 
     @EJB
     private UserBean userBean;
-
+    private static final Logger logger = LogManager.getLogger(EmailBean.class);
     private final String username = "lexsilva0386@outlook.com";
     private final String password = System.getenv("SMTP_PASSWORD");
     private final String host = "smtp-mail.outlook.com";
@@ -56,7 +58,7 @@ public class EmailBean {
             sent = false;
             e.printStackTrace();
         }
-
+        logger.info("Email sent to " + to + ": " + sent);
         return sent;
     }
 
@@ -71,15 +73,19 @@ public class EmailBean {
                 + "Confirmation Link: " + confirmationLink;
 
         if (sendEmail(userEmail, subject, body)) {
+            logger.info("Confirmation email sent to " + userEmail);
             sent = true;
         } else {
             // Verifica se já se passaram mais de 48 horas desde a criação do user
             LocalDateTime now = LocalDateTime.now();
             long hoursSinceCreation = ChronoUnit.HOURS.between(creationDate, now);
             if (hoursSinceCreation > 48) {
+                logger.info("User " + user.getUsername() + " has not confirmed their account within 48 hours. Removing user...");
                 userBean.removeUser(user.getUsername());
+                logger.info("User " + user.getUsername() + " removed.");
             }
         }
+        logger.info("Confirmation email sent to " + userEmail + ": " + sent);
         return sent;
     }
    public boolean sendPasswordResetEmail(User user) {
@@ -93,8 +99,10 @@ public class EmailBean {
                 + "Password Reset Link: " + resetLink;
 
         if (sendEmail(userEmail, subject, body)) {
+            logger.info("Password reset email sent to " + userEmail);
             sent = true;
         }
+        logger.info("Password reset email sent to " + userEmail + ": " + sent);
         return sent;
     }
 }
