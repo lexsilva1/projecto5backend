@@ -46,6 +46,9 @@ public class TaskBean {
     public TaskBean(TaskDao taskDao) {
         this.taskDao = taskDao;
     }
+    public void setTasks(Tasks tasks) {
+        this.tasks = tasks;
+    }
     public boolean isTaskValid(Task task) {
         if (task.getTitle().isBlank() || task.getDescription().isBlank() || task.getStartDate() == null || task.getEndDate() == null || task.getCategory() == null) {
             logger.info("Task is invalid");
@@ -55,7 +58,9 @@ public class TaskBean {
             return task.getTitle() != null && task.getDescription() != null && task.getStartDate() != null && task.getEndDate() != null;
         }
     }
-
+    public void setDashboard(Dashboard dashboard) {
+        this.dashboard = dashboard;
+    }
     public TaskEntity convertToEntity(dto.Task task) {
         logger.info("Converting task to entity");
         TaskEntity taskEntity = new TaskEntity();

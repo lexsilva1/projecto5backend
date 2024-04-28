@@ -610,7 +610,7 @@ logger.info("Removing user");
             userDao.persist(userEntity1);
             logger.info("Deleted user created");
         }
-        if(userDao.findUserByUsername("gabsmith") == null) {
+        if (userDao.findUserByUsername("gabsmith") == null) {
             UserEntity userEntity2 = new UserEntity();
             userEntity2.setUsername("gabsmith");
             userEntity2.setName("Gabrielle Smith");
@@ -624,7 +624,7 @@ logger.info("Removing user");
             userDao.persist(userEntity2);
             logger.info("Gabrielle Smith user created");
         }
-        if(userDao.findUserByUsername("johndoe") == null) {
+        if (userDao.findUserByUsername("johndoe") == null) {
             UserEntity userEntity3 = new UserEntity();
             userEntity3.setUsername("johndoe");
             userEntity3.setName("John Doe");
@@ -637,6 +637,16 @@ logger.info("Removing user");
             userEntity3.setConfirmed(LocalDate.of(2024, 02, 29));
             userDao.persist(userEntity3);
             logger.info("John Doe user created");
+        }
+        if (unconfirmedUSerDao.findUserByUsername("joesmith") == null) {
+            UnconfirmedUserEntity unconfirmedUserEntity = new UnconfirmedUserEntity();
+            unconfirmedUserEntity.setUsername("joesmith");
+            unconfirmedUserEntity.setExpirationDate(LocalDateTime.now().plusDays(1));
+            unconfirmedUserEntity.setEmail("joesmith@mail.com");
+            unconfirmedUserEntity.setToken("1234567890");
+            unconfirmedUserEntity.setCreationDate(LocalDateTime.now().minusDays(1));
+            unconfirmedUserEntity.setRole("ScrumMaster");
+            unconfirmedUSerDao.persist(unconfirmedUserEntity);
         }
     }
     public void setLastActivity(String token) {
@@ -763,7 +773,7 @@ logger.info("Removing user");
             messageDto.setReceiver(message.getReceiver().getUsername());
             messageDto.setMessage(message.getMessage());
             messageDto.setSendDate(message.getTimestamp().toString());
-            if(message.isRead() == false && message.getReceiver().getUsername().equals(sender.getUsername())) {
+            if(!message.isRead() && message.getReceiver().getUsername().equals(sender.getUsername())) {
                 logger.info("Message is not read");
                 message.setRead(true);
                 MessageDao.merge(message);
@@ -772,6 +782,7 @@ logger.info("Removing user");
                 logger.info("Message is read");
                 messageDto.setRead(message.isRead());
             }
+
             messagesDto.add(messageDto);
             if(chat.getSession(receiver.getToken(),sender.getUsername()) != null) {
                 logger.info("Chat session found");
@@ -780,7 +791,9 @@ logger.info("Removing user");
                 updateRead.setReceiver(sender.getUsername());
                 updateRead.setMessage("Set All Read");
                 logger.info("Sending message to set all read");
-                chat.send(receiver.getToken()+"/"+sender.getUsername(), gson.toJson(messageDto));
+                chat.send(receiver.getToken()+"/"+sender.getUsername(), gson.toJson(updateRead
+                ));
+                chat.send(sender.getToken()+"/"+receiver.getUsername(), gson.toJson(updateRead));
             }
         }
         logger.info("Messages found");
@@ -840,15 +853,20 @@ logger.info("Removing user");
     public UnconfirmedUser getUnconfirmedUser(String username) {
         logger.info("Getting unconfirmed user");
         UnconfirmedUserEntity unconfirmedUserEntity = unconfirmedUSerDao.findUserByUsername(username);
-        UnconfirmedUser user = new UnconfirmedUser();
-        user.setUsername(unconfirmedUserEntity.getUsername());
-        user.setEmail(unconfirmedUserEntity.getEmail());
-        user.setRole(unconfirmedUserEntity.getRole());
-        user.setToken(unconfirmedUserEntity.getToken());
-        user.setCreationDate(unconfirmedUserEntity.getCreationDate());
-        user.setExpirationDate(unconfirmedUserEntity.getExpirationDate());
-        logger.info("Unconfirmed user found");
-        return user;
+        if (unconfirmedUserEntity == null) {
+            logger.error("Unconfirmed user not found");
+            return null;
+        } else {
+            UnconfirmedUser user = new UnconfirmedUser();
+            user.setUsername(unconfirmedUserEntity.getUsername());
+            user.setEmail(unconfirmedUserEntity.getEmail());
+            user.setRole(unconfirmedUserEntity.getRole());
+            user.setToken(unconfirmedUserEntity.getToken());
+            user.setCreationDate(unconfirmedUserEntity.getCreationDate());
+            user.setExpirationDate(unconfirmedUserEntity.getExpirationDate());
+            logger.info("Unconfirmed user found");
+            return user;
+        }
     }
 
     public boolean isUserUnconfirmed(String token) {

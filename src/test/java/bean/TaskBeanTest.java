@@ -1,5 +1,7 @@
 package bean;
 
+import Websocket.Dashboard;
+import Websocket.Tasks;
 import dto.Task;
 import entities.CategoryEntity;
 import entities.TaskEntity;
@@ -23,6 +25,10 @@ class TaskBeanTest {
     void setUp() {
         taskDaoMock = mock(TaskDao.class);
         taskBean = new TaskBean(taskDaoMock);
+        Dashboard dashboardMock = mock(Dashboard.class);
+        taskBean.setDashboard(dashboardMock);
+        Tasks tasksMock = mock(Tasks.class); // Mock Tasks object
+        taskBean.setTasks(tasksMock);
     }
 
     @Test
@@ -70,6 +76,8 @@ class TaskBeanTest {
 
     @Test
     void convertToDto() {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername("testUser"); // Set the username of the user entity
 
         TaskEntity taskEntity = new TaskEntity();
         taskEntity.setId("123");
@@ -79,6 +87,7 @@ class TaskBeanTest {
         taskEntity.setPriority(2);
         taskEntity.setStartDate(LocalDate.of(2024, 3, 1));
         taskEntity.setEndDate(LocalDate.of(2024, 3, 31));
+        taskEntity.setUser(userEntity); // Set the user entity in the task entity
 
         CategoryEntity categoryEntity = new CategoryEntity();
         categoryEntity.setName("Test Category");
@@ -94,10 +103,13 @@ class TaskBeanTest {
         assertEquals(LocalDate.of(2024, 3, 1), taskDto.getStartDate());
         assertEquals(LocalDate.of(2024, 3, 31), taskDto.getEndDate());
         assertEquals("Test Category", taskDto.getCategory());
+        assertEquals("testUser", taskDto.getCreator()); // Check the username of the creator
     }
 
     @Test
     void findTaskById() {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername("testUser"); // Set the username of the user entity
 
         TaskEntity taskEntity = new TaskEntity();
         taskEntity.setId("123");
@@ -107,11 +119,11 @@ class TaskBeanTest {
         taskEntity.setPriority(2);
         taskEntity.setStartDate(LocalDate.of(2024, 3, 1));
         taskEntity.setEndDate(LocalDate.of(2024, 3, 31));
+        taskEntity.setUser(userEntity); // Set the user entity in the task entity
 
         CategoryEntity categoryEntity = new CategoryEntity();
         categoryEntity.setName("Test Category");
         taskEntity.setCategory(categoryEntity);
-
 
         when(taskDaoMock.findTaskById("123")).thenReturn(taskEntity);
 
@@ -125,6 +137,7 @@ class TaskBeanTest {
         assertEquals(LocalDate.of(2024, 3, 1), taskDto.getStartDate());
         assertEquals(LocalDate.of(2024, 3, 31), taskDto.getEndDate());
         assertEquals("Test Category", taskDto.getCategory());
+        assertEquals("testUser", taskDto.getCreator()); // Check the username of the creator
     }
     @Test
     void isTaskValid_ValidTask_ReturnsTrue() {
@@ -156,9 +169,23 @@ class TaskBeanTest {
     }
     @Test
     void restoreTask_TaskFound_ReturnsTrue() {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername("testUser"); // Set the username of the user entity
+
+        CategoryEntity categoryEntity = new CategoryEntity();
+        categoryEntity.setId(1); // Set the id of the category entity
+        categoryEntity.setName("Test Category"); // Set the name of the category entity
 
         TaskEntity taskEntity = new TaskEntity();
         taskEntity.setId("123");
+        taskEntity.setTitle("Test Task");
+        taskEntity.setDescription("Test Description");
+        taskEntity.setStatus(1);
+        taskEntity.setPriority(2);
+        taskEntity.setStartDate(LocalDate.of(2024, 3, 1));
+        taskEntity.setEndDate(LocalDate.of(2024, 3, 31));
+        taskEntity.setUser(userEntity); // Set the user entity in the task entity
+        taskEntity.setCategory(categoryEntity); // Set the category entity in the task entity
 
         when(taskDaoMock.findTaskById("123")).thenReturn(taskEntity);
 
@@ -177,10 +204,17 @@ class TaskBeanTest {
     }
     @Test
     void blockTask_TaskFoundAndActive_ReturnsTrue() {
-
         TaskEntity taskEntity = new TaskEntity();
         taskEntity.setId("123");
         taskEntity.setActive(true);
+
+        CategoryEntity categoryEntity = new CategoryEntity();
+        categoryEntity.setId(1); // Set the ID of the category entity
+        taskEntity.setCategory(categoryEntity); // Set the category entity in the task entity
+
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername("testUser"); // Set the username of the user entity
+        taskEntity.setUser(userEntity); // Set the user entity in the task entity
 
         when(taskDaoMock.findTaskById("123")).thenReturn(taskEntity);
 

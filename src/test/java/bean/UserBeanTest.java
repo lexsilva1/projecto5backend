@@ -1,5 +1,6 @@
 package bean;
 
+import Websocket.Dashboard;
 import bean.UserBean;
 import dao.UserDao;
 import dto.PasswordDto;
@@ -28,6 +29,8 @@ class UserBeanTest {
 
     @InjectMocks
     private UserBean userBean;
+    @Mock
+    private Dashboard dashboardMock;
 
     @BeforeEach
     void setUp() {
@@ -46,6 +49,7 @@ class UserBeanTest {
 
         verify(encryptHelperMock).encryptPassword(user.getPassword());
         verify(userDaoMock).persist(any(UserEntity.class));
+        verify(dashboardMock).send("ping");
     }
 
     @Test
@@ -111,6 +115,7 @@ class UserBeanTest {
 
         assertTrue(result);
         verify(userDaoMock).remove(userEntity);
+        verify(dashboardMock).send("ping");
     }
     @Test
     void removeUser_UserExists_RemovesUser() {

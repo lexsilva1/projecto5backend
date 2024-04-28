@@ -28,7 +28,12 @@ import service.ObjectMapperContextResolver;
 @Singleton
 @ServerEndpoint("/websocket/chat/{token}/{username}")
 public class Chat {
-
+    public void setUserBean(UserBean userBean) {
+        this.userBean = userBean;
+    }
+    public void serNotifier(Notifier notifier) {
+        this.notifier = notifier;
+    }
     HashMap<String, Session> sessions = new HashMap<String, Session>();
     @EJB
     private MessageDao messageDao;
@@ -43,6 +48,8 @@ public class Chat {
         String conversationToken = token + "/" + username;
         return sessions.get(conversationToken);
     }
+
+
     public void send(String token, String msg) { // tem que se repetir para o sender também
         Session session = sessions.get(token);
         if (session != null) {

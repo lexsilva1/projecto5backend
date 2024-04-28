@@ -220,6 +220,10 @@ public class UserService {
     public Response login(@HeaderParam("username") String username, @HeaderParam("password") String password, @Context HttpServletRequest request) {
         String ipadress = request.getRemoteAddr();
         logger.info("User with username " + username + " is logging in from IP address " + ipadress);
+        if(userBean.getUnconfirmedUser(username)!=null){
+            logger.info("User with username " + username + " is trying to login with unconfirmed user.");
+            return Response.status(401).entity("User is not confirmed").build();
+        }
         if (!userBean.userNameExists(username)) {
             logger.info("User with username " + username + " is not found.");
             return Response.status(404).entity("User with this username is not found").build();
@@ -425,7 +429,8 @@ public class UserService {
     @Path("/passwordReset/{token}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response passwordReset(@PathParam("token") String token, PasswordDto password, @Context HttpServletRequest request) {
-        userBean.setLastActivity(token);
+        String ipadress = request.getRemoteAddr();
+        logger.info("User with token " + token + " is resetting password from IP address " + ipadress);
 
         boolean valid = userBean.isResetPasswordValid(password);
         if (!valid) {

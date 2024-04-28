@@ -1,0 +1,1838 @@
+20:21:42.259 [main] INFO - Restoring task
+20:21:42.283 [main] INFO - Converting task to entity
+20:21:42.284 [main] INFO - Task converted to entity
+20:21:42.290 [main] INFO - Converting task to dto
+20:21:42.290 [main] INFO - Converting category to dto
+20:21:42.291 [main] INFO - Category converted to dto
+20:21:42.294 [main] INFO - Creating category
+20:21:42.295 [main] INFO - Category created
+20:21:42.295 [main] INFO - Sending ping to dashboard
+20:21:42.297 [main] INFO - Task is valid
+20:21:42.299 [main] INFO - Restoring task
+20:21:42.300 [main] INFO - Task not restored
+20:21:42.303 [main] INFO - Converting task to dto
+20:21:42.303 [main] INFO - Converting category to dto
+20:21:42.303 [main] INFO - Category converted to dto
+20:21:42.306 [main] INFO - Blocking task
+20:21:42.307 [main] INFO - Task not blocked nor deleted
+20:21:42.308 [main] INFO - Task is invalid
+20:21:42.310 [main] INFO - Blocking task
+20:21:42.311 [main] INFO - Task is active
+20:21:42.426 [main] INFO - Finding user by username: testUser
+20:21:42.426 [main] INFO - User found
+20:21:42.426 [main] INFO - Converting entity to user
+20:21:42.427 [main] INFO - Entity converted to user
+20:21:42.432 [main] INFO - Getting user with token: validToken
+20:21:42.432 [main] INFO - User found
+20:21:42.432 [main] INFO - Converting entity to user
+20:21:42.432 [main] INFO - Entity converted to user
+20:21:42.437 [main] INFO - Blocking user: testUser
+20:21:42.437 [main] INFO - User found
+20:21:42.438 [main] INFO - User is not null
+20:21:42.438 [main] INFO - User set to inactive
+20:21:42.438 [main] INFO - User updated
+20:21:42.444 [main] INFO - Blocking user: nonExistingUser
+20:21:42.445 [main] INFO - User found
+20:21:42.457 [main] INFO - Adding user: testUser
+20:21:42.457 [main] INFO - User data is valid
+20:21:42.457 [main] INFO - Password encrypted
+20:21:42.457 [main] INFO - Converting user to entity
+20:21:42.457 [main] INFO - User converted to entity
+20:21:42.458 [main] INFO - User converted to entity
+20:21:42.458 [main] INFO - User confirmed
+20:21:42.458 [main] INFO - User persisted
+20:21:42.462 [main] INFO - Blocking user: testUser
+20:21:42.463 [main] INFO - User found
+20:21:42.463 [main] INFO - User is not null
+20:21:42.463 [main] INFO - User set to inactive
+20:21:42.463 [main] INFO - User updated
+20:21:42.467 [main] INFO - Removing user: testUser
+20:21:42.467 [main] INFO - User found
+20:21:42.467 [main] INFO - User is not null
+20:21:42.467 [main] INFO - User removed
+20:21:42.472 [main] INFO - Blocking user: nonExistingUser
+20:21:42.472 [main] INFO - User found
+20:21:42.476 [main] INFO - Getting all users
+20:21:42.476 [main] INFO - Users found
+20:21:42.479 [main] INFO - Removing user: testUser
+20:21:42.479 [main] INFO - User found
+20:21:42.479 [main] INFO - User is not null
+20:21:42.479 [main] INFO - User removed
+20:27:50.210 [main] INFO - Restoring task
+20:27:50.234 [main] INFO - Converting task to entity
+20:27:50.235 [main] INFO - Task converted to entity
+20:27:50.241 [main] INFO - Converting task to dto
+20:27:50.241 [main] INFO - Converting category to dto
+20:27:50.242 [main] INFO - Category converted to dto
+20:27:50.245 [main] INFO - Creating category
+20:27:50.246 [main] INFO - Category created
+20:27:50.246 [main] INFO - Sending ping to dashboard
+20:27:50.249 [main] INFO - Task is valid
+20:27:50.251 [main] INFO - Restoring task
+20:27:50.251 [main] INFO - Task not restored
+20:27:50.253 [main] INFO - Converting task to dto
+20:27:50.253 [main] INFO - Converting category to dto
+20:27:50.253 [main] INFO - Category converted to dto
+20:27:50.256 [main] INFO - Blocking task
+20:27:50.256 [main] INFO - Task not blocked nor deleted
+20:27:50.257 [main] INFO - Task is invalid
+20:27:50.259 [main] INFO - Blocking task
+20:27:50.259 [main] INFO - Task is active
+20:27:50.368 [main] INFO - Finding user by username: testUser
+20:27:50.368 [main] INFO - User found
+20:27:50.368 [main] INFO - Converting entity to user
+20:27:50.369 [main] INFO - Entity converted to user
+20:27:50.373 [main] INFO - Getting user with token: validToken
+20:27:50.374 [main] INFO - User found
+20:27:50.374 [main] INFO - Converting entity to user
+20:27:50.374 [main] INFO - Entity converted to user
+20:27:50.379 [main] INFO - Blocking user: testUser
+20:27:50.380 [main] INFO - User found
+20:27:50.380 [main] INFO - User is not null
+20:27:50.380 [main] INFO - User set to inactive
+20:27:50.380 [main] INFO - User updated
+20:27:50.386 [main] INFO - Blocking user: nonExistingUser
+20:27:50.387 [main] INFO - User found
+20:27:50.398 [main] INFO - Adding user: testUser
+20:27:50.398 [main] INFO - User data is valid
+20:27:50.399 [main] INFO - Password encrypted
+20:27:50.399 [main] INFO - Converting user to entity
+20:27:50.399 [main] INFO - User converted to entity
+20:27:50.399 [main] INFO - User converted to entity
+20:27:50.399 [main] INFO - User confirmed
+20:27:50.399 [main] INFO - User persisted
+20:27:50.404 [main] INFO - Blocking user: testUser
+20:27:50.404 [main] INFO - User found
+20:27:50.404 [main] INFO - User is not null
+20:27:50.404 [main] INFO - User set to inactive
+20:27:50.404 [main] INFO - User updated
+20:27:50.408 [main] INFO - Removing user: testUser
+20:27:50.409 [main] INFO - User found
+20:27:50.409 [main] INFO - User is not null
+20:27:50.409 [main] INFO - User removed
+20:27:50.413 [main] INFO - Blocking user: nonExistingUser
+20:27:50.413 [main] INFO - User found
+20:27:50.416 [main] INFO - Getting all users
+20:27:50.416 [main] INFO - Users found
+20:27:50.418 [main] INFO - Removing user: testUser
+20:27:50.419 [main] INFO - User found
+20:27:50.419 [main] INFO - User is not null
+20:27:50.419 [main] INFO - User removed
+20:38:39.645 [main] INFO - Restoring task
+20:38:39.669 [main] INFO - Converting task to entity
+20:38:39.670 [main] INFO - Task converted to entity
+20:38:39.675 [main] INFO - Converting task to dto
+20:38:39.675 [main] INFO - Converting category to dto
+20:38:39.675 [main] INFO - Category converted to dto
+20:38:39.679 [main] INFO - Creating category
+20:38:39.679 [main] INFO - Category created
+20:38:39.679 [main] INFO - Sending ping to dashboard
+20:38:39.682 [main] INFO - Task is valid
+20:38:39.684 [main] INFO - Restoring task
+20:38:39.684 [main] INFO - Task not restored
+20:38:39.686 [main] INFO - Converting task to dto
+20:38:39.686 [main] INFO - Converting category to dto
+20:38:39.686 [main] INFO - Category converted to dto
+20:38:39.689 [main] INFO - Blocking task
+20:38:39.689 [main] INFO - Task not blocked nor deleted
+20:38:39.691 [main] INFO - Task is invalid
+20:38:39.692 [main] INFO - Blocking task
+20:38:39.692 [main] INFO - Task is active
+20:38:39.792 [main] INFO - Finding user by username: testUser
+20:38:39.792 [main] INFO - User found
+20:38:39.792 [main] INFO - Converting entity to user
+20:38:39.792 [main] INFO - Entity converted to user
+20:38:39.796 [main] INFO - Getting user with token: validToken
+20:38:39.796 [main] INFO - User found
+20:38:39.796 [main] INFO - Converting entity to user
+20:38:39.796 [main] INFO - Entity converted to user
+20:38:39.800 [main] INFO - Blocking user: testUser
+20:38:39.800 [main] INFO - User found
+20:38:39.800 [main] INFO - User is not null
+20:38:39.800 [main] INFO - User set to inactive
+20:38:39.801 [main] INFO - User updated
+20:38:39.806 [main] INFO - Blocking user: nonExistingUser
+20:38:39.807 [main] INFO - User found
+20:38:39.818 [main] INFO - Adding user: testUser
+20:38:39.818 [main] INFO - User data is valid
+20:38:39.818 [main] INFO - Password encrypted
+20:38:39.818 [main] INFO - Converting user to entity
+20:38:39.818 [main] INFO - User converted to entity
+20:38:39.818 [main] INFO - User converted to entity
+20:38:39.818 [main] INFO - User confirmed
+20:38:39.819 [main] INFO - User persisted
+20:38:39.824 [main] INFO - Blocking user: testUser
+20:38:39.824 [main] INFO - User found
+20:38:39.824 [main] INFO - User is not null
+20:38:39.824 [main] INFO - User set to inactive
+20:38:39.824 [main] INFO - User updated
+20:38:39.829 [main] INFO - Removing user: testUser
+20:38:39.829 [main] INFO - User found
+20:38:39.829 [main] INFO - User is not null
+20:38:39.829 [main] INFO - User removed
+20:38:39.833 [main] INFO - Blocking user: nonExistingUser
+20:38:39.833 [main] INFO - User found
+20:38:39.836 [main] INFO - Getting all users
+20:38:39.836 [main] INFO - Users found
+20:38:39.838 [main] INFO - Removing user: testUser
+20:38:39.839 [main] INFO - User found
+20:38:39.839 [main] INFO - User is not null
+20:38:39.839 [main] INFO - User removed
+20:44:25.079 [main] INFO - Restoring task
+20:44:25.101 [main] INFO - Converting task to entity
+20:44:25.102 [main] INFO - Task converted to entity
+20:44:25.107 [main] INFO - Converting task to dto
+20:44:25.107 [main] INFO - Converting category to dto
+20:44:25.108 [main] INFO - Category converted to dto
+20:44:25.112 [main] INFO - Creating category
+20:44:25.112 [main] INFO - Category created
+20:44:25.112 [main] INFO - Sending ping to dashboard
+20:44:25.115 [main] INFO - Task is valid
+20:44:25.117 [main] INFO - Restoring task
+20:44:25.117 [main] INFO - Task not restored
+20:44:25.119 [main] INFO - Converting task to dto
+20:44:25.120 [main] INFO - Converting category to dto
+20:44:25.120 [main] INFO - Category converted to dto
+20:44:25.122 [main] INFO - Blocking task
+20:44:25.123 [main] INFO - Task not blocked nor deleted
+20:44:25.124 [main] INFO - Task is invalid
+20:44:25.126 [main] INFO - Blocking task
+20:44:25.126 [main] INFO - Task is active
+20:44:25.253 [main] INFO - Finding user by username: testUser
+20:44:25.254 [main] INFO - User found
+20:44:25.254 [main] INFO - Converting entity to user
+20:44:25.254 [main] INFO - Entity converted to user
+20:44:25.260 [main] INFO - Getting user with token: validToken
+20:44:25.261 [main] INFO - User found
+20:44:25.261 [main] INFO - Converting entity to user
+20:44:25.261 [main] INFO - Entity converted to user
+20:44:25.269 [main] INFO - Blocking user: testUser
+20:44:25.269 [main] INFO - User found
+20:44:25.269 [main] INFO - User is not null
+20:44:25.269 [main] INFO - User set to inactive
+20:44:25.269 [main] INFO - User updated
+20:44:25.277 [main] INFO - Blocking user: nonExistingUser
+20:44:25.277 [main] INFO - User found
+20:44:25.289 [main] INFO - Adding user: testUser
+20:44:25.289 [main] INFO - User data is valid
+20:44:25.289 [main] INFO - Password encrypted
+20:44:25.289 [main] INFO - Converting user to entity
+20:44:25.289 [main] INFO - User converted to entity
+20:44:25.290 [main] INFO - User converted to entity
+20:44:25.290 [main] INFO - User confirmed
+20:44:25.290 [main] INFO - User persisted
+20:44:25.294 [main] INFO - Blocking user: testUser
+20:44:25.294 [main] INFO - User found
+20:44:25.294 [main] INFO - User is not null
+20:44:25.294 [main] INFO - User set to inactive
+20:44:25.295 [main] INFO - User updated
+20:44:25.299 [main] INFO - Removing user: testUser
+20:44:25.299 [main] INFO - User found
+20:44:25.299 [main] INFO - User is not null
+20:44:25.300 [main] INFO - User removed
+20:44:25.304 [main] INFO - Blocking user: nonExistingUser
+20:44:25.304 [main] INFO - User found
+20:44:25.308 [main] INFO - Getting all users
+20:44:25.308 [main] INFO - Users found
+20:44:25.311 [main] INFO - Removing user: testUser
+20:44:25.311 [main] INFO - User found
+20:44:25.311 [main] INFO - User is not null
+20:44:25.311 [main] INFO - User removed
+20:46:14.381 [main] INFO - Restoring task
+20:46:14.404 [main] INFO - Converting task to entity
+20:46:14.404 [main] INFO - Task converted to entity
+20:46:14.408 [main] INFO - Converting task to dto
+20:46:14.409 [main] INFO - Converting category to dto
+20:46:14.409 [main] INFO - Category converted to dto
+20:46:14.412 [main] INFO - Creating category
+20:46:14.412 [main] INFO - Category created
+20:46:14.412 [main] INFO - Sending ping to dashboard
+20:46:14.414 [main] INFO - Task is valid
+20:46:14.416 [main] INFO - Restoring task
+20:46:14.416 [main] INFO - Task not restored
+20:46:14.418 [main] INFO - Converting task to dto
+20:46:14.418 [main] INFO - Converting category to dto
+20:46:14.418 [main] INFO - Category converted to dto
+20:46:14.420 [main] INFO - Blocking task
+20:46:14.421 [main] INFO - Task not blocked nor deleted
+20:46:14.422 [main] INFO - Task is invalid
+20:46:14.423 [main] INFO - Blocking task
+20:46:14.423 [main] INFO - Task is active
+20:46:14.520 [main] INFO - Finding user by username: testUser
+20:46:14.520 [main] INFO - User found
+20:46:14.520 [main] INFO - Converting entity to user
+20:46:14.521 [main] INFO - Entity converted to user
+20:46:14.524 [main] INFO - Getting user with token: validToken
+20:46:14.525 [main] INFO - User found
+20:46:14.525 [main] INFO - Converting entity to user
+20:46:14.525 [main] INFO - Entity converted to user
+20:46:14.528 [main] INFO - Blocking user: testUser
+20:46:14.528 [main] INFO - User found
+20:46:14.528 [main] INFO - User is not null
+20:46:14.529 [main] INFO - User set to inactive
+20:46:14.529 [main] INFO - User updated
+20:46:14.534 [main] INFO - Blocking user: nonExistingUser
+20:46:14.534 [main] INFO - User found
+20:46:14.544 [main] INFO - Adding user: testUser
+20:46:14.544 [main] INFO - User data is valid
+20:46:14.544 [main] INFO - Password encrypted
+20:46:14.544 [main] INFO - Converting user to entity
+20:46:14.544 [main] INFO - User converted to entity
+20:46:14.544 [main] INFO - User converted to entity
+20:46:14.544 [main] INFO - User confirmed
+20:46:14.545 [main] INFO - User persisted
+20:46:14.548 [main] INFO - Blocking user: testUser
+20:46:14.549 [main] INFO - User found
+20:46:14.549 [main] INFO - User is not null
+20:46:14.549 [main] INFO - User set to inactive
+20:46:14.549 [main] INFO - User updated
+20:46:14.553 [main] INFO - Removing user: testUser
+20:46:14.553 [main] INFO - User found
+20:46:14.553 [main] INFO - User is not null
+20:46:14.553 [main] INFO - User removed
+20:46:14.557 [main] INFO - Blocking user: nonExistingUser
+20:46:14.557 [main] INFO - User found
+20:46:14.560 [main] INFO - Getting all users
+20:46:14.560 [main] INFO - Users found
+20:46:14.562 [main] INFO - Removing user: testUser
+20:46:14.563 [main] INFO - User found
+20:46:14.563 [main] INFO - User is not null
+20:46:14.563 [main] INFO - User removed
+20:47:23.016 [main] INFO - Restoring task
+20:47:23.038 [main] INFO - Converting task to entity
+20:47:23.038 [main] INFO - Task converted to entity
+20:47:23.044 [main] INFO - Converting task to dto
+20:47:23.044 [main] INFO - Converting category to dto
+20:47:23.044 [main] INFO - Category converted to dto
+20:47:23.048 [main] INFO - Creating category
+20:47:23.048 [main] INFO - Category created
+20:47:23.048 [main] INFO - Sending ping to dashboard
+20:47:23.050 [main] INFO - Task is valid
+20:47:23.052 [main] INFO - Restoring task
+20:47:23.054 [main] INFO - Task not restored
+20:47:23.055 [main] INFO - Converting task to dto
+20:47:23.056 [main] INFO - Converting category to dto
+20:47:23.056 [main] INFO - Category converted to dto
+20:47:23.058 [main] INFO - Blocking task
+20:47:23.059 [main] INFO - Task not blocked nor deleted
+20:47:23.060 [main] INFO - Task is invalid
+20:47:23.061 [main] INFO - Blocking task
+20:47:23.061 [main] INFO - Task is active
+20:47:23.156 [main] INFO - Finding user by username: testUser
+20:47:23.156 [main] INFO - User found
+20:47:23.156 [main] INFO - Converting entity to user
+20:47:23.156 [main] INFO - Entity converted to user
+20:47:23.161 [main] INFO - Getting user with token: validToken
+20:47:23.161 [main] INFO - User found
+20:47:23.161 [main] INFO - Converting entity to user
+20:47:23.161 [main] INFO - Entity converted to user
+20:47:23.165 [main] INFO - Blocking user: testUser
+20:47:23.166 [main] INFO - User found
+20:47:23.166 [main] INFO - User is not null
+20:47:23.167 [main] INFO - User set to inactive
+20:47:23.167 [main] INFO - User updated
+20:47:23.173 [main] INFO - Blocking user: nonExistingUser
+20:47:23.173 [main] INFO - User found
+20:47:23.184 [main] INFO - Adding user: testUser
+20:47:23.184 [main] INFO - User data is valid
+20:47:23.184 [main] INFO - Password encrypted
+20:47:23.184 [main] INFO - Converting user to entity
+20:47:23.185 [main] INFO - User converted to entity
+20:47:23.185 [main] INFO - User converted to entity
+20:47:23.185 [main] INFO - User confirmed
+20:47:23.185 [main] INFO - User persisted
+20:47:23.190 [main] INFO - Blocking user: testUser
+20:47:23.190 [main] INFO - User found
+20:47:23.190 [main] INFO - User is not null
+20:47:23.190 [main] INFO - User set to inactive
+20:47:23.190 [main] INFO - User updated
+20:47:23.194 [main] INFO - Removing user: testUser
+20:47:23.195 [main] INFO - User found
+20:47:23.195 [main] INFO - User is not null
+20:47:23.195 [main] INFO - User removed
+20:47:23.198 [main] INFO - Blocking user: nonExistingUser
+20:47:23.199 [main] INFO - User found
+20:47:23.201 [main] INFO - Getting all users
+20:47:23.201 [main] INFO - Users found
+20:47:23.204 [main] INFO - Removing user: testUser
+20:47:23.204 [main] INFO - User found
+20:47:23.204 [main] INFO - User is not null
+20:47:23.204 [main] INFO - User removed
+20:50:52.875 [main] INFO - Restoring task
+20:50:52.899 [main] INFO - Converting task to entity
+20:50:52.900 [main] INFO - Task converted to entity
+20:50:52.905 [main] INFO - Converting task to dto
+20:50:52.905 [main] INFO - Converting category to dto
+20:50:52.905 [main] INFO - Category converted to dto
+20:50:52.909 [main] INFO - Creating category
+20:50:52.909 [main] INFO - Category created
+20:50:52.909 [main] INFO - Sending ping to dashboard
+20:50:52.912 [main] INFO - Task is valid
+20:50:52.914 [main] INFO - Restoring task
+20:50:52.914 [main] INFO - Task not restored
+20:50:52.917 [main] INFO - Converting task to dto
+20:50:52.917 [main] INFO - Converting category to dto
+20:50:52.917 [main] INFO - Category converted to dto
+20:50:52.919 [main] INFO - Blocking task
+20:50:52.920 [main] INFO - Task not blocked nor deleted
+20:50:52.921 [main] INFO - Task is invalid
+20:50:52.922 [main] INFO - Blocking task
+20:50:52.923 [main] INFO - Task is active
+20:50:53.034 [main] INFO - Finding user by username: testUser
+20:50:53.034 [main] INFO - User found
+20:50:53.034 [main] INFO - Converting entity to user
+20:50:53.035 [main] INFO - Entity converted to user
+20:50:53.039 [main] INFO - Getting user with token: validToken
+20:50:53.040 [main] INFO - User found
+20:50:53.040 [main] INFO - Converting entity to user
+20:50:53.040 [main] INFO - Entity converted to user
+20:50:53.045 [main] INFO - Blocking user: testUser
+20:50:53.045 [main] INFO - User found
+20:50:53.045 [main] INFO - User is not null
+20:50:53.045 [main] INFO - User set to inactive
+20:50:53.046 [main] INFO - User updated
+20:50:53.054 [main] INFO - Blocking user: nonExistingUser
+20:50:53.054 [main] INFO - User found
+20:50:53.068 [main] INFO - Adding user: testUser
+20:50:53.069 [main] INFO - User data is valid
+20:50:53.069 [main] INFO - Password encrypted
+20:50:53.069 [main] INFO - Converting user to entity
+20:50:53.069 [main] INFO - User converted to entity
+20:50:53.069 [main] INFO - User converted to entity
+20:50:53.069 [main] INFO - User confirmed
+20:50:53.069 [main] INFO - User persisted
+20:50:53.073 [main] INFO - Blocking user: testUser
+20:50:53.074 [main] INFO - User found
+20:50:53.074 [main] INFO - User is not null
+20:50:53.074 [main] INFO - User set to inactive
+20:50:53.074 [main] INFO - User updated
+20:50:53.078 [main] INFO - Removing user: testUser
+20:50:53.078 [main] INFO - User found
+20:50:53.078 [main] INFO - User is not null
+20:50:53.078 [main] INFO - User removed
+20:50:53.082 [main] INFO - Blocking user: nonExistingUser
+20:50:53.082 [main] INFO - User found
+20:50:53.085 [main] INFO - Getting all users
+20:50:53.085 [main] INFO - Users found
+20:50:53.088 [main] INFO - Removing user: testUser
+20:50:53.088 [main] INFO - User found
+20:50:53.088 [main] INFO - User is not null
+20:50:53.088 [main] INFO - User removed
+20:54:23.545 [main] INFO - Restoring task
+20:54:23.554 [main] INFO - Converting entity to socket dto
+20:54:23.555 [main] INFO - Converting task to dto
+20:54:23.556 [main] INFO - Converting category to dto
+20:54:23.570 [main] INFO - Converting task to entity
+20:54:23.571 [main] INFO - Task converted to entity
+20:54:23.576 [main] INFO - Converting task to dto
+20:54:23.576 [main] INFO - Converting category to dto
+20:54:23.576 [main] INFO - Category converted to dto
+20:54:23.580 [main] INFO - Creating category
+20:54:23.580 [main] INFO - Category created
+20:54:23.580 [main] INFO - Sending ping to dashboard
+20:54:23.586 [main] INFO - Task is valid
+20:54:23.588 [main] INFO - Restoring task
+20:54:23.589 [main] INFO - Task not restored
+20:54:23.590 [main] INFO - Converting task to dto
+20:54:23.591 [main] INFO - Converting category to dto
+20:54:23.591 [main] INFO - Category converted to dto
+20:54:23.593 [main] INFO - Blocking task
+20:54:23.593 [main] INFO - Task not blocked nor deleted
+20:54:23.594 [main] INFO - Task is invalid
+20:54:23.596 [main] INFO - Blocking task
+20:54:23.596 [main] INFO - Task is active
+20:54:23.596 [main] INFO - Converting entity to socket dto
+20:54:23.596 [main] INFO - Converting task to dto
+20:54:23.597 [main] INFO - Converting category to dto
+20:54:23.697 [main] INFO - Finding user by username: testUser
+20:54:23.698 [main] INFO - User found
+20:54:23.698 [main] INFO - Converting entity to user
+20:54:23.698 [main] INFO - Entity converted to user
+20:54:23.702 [main] INFO - Getting user with token: validToken
+20:54:23.702 [main] INFO - User found
+20:54:23.703 [main] INFO - Converting entity to user
+20:54:23.703 [main] INFO - Entity converted to user
+20:54:23.706 [main] INFO - Blocking user: testUser
+20:54:23.707 [main] INFO - User found
+20:54:23.707 [main] INFO - User is not null
+20:54:23.707 [main] INFO - User set to inactive
+20:54:23.707 [main] INFO - User updated
+20:54:23.711 [main] INFO - Blocking user: nonExistingUser
+20:54:23.711 [main] INFO - User found
+20:54:23.718 [main] INFO - Adding user: testUser
+20:54:23.718 [main] INFO - User data is valid
+20:54:23.718 [main] INFO - Password encrypted
+20:54:23.718 [main] INFO - Converting user to entity
+20:54:23.718 [main] INFO - User converted to entity
+20:54:23.718 [main] INFO - User converted to entity
+20:54:23.719 [main] INFO - User confirmed
+20:54:23.719 [main] INFO - User persisted
+20:54:23.724 [main] INFO - Blocking user: testUser
+20:54:23.724 [main] INFO - User found
+20:54:23.725 [main] INFO - User is not null
+20:54:23.725 [main] INFO - User set to inactive
+20:54:23.725 [main] INFO - User updated
+20:54:23.730 [main] INFO - Removing user: testUser
+20:54:23.730 [main] INFO - User found
+20:54:23.731 [main] INFO - User is not null
+20:54:23.731 [main] INFO - User removed
+20:54:23.735 [main] INFO - Blocking user: nonExistingUser
+20:54:23.735 [main] INFO - User found
+20:54:23.738 [main] INFO - Getting all users
+20:54:23.738 [main] INFO - Users found
+20:54:23.741 [main] INFO - Removing user: testUser
+20:54:23.741 [main] INFO - User found
+20:54:23.742 [main] INFO - User is not null
+20:54:23.742 [main] INFO - User removed
+21:02:53.162 [main] INFO - Restoring task
+21:02:53.170 [main] INFO - Converting entity to socket dto
+21:02:53.170 [main] INFO - Converting task to dto
+21:02:53.172 [main] INFO - Converting category to dto
+21:02:53.187 [main] INFO - Converting task to entity
+21:02:53.188 [main] INFO - Task converted to entity
+21:02:53.195 [main] INFO - Converting task to dto
+21:02:53.196 [main] INFO - Converting category to dto
+21:02:53.196 [main] INFO - Category converted to dto
+21:02:53.200 [main] INFO - Creating category
+21:02:53.200 [main] INFO - Category created
+21:02:53.200 [main] INFO - Sending ping to dashboard
+21:02:53.206 [main] INFO - Task is valid
+21:02:53.209 [main] INFO - Restoring task
+21:02:53.209 [main] INFO - Task not restored
+21:02:53.211 [main] INFO - Converting task to dto
+21:02:53.211 [main] INFO - Converting category to dto
+21:02:53.211 [main] INFO - Category converted to dto
+21:02:53.214 [main] INFO - Blocking task
+21:02:53.214 [main] INFO - Task not blocked nor deleted
+21:02:53.215 [main] INFO - Task is invalid
+21:02:53.217 [main] INFO - Blocking task
+21:02:53.218 [main] INFO - Task is active
+21:02:53.218 [main] INFO - Converting entity to socket dto
+21:02:53.218 [main] INFO - Converting task to dto
+21:02:53.218 [main] INFO - Converting category to dto
+21:02:53.325 [main] INFO - Finding user by username: testUser
+21:02:53.325 [main] INFO - User found
+21:02:53.325 [main] INFO - Converting entity to user
+21:02:53.326 [main] INFO - Entity converted to user
+21:02:53.331 [main] INFO - Getting user with token: validToken
+21:02:53.331 [main] INFO - User found
+21:02:53.331 [main] INFO - Converting entity to user
+21:02:53.331 [main] INFO - Entity converted to user
+21:02:53.335 [main] INFO - Blocking user: testUser
+21:02:53.335 [main] INFO - User found
+21:02:53.335 [main] INFO - User is not null
+21:02:53.336 [main] INFO - User set to inactive
+21:02:53.336 [main] INFO - User updated
+21:02:53.336 [main] INFO - Dashboard pinged
+21:02:53.339 [main] INFO - Blocking user: nonExistingUser
+21:02:53.339 [main] INFO - User found
+21:02:53.344 [main] INFO - Adding user: testUser
+21:02:53.344 [main] INFO - User data is valid
+21:02:53.345 [main] INFO - Password encrypted
+21:02:53.345 [main] INFO - Converting user to entity
+21:02:53.345 [main] INFO - User converted to entity
+21:02:53.345 [main] INFO - User converted to entity
+21:02:53.345 [main] INFO - User confirmed
+21:02:53.345 [main] INFO - User persisted
+21:02:53.345 [main] INFO - Dashboard pinged
+21:02:53.351 [main] INFO - Blocking user: testUser
+21:02:53.351 [main] INFO - User found
+21:02:53.351 [main] INFO - User is not null
+21:02:53.351 [main] INFO - User set to inactive
+21:02:53.351 [main] INFO - User updated
+21:02:53.351 [main] INFO - Dashboard pinged
+21:02:53.354 [main] INFO - Removing user: testUser
+21:02:53.355 [main] INFO - User found
+21:02:53.355 [main] INFO - User is not null
+21:02:53.355 [main] INFO - User removed
+21:02:53.355 [main] INFO - Dashboard pinged
+21:02:53.358 [main] INFO - Blocking user: nonExistingUser
+21:02:53.358 [main] INFO - User found
+21:02:53.362 [main] INFO - Getting all users
+21:02:53.363 [main] INFO - Users found
+21:02:53.365 [main] INFO - Removing user: testUser
+21:02:53.366 [main] INFO - User found
+21:02:53.366 [main] INFO - User is not null
+21:02:53.366 [main] INFO - User removed
+21:02:53.366 [main] INFO - Dashboard pinged
+21:03:25.967 [main] INFO - Restoring task
+21:03:25.975 [main] INFO - Converting entity to socket dto
+21:03:25.975 [main] INFO - Converting task to dto
+21:03:25.977 [main] INFO - Converting category to dto
+21:03:25.991 [main] INFO - Converting task to entity
+21:03:25.992 [main] INFO - Task converted to entity
+21:03:25.997 [main] INFO - Converting task to dto
+21:03:25.997 [main] INFO - Converting category to dto
+21:03:25.998 [main] INFO - Category converted to dto
+21:03:26.001 [main] INFO - Creating category
+21:03:26.001 [main] INFO - Category created
+21:03:26.001 [main] INFO - Sending ping to dashboard
+21:03:26.007 [main] INFO - Task is valid
+21:03:26.009 [main] INFO - Restoring task
+21:03:26.009 [main] INFO - Task not restored
+21:03:26.010 [main] INFO - Converting task to dto
+21:03:26.010 [main] INFO - Converting category to dto
+21:03:26.010 [main] INFO - Category converted to dto
+21:03:26.012 [main] INFO - Blocking task
+21:03:26.013 [main] INFO - Task not blocked nor deleted
+21:03:26.014 [main] INFO - Task is invalid
+21:03:26.015 [main] INFO - Blocking task
+21:03:26.016 [main] INFO - Task is active
+21:03:26.016 [main] INFO - Converting entity to socket dto
+21:03:26.016 [main] INFO - Converting task to dto
+21:03:26.016 [main] INFO - Converting category to dto
+21:03:26.114 [main] INFO - Finding user by username: testUser
+21:03:26.114 [main] INFO - User found
+21:03:26.114 [main] INFO - Converting entity to user
+21:03:26.114 [main] INFO - Entity converted to user
+21:03:26.119 [main] INFO - Getting user with token: validToken
+21:03:26.119 [main] INFO - User found
+21:03:26.119 [main] INFO - Converting entity to user
+21:03:26.119 [main] INFO - Entity converted to user
+21:03:26.123 [main] INFO - Blocking user: testUser
+21:03:26.123 [main] INFO - User found
+21:03:26.123 [main] INFO - User is not null
+21:03:26.123 [main] INFO - User set to inactive
+21:03:26.123 [main] INFO - User updated
+21:03:26.124 [main] INFO - Dashboard pinged
+21:03:26.127 [main] INFO - Blocking user: nonExistingUser
+21:03:26.127 [main] INFO - User found
+21:03:26.133 [main] INFO - Adding user: testUser
+21:03:26.133 [main] INFO - User data is valid
+21:03:26.134 [main] INFO - Password encrypted
+21:03:26.134 [main] INFO - Converting user to entity
+21:03:26.134 [main] INFO - User converted to entity
+21:03:26.134 [main] INFO - User converted to entity
+21:03:26.134 [main] INFO - User confirmed
+21:03:26.134 [main] INFO - User persisted
+21:03:26.134 [main] INFO - Dashboard pinged
+21:03:26.140 [main] INFO - Blocking user: testUser
+21:03:26.140 [main] INFO - User found
+21:03:26.140 [main] INFO - User is not null
+21:03:26.140 [main] INFO - User set to inactive
+21:03:26.140 [main] INFO - User updated
+21:03:26.141 [main] INFO - Dashboard pinged
+21:03:26.144 [main] INFO - Removing user: testUser
+21:03:26.144 [main] INFO - User found
+21:03:26.144 [main] INFO - User is not null
+21:03:26.144 [main] INFO - User removed
+21:03:26.144 [main] INFO - Dashboard pinged
+21:03:26.147 [main] INFO - Blocking user: nonExistingUser
+21:03:26.148 [main] INFO - User found
+21:03:26.150 [main] INFO - Getting all users
+21:03:26.150 [main] INFO - Users found
+21:03:26.153 [main] INFO - Removing user: testUser
+21:03:26.154 [main] INFO - User found
+21:03:26.154 [main] INFO - User is not null
+21:03:26.154 [main] INFO - User removed
+21:03:26.154 [main] INFO - Dashboard pinged
+21:05:25.714 [main] INFO - Restoring task
+21:05:25.722 [main] INFO - Converting entity to socket dto
+21:05:25.723 [main] INFO - Converting task to dto
+21:05:25.725 [main] INFO - Converting category to dto
+21:05:25.738 [main] INFO - Converting task to entity
+21:05:25.739 [main] INFO - Task converted to entity
+21:05:25.744 [main] INFO - Converting task to dto
+21:05:25.744 [main] INFO - Converting category to dto
+21:05:25.744 [main] INFO - Category converted to dto
+21:05:25.747 [main] INFO - Creating category
+21:05:25.748 [main] INFO - Category created
+21:05:25.748 [main] INFO - Sending ping to dashboard
+21:05:25.754 [main] INFO - Task is valid
+21:05:25.756 [main] INFO - Restoring task
+21:05:25.756 [main] INFO - Task not restored
+21:05:25.758 [main] INFO - Converting task to dto
+21:05:25.758 [main] INFO - Converting category to dto
+21:05:25.758 [main] INFO - Category converted to dto
+21:05:25.760 [main] INFO - Blocking task
+21:05:25.761 [main] INFO - Task not blocked nor deleted
+21:05:25.762 [main] INFO - Task is invalid
+21:05:25.763 [main] INFO - Blocking task
+21:05:25.764 [main] INFO - Task is active
+21:05:25.764 [main] INFO - Converting entity to socket dto
+21:05:25.764 [main] INFO - Converting task to dto
+21:05:25.764 [main] INFO - Converting category to dto
+21:05:25.764 [main] INFO - Category converted to dto
+21:05:25.879 [main] INFO - Finding user by username: testUser
+21:05:25.879 [main] INFO - User found
+21:05:25.879 [main] INFO - Converting entity to user
+21:05:25.880 [main] INFO - Entity converted to user
+21:05:25.884 [main] INFO - Getting user with token: validToken
+21:05:25.885 [main] INFO - User found
+21:05:25.885 [main] INFO - Converting entity to user
+21:05:25.885 [main] INFO - Entity converted to user
+21:05:25.889 [main] INFO - Blocking user: testUser
+21:05:25.890 [main] INFO - User found
+21:05:25.890 [main] INFO - User is not null
+21:05:25.890 [main] INFO - User set to inactive
+21:05:25.890 [main] INFO - User updated
+21:05:25.890 [main] INFO - Dashboard pinged
+21:05:25.893 [main] INFO - Blocking user: nonExistingUser
+21:05:25.894 [main] INFO - User found
+21:05:25.900 [main] INFO - Adding user: testUser
+21:05:25.900 [main] INFO - User data is valid
+21:05:25.900 [main] INFO - Password encrypted
+21:05:25.901 [main] INFO - Converting user to entity
+21:05:25.901 [main] INFO - User converted to entity
+21:05:25.901 [main] INFO - User converted to entity
+21:05:25.901 [main] INFO - User confirmed
+21:05:25.901 [main] INFO - User persisted
+21:05:25.901 [main] INFO - Dashboard pinged
+21:05:25.906 [main] INFO - Blocking user: testUser
+21:05:25.907 [main] INFO - User found
+21:05:25.907 [main] INFO - User is not null
+21:05:25.907 [main] INFO - User set to inactive
+21:05:25.907 [main] INFO - User updated
+21:05:25.907 [main] INFO - Dashboard pinged
+21:05:25.910 [main] INFO - Removing user: testUser
+21:05:25.910 [main] INFO - User found
+21:05:25.910 [main] INFO - User is not null
+21:05:25.911 [main] INFO - User removed
+21:05:25.911 [main] INFO - Dashboard pinged
+21:05:25.914 [main] INFO - Blocking user: nonExistingUser
+21:05:25.915 [main] INFO - User found
+21:05:25.917 [main] INFO - Getting all users
+21:05:25.917 [main] INFO - Users found
+21:05:25.921 [main] INFO - Removing user: testUser
+21:05:25.921 [main] INFO - User found
+21:05:25.921 [main] INFO - User is not null
+21:05:25.921 [main] INFO - User removed
+21:05:25.921 [main] INFO - Dashboard pinged
+21:06:46.804 [main] INFO - Restoring task
+21:06:46.813 [main] INFO - Converting entity to socket dto
+21:06:46.813 [main] INFO - Converting task to dto
+21:06:46.815 [main] INFO - Converting category to dto
+21:06:46.829 [main] INFO - Converting task to entity
+21:06:46.830 [main] INFO - Task converted to entity
+21:06:46.835 [main] INFO - Converting task to dto
+21:06:46.836 [main] INFO - Converting category to dto
+21:06:46.836 [main] INFO - Category converted to dto
+21:06:46.840 [main] INFO - Creating category
+21:06:46.840 [main] INFO - Category created
+21:06:46.840 [main] INFO - Sending ping to dashboard
+21:06:46.847 [main] INFO - Task is valid
+21:06:46.849 [main] INFO - Restoring task
+21:06:46.850 [main] INFO - Task not restored
+21:06:46.852 [main] INFO - Converting task to dto
+21:06:46.852 [main] INFO - Converting category to dto
+21:06:46.852 [main] INFO - Category converted to dto
+21:06:46.855 [main] INFO - Blocking task
+21:06:46.855 [main] INFO - Task not blocked nor deleted
+21:06:46.856 [main] INFO - Task is invalid
+21:06:46.858 [main] INFO - Blocking task
+21:06:46.859 [main] INFO - Task is active
+21:06:46.859 [main] INFO - Converting entity to socket dto
+21:06:46.859 [main] INFO - Converting task to dto
+21:06:46.859 [main] INFO - Converting category to dto
+21:06:46.859 [main] INFO - Category converted to dto
+21:06:46.859 [main] INFO - Task converted to dto
+21:06:46.859 [main] INFO - Entity converted to socket dto
+21:06:46.964 [main] INFO - Finding user by username: testUser
+21:06:46.964 [main] INFO - User found
+21:06:46.964 [main] INFO - Converting entity to user
+21:06:46.964 [main] INFO - Entity converted to user
+21:06:46.969 [main] INFO - Getting user with token: validToken
+21:06:46.970 [main] INFO - User found
+21:06:46.970 [main] INFO - Converting entity to user
+21:06:46.970 [main] INFO - Entity converted to user
+21:06:46.975 [main] INFO - Blocking user: testUser
+21:06:46.975 [main] INFO - User found
+21:06:46.975 [main] INFO - User is not null
+21:06:46.975 [main] INFO - User set to inactive
+21:06:46.976 [main] INFO - User updated
+21:06:46.976 [main] INFO - Dashboard pinged
+21:06:46.980 [main] INFO - Blocking user: nonExistingUser
+21:06:46.980 [main] INFO - User found
+21:06:46.987 [main] INFO - Adding user: testUser
+21:06:46.987 [main] INFO - User data is valid
+21:06:46.987 [main] INFO - Password encrypted
+21:06:46.987 [main] INFO - Converting user to entity
+21:06:46.987 [main] INFO - User converted to entity
+21:06:46.987 [main] INFO - User converted to entity
+21:06:46.987 [main] INFO - User confirmed
+21:06:46.988 [main] INFO - User persisted
+21:06:46.988 [main] INFO - Dashboard pinged
+21:06:46.993 [main] INFO - Blocking user: testUser
+21:06:46.993 [main] INFO - User found
+21:06:46.993 [main] INFO - User is not null
+21:06:46.993 [main] INFO - User set to inactive
+21:06:46.993 [main] INFO - User updated
+21:06:46.994 [main] INFO - Dashboard pinged
+21:06:46.996 [main] INFO - Removing user: testUser
+21:06:46.997 [main] INFO - User found
+21:06:46.997 [main] INFO - User is not null
+21:06:46.997 [main] INFO - User removed
+21:06:46.997 [main] INFO - Dashboard pinged
+21:06:47.000 [main] INFO - Blocking user: nonExistingUser
+21:06:47.000 [main] INFO - User found
+21:06:47.003 [main] INFO - Getting all users
+21:06:47.003 [main] INFO - Users found
+21:06:47.006 [main] INFO - Removing user: testUser
+21:06:47.006 [main] INFO - User found
+21:06:47.006 [main] INFO - User is not null
+21:06:47.006 [main] INFO - User removed
+21:06:47.006 [main] INFO - Dashboard pinged
+21:09:48.710 [main] INFO - Restoring task
+21:09:48.721 [main] INFO - Converting entity to socket dto
+21:09:48.721 [main] INFO - Converting task to dto
+21:09:48.723 [main] INFO - Converting category to dto
+21:09:48.740 [main] INFO - Converting task to entity
+21:09:48.741 [main] INFO - Task converted to entity
+21:09:48.746 [main] INFO - Converting task to dto
+21:09:48.746 [main] INFO - Converting category to dto
+21:09:48.746 [main] INFO - Category converted to dto
+21:09:48.751 [main] INFO - Creating category
+21:09:48.751 [main] INFO - Category created
+21:09:48.751 [main] INFO - Sending ping to dashboard
+21:09:48.760 [main] INFO - Task is valid
+21:09:48.763 [main] INFO - Restoring task
+21:09:48.763 [main] INFO - Task not restored
+21:09:48.766 [main] INFO - Converting task to dto
+21:09:48.766 [main] INFO - Converting category to dto
+21:09:48.766 [main] INFO - Category converted to dto
+21:09:48.768 [main] INFO - Blocking task
+21:09:48.769 [main] INFO - Task not blocked nor deleted
+21:09:48.770 [main] INFO - Task is invalid
+21:09:48.772 [main] INFO - Blocking task
+21:09:48.772 [main] INFO - Task is active
+21:09:48.772 [main] INFO - Converting entity to socket dto
+21:09:48.772 [main] INFO - Converting task to dto
+21:09:48.772 [main] INFO - Converting category to dto
+21:09:48.772 [main] INFO - Category converted to dto
+21:09:48.772 [main] INFO - Task converted to dto
+21:09:48.772 [main] INFO - Entity converted to socket dto
+21:09:48.774 [main] INFO - Task blocked
+21:09:48.774 [main] INFO - Task blocked/deleted
+21:09:48.887 [main] INFO - Finding user by username: testUser
+21:09:48.888 [main] INFO - User found
+21:09:48.888 [main] INFO - Converting entity to user
+21:09:48.888 [main] INFO - Entity converted to user
+21:09:48.893 [main] INFO - Getting user with token: validToken
+21:09:48.894 [main] INFO - User found
+21:09:48.894 [main] INFO - Converting entity to user
+21:09:48.894 [main] INFO - Entity converted to user
+21:09:48.898 [main] INFO - Blocking user: testUser
+21:09:48.898 [main] INFO - User found
+21:09:48.898 [main] INFO - User is not null
+21:09:48.898 [main] INFO - User set to inactive
+21:09:48.899 [main] INFO - User updated
+21:09:48.899 [main] INFO - Dashboard pinged
+21:09:48.904 [main] INFO - Blocking user: nonExistingUser
+21:09:48.904 [main] INFO - User found
+21:09:48.911 [main] INFO - Adding user: testUser
+21:09:48.912 [main] INFO - User data is valid
+21:09:48.912 [main] INFO - Password encrypted
+21:09:48.912 [main] INFO - Converting user to entity
+21:09:48.912 [main] INFO - User converted to entity
+21:09:48.912 [main] INFO - User converted to entity
+21:09:48.912 [main] INFO - User confirmed
+21:09:48.912 [main] INFO - User persisted
+21:09:48.912 [main] INFO - Dashboard pinged
+21:09:48.918 [main] INFO - Blocking user: testUser
+21:09:48.918 [main] INFO - User found
+21:09:48.918 [main] INFO - User is not null
+21:09:48.918 [main] INFO - User set to inactive
+21:09:48.918 [main] INFO - User updated
+21:09:48.918 [main] INFO - Dashboard pinged
+21:09:48.922 [main] INFO - Removing user: testUser
+21:09:48.922 [main] INFO - User found
+21:09:48.923 [main] INFO - User is not null
+21:09:48.923 [main] INFO - User removed
+21:09:48.923 [main] INFO - Dashboard pinged
+21:09:48.927 [main] INFO - Blocking user: nonExistingUser
+21:09:48.927 [main] INFO - User found
+21:09:48.931 [main] INFO - Getting all users
+21:09:48.931 [main] INFO - Users found
+21:09:48.935 [main] INFO - Removing user: testUser
+21:09:48.935 [main] INFO - User found
+21:09:48.935 [main] INFO - User is not null
+21:09:48.935 [main] INFO - User removed
+21:09:48.935 [main] INFO - Dashboard pinged
+21:13:11.334 [main] INFO - Restoring task
+21:13:11.345 [main] INFO - Converting entity to socket dto
+21:13:11.346 [main] INFO - Converting task to dto
+21:13:11.348 [main] INFO - Converting category to dto
+21:13:11.364 [main] INFO - Converting task to entity
+21:13:11.364 [main] INFO - Task converted to entity
+21:13:11.370 [main] INFO - Converting task to dto
+21:13:11.370 [main] INFO - Converting category to dto
+21:13:11.370 [main] INFO - Category converted to dto
+21:13:11.370 [main] INFO - Task converted to dto
+21:13:11.374 [main] INFO - Creating category
+21:13:11.374 [main] INFO - Category created
+21:13:11.374 [main] INFO - Sending ping to dashboard
+21:13:11.381 [main] INFO - Task is valid
+21:13:11.383 [main] INFO - Restoring task
+21:13:11.383 [main] INFO - Task not restored
+21:13:11.386 [main] INFO - Converting task to dto
+21:13:11.386 [main] INFO - Converting category to dto
+21:13:11.386 [main] INFO - Category converted to dto
+21:13:11.389 [main] INFO - Blocking task
+21:13:11.389 [main] INFO - Task not blocked nor deleted
+21:13:11.391 [main] INFO - Task is invalid
+21:13:11.393 [main] INFO - Blocking task
+21:13:11.393 [main] INFO - Task is active
+21:13:11.394 [main] INFO - Converting entity to socket dto
+21:13:11.394 [main] INFO - Converting task to dto
+21:13:11.394 [main] INFO - Converting category to dto
+21:13:11.394 [main] INFO - Category converted to dto
+21:13:11.394 [main] INFO - Task converted to dto
+21:13:11.394 [main] INFO - Entity converted to socket dto
+21:13:11.395 [main] INFO - Task blocked
+21:13:11.395 [main] INFO - Task blocked/deleted
+21:13:11.510 [main] INFO - Finding user by username: testUser
+21:13:11.511 [main] INFO - User found
+21:13:11.511 [main] INFO - Converting entity to user
+21:13:11.511 [main] INFO - Entity converted to user
+21:13:11.516 [main] INFO - Getting user with token: validToken
+21:13:11.516 [main] INFO - User found
+21:13:11.516 [main] INFO - Converting entity to user
+21:13:11.517 [main] INFO - Entity converted to user
+21:13:11.521 [main] INFO - Blocking user: testUser
+21:13:11.522 [main] INFO - User found
+21:13:11.522 [main] INFO - User is not null
+21:13:11.522 [main] INFO - User set to inactive
+21:13:11.522 [main] INFO - User updated
+21:13:11.523 [main] INFO - Dashboard pinged
+21:13:11.526 [main] INFO - Blocking user: nonExistingUser
+21:13:11.528 [main] INFO - User found
+21:13:11.535 [main] INFO - Adding user: testUser
+21:13:11.535 [main] INFO - User data is valid
+21:13:11.535 [main] INFO - Password encrypted
+21:13:11.535 [main] INFO - Converting user to entity
+21:13:11.535 [main] INFO - User converted to entity
+21:13:11.535 [main] INFO - User converted to entity
+21:13:11.536 [main] INFO - User confirmed
+21:13:11.536 [main] INFO - User persisted
+21:13:11.536 [main] INFO - Dashboard pinged
+21:13:11.541 [main] INFO - Blocking user: testUser
+21:13:11.541 [main] INFO - User found
+21:13:11.541 [main] INFO - User is not null
+21:13:11.541 [main] INFO - User set to inactive
+21:13:11.541 [main] INFO - User updated
+21:13:11.542 [main] INFO - Dashboard pinged
+21:13:11.545 [main] INFO - Removing user: testUser
+21:13:11.546 [main] INFO - User found
+21:13:11.546 [main] INFO - User is not null
+21:13:11.546 [main] INFO - User removed
+21:13:11.546 [main] INFO - Dashboard pinged
+21:13:11.549 [main] INFO - Blocking user: nonExistingUser
+21:13:11.550 [main] INFO - User found
+21:13:11.552 [main] INFO - Getting all users
+21:13:11.553 [main] INFO - Users found
+21:13:11.556 [main] INFO - Removing user: testUser
+21:13:11.556 [main] INFO - User found
+21:13:11.556 [main] INFO - User is not null
+21:13:11.556 [main] INFO - User removed
+21:13:11.556 [main] INFO - Dashboard pinged
+21:46:24.065 [main] INFO - Restoring task
+21:46:24.073 [main] INFO - Converting entity to socket dto
+21:46:24.074 [main] INFO - Converting task to dto
+21:46:24.075 [main] INFO - Converting category to dto
+21:46:24.089 [main] INFO - Converting task to entity
+21:46:24.090 [main] INFO - Task converted to entity
+21:46:24.094 [main] INFO - Converting task to dto
+21:46:24.094 [main] INFO - Converting category to dto
+21:46:24.094 [main] INFO - Category converted to dto
+21:46:24.095 [main] INFO - Task converted to dto
+21:46:24.097 [main] INFO - Creating category
+21:46:24.097 [main] INFO - Category created
+21:46:24.097 [main] INFO - Sending ping to dashboard
+21:46:24.103 [main] INFO - Task is valid
+21:46:24.105 [main] INFO - Restoring task
+21:46:24.105 [main] INFO - Task not restored
+21:46:24.107 [main] INFO - Converting task to dto
+21:46:24.107 [main] INFO - Converting category to dto
+21:46:24.107 [main] INFO - Category converted to dto
+21:46:24.107 [main] INFO - Task converted to dto
+21:46:24.108 [main] INFO - Blocking task
+21:46:24.108 [main] INFO - Task not blocked nor deleted
+21:46:24.110 [main] INFO - Task is invalid
+21:46:24.111 [main] INFO - Blocking task
+21:46:24.111 [main] INFO - Task is active
+21:46:24.112 [main] INFO - Converting entity to socket dto
+21:46:24.112 [main] INFO - Converting task to dto
+21:46:24.112 [main] INFO - Converting category to dto
+21:46:24.112 [main] INFO - Category converted to dto
+21:46:24.112 [main] INFO - Task converted to dto
+21:46:24.112 [main] INFO - Entity converted to socket dto
+21:46:24.113 [main] INFO - Task blocked
+21:46:24.113 [main] INFO - Task blocked/deleted
+21:46:24.212 [main] INFO - Finding user by username: testUser
+21:46:24.212 [main] INFO - User found
+21:46:24.212 [main] INFO - Converting entity to user
+21:46:24.212 [main] INFO - Entity converted to user
+21:46:24.217 [main] INFO - Getting user with token: validToken
+21:46:24.217 [main] INFO - User found
+21:46:24.218 [main] INFO - Converting entity to user
+21:46:24.218 [main] INFO - Entity converted to user
+21:46:24.222 [main] INFO - Blocking user: testUser
+21:46:24.222 [main] INFO - User found
+21:46:24.222 [main] INFO - User is not null
+21:46:24.222 [main] INFO - User set to inactive
+21:46:24.222 [main] INFO - User updated
+21:46:24.223 [main] INFO - Dashboard pinged
+21:46:24.227 [main] INFO - Blocking user: nonExistingUser
+21:46:24.227 [main] INFO - User found
+21:46:24.233 [main] INFO - Adding user: testUser
+21:46:24.233 [main] INFO - User data is valid
+21:46:24.233 [main] INFO - Password encrypted
+21:46:24.233 [main] INFO - Converting user to entity
+21:46:24.233 [main] INFO - User converted to entity
+21:46:24.233 [main] INFO - User converted to entity
+21:46:24.234 [main] INFO - User confirmed
+21:46:24.234 [main] INFO - User persisted
+21:46:24.234 [main] INFO - Dashboard pinged
+21:46:24.238 [main] INFO - Blocking user: testUser
+21:46:24.238 [main] INFO - User found
+21:46:24.238 [main] INFO - User is not null
+21:46:24.238 [main] INFO - User set to inactive
+21:46:24.238 [main] INFO - User updated
+21:46:24.239 [main] INFO - Dashboard pinged
+21:46:24.242 [main] INFO - Removing user: testUser
+21:46:24.242 [main] INFO - User found
+21:46:24.242 [main] INFO - User is not null
+21:46:24.243 [main] INFO - User removed
+21:46:24.243 [main] INFO - Dashboard pinged
+21:46:24.246 [main] INFO - Blocking user: nonExistingUser
+21:46:24.246 [main] INFO - User found
+21:46:24.249 [main] INFO - Getting all users
+21:46:24.249 [main] INFO - Users found
+21:46:24.252 [main] INFO - Removing user: testUser
+21:46:24.253 [main] INFO - User found
+21:46:24.253 [main] INFO - User is not null
+21:46:24.253 [main] INFO - User removed
+21:46:24.253 [main] INFO - Dashboard pinged
+21:47:27.931 [main] INFO - Restoring task
+21:47:27.939 [main] INFO - Converting entity to socket dto
+21:47:27.939 [main] INFO - Converting task to dto
+21:47:27.940 [main] INFO - Converting category to dto
+21:47:27.941 [main] INFO - Category converted to dto
+21:47:27.954 [main] INFO - Converting task to entity
+21:47:27.955 [main] INFO - Task converted to entity
+21:47:27.959 [main] INFO - Converting task to dto
+21:47:27.959 [main] INFO - Converting category to dto
+21:47:27.960 [main] INFO - Category converted to dto
+21:47:27.960 [main] INFO - Task converted to dto
+21:47:27.962 [main] INFO - Creating category
+21:47:27.962 [main] INFO - Category created
+21:47:27.962 [main] INFO - Sending ping to dashboard
+21:47:27.968 [main] INFO - Task is valid
+21:47:27.970 [main] INFO - Restoring task
+21:47:27.970 [main] INFO - Task not restored
+21:47:27.972 [main] INFO - Converting task to dto
+21:47:27.973 [main] INFO - Converting category to dto
+21:47:27.973 [main] INFO - Category converted to dto
+21:47:27.973 [main] INFO - Task converted to dto
+21:47:27.974 [main] INFO - Blocking task
+21:47:27.974 [main] INFO - Task not blocked nor deleted
+21:47:27.976 [main] INFO - Task is invalid
+21:47:27.978 [main] INFO - Blocking task
+21:47:27.978 [main] INFO - Task is active
+21:47:27.978 [main] INFO - Converting entity to socket dto
+21:47:27.978 [main] INFO - Converting task to dto
+21:47:27.978 [main] INFO - Converting category to dto
+21:47:27.979 [main] INFO - Category converted to dto
+21:47:27.979 [main] INFO - Task converted to dto
+21:47:27.979 [main] INFO - Entity converted to socket dto
+21:47:27.979 [main] INFO - Task blocked
+21:47:27.979 [main] INFO - Task blocked/deleted
+21:47:28.091 [main] INFO - Finding user by username: testUser
+21:47:28.091 [main] INFO - User found
+21:47:28.091 [main] INFO - Converting entity to user
+21:47:28.091 [main] INFO - Entity converted to user
+21:47:28.097 [main] INFO - Getting user with token: validToken
+21:47:28.097 [main] INFO - User found
+21:47:28.097 [main] INFO - Converting entity to user
+21:47:28.097 [main] INFO - Entity converted to user
+21:47:28.101 [main] INFO - Blocking user: testUser
+21:47:28.102 [main] INFO - User found
+21:47:28.102 [main] INFO - User is not null
+21:47:28.102 [main] INFO - User set to inactive
+21:47:28.103 [main] INFO - User updated
+21:47:28.103 [main] INFO - Dashboard pinged
+21:47:28.107 [main] INFO - Blocking user: nonExistingUser
+21:47:28.107 [main] INFO - User found
+21:47:28.114 [main] INFO - Adding user: testUser
+21:47:28.114 [main] INFO - User data is valid
+21:47:28.114 [main] INFO - Password encrypted
+21:47:28.114 [main] INFO - Converting user to entity
+21:47:28.114 [main] INFO - User converted to entity
+21:47:28.114 [main] INFO - User converted to entity
+21:47:28.114 [main] INFO - User confirmed
+21:47:28.114 [main] INFO - User persisted
+21:47:28.115 [main] INFO - Dashboard pinged
+21:47:28.118 [main] INFO - Blocking user: testUser
+21:47:28.119 [main] INFO - User found
+21:47:28.119 [main] INFO - User is not null
+21:47:28.119 [main] INFO - User set to inactive
+21:47:28.119 [main] INFO - User updated
+21:47:28.119 [main] INFO - Dashboard pinged
+21:47:28.122 [main] INFO - Removing user: testUser
+21:47:28.122 [main] INFO - User found
+21:47:28.123 [main] INFO - User is not null
+21:47:28.123 [main] INFO - User removed
+21:47:28.123 [main] INFO - Dashboard pinged
+21:47:28.125 [main] INFO - Blocking user: nonExistingUser
+21:47:28.126 [main] INFO - User found
+21:47:28.128 [main] INFO - Getting all users
+21:47:28.128 [main] INFO - Users found
+21:47:28.130 [main] INFO - Removing user: testUser
+21:47:28.131 [main] INFO - User found
+21:47:28.131 [main] INFO - User is not null
+21:47:28.131 [main] INFO - User removed
+21:47:28.131 [main] INFO - Dashboard pinged
+21:48:15.553 [main] INFO - Restoring task
+21:48:15.560 [main] INFO - Converting entity to socket dto
+21:48:15.560 [main] INFO - Converting task to dto
+21:48:15.561 [main] INFO - Converting category to dto
+21:48:15.562 [main] INFO - Category converted to dto
+21:48:15.562 [main] INFO - Task converted to dto
+21:48:15.562 [main] INFO - Entity converted to socket dto
+21:48:15.563 [main] INFO - Task restored
+21:48:15.577 [main] INFO - Converting task to entity
+21:48:15.577 [main] INFO - Task converted to entity
+21:48:15.581 [main] INFO - Converting task to dto
+21:48:15.581 [main] INFO - Converting category to dto
+21:48:15.581 [main] INFO - Category converted to dto
+21:48:15.581 [main] INFO - Task converted to dto
+21:48:15.584 [main] INFO - Creating category
+21:48:15.584 [main] INFO - Category created
+21:48:15.585 [main] INFO - Sending ping to dashboard
+21:48:15.591 [main] INFO - Task is valid
+21:48:15.592 [main] INFO - Restoring task
+21:48:15.592 [main] INFO - Task not restored
+21:48:15.594 [main] INFO - Converting task to dto
+21:48:15.594 [main] INFO - Converting category to dto
+21:48:15.595 [main] INFO - Category converted to dto
+21:48:15.595 [main] INFO - Task converted to dto
+21:48:15.596 [main] INFO - Blocking task
+21:48:15.596 [main] INFO - Task not blocked nor deleted
+21:48:15.598 [main] INFO - Task is invalid
+21:48:15.599 [main] INFO - Blocking task
+21:48:15.600 [main] INFO - Task is active
+21:48:15.600 [main] INFO - Converting entity to socket dto
+21:48:15.600 [main] INFO - Converting task to dto
+21:48:15.600 [main] INFO - Converting category to dto
+21:48:15.600 [main] INFO - Category converted to dto
+21:48:15.600 [main] INFO - Task converted to dto
+21:48:15.600 [main] INFO - Entity converted to socket dto
+21:48:15.600 [main] INFO - Task blocked
+21:48:15.600 [main] INFO - Task blocked/deleted
+21:48:15.723 [main] INFO - Finding user by username: testUser
+21:48:15.723 [main] INFO - User found
+21:48:15.723 [main] INFO - Converting entity to user
+21:48:15.724 [main] INFO - Entity converted to user
+21:48:15.729 [main] INFO - Getting user with token: validToken
+21:48:15.730 [main] INFO - User found
+21:48:15.730 [main] INFO - Converting entity to user
+21:48:15.730 [main] INFO - Entity converted to user
+21:48:15.735 [main] INFO - Blocking user: testUser
+21:48:15.735 [main] INFO - User found
+21:48:15.735 [main] INFO - User is not null
+21:48:15.735 [main] INFO - User set to inactive
+21:48:15.735 [main] INFO - User updated
+21:48:15.736 [main] INFO - Dashboard pinged
+21:48:15.739 [main] INFO - Blocking user: nonExistingUser
+21:48:15.740 [main] INFO - User found
+21:48:15.746 [main] INFO - Adding user: testUser
+21:48:15.746 [main] INFO - User data is valid
+21:48:15.746 [main] INFO - Password encrypted
+21:48:15.746 [main] INFO - Converting user to entity
+21:48:15.746 [main] INFO - User converted to entity
+21:48:15.746 [main] INFO - User converted to entity
+21:48:15.746 [main] INFO - User confirmed
+21:48:15.747 [main] INFO - User persisted
+21:48:15.747 [main] INFO - Dashboard pinged
+21:48:15.751 [main] INFO - Blocking user: testUser
+21:48:15.751 [main] INFO - User found
+21:48:15.751 [main] INFO - User is not null
+21:48:15.751 [main] INFO - User set to inactive
+21:48:15.752 [main] INFO - User updated
+21:48:15.752 [main] INFO - Dashboard pinged
+21:48:15.755 [main] INFO - Removing user: testUser
+21:48:15.756 [main] INFO - User found
+21:48:15.756 [main] INFO - User is not null
+21:48:15.756 [main] INFO - User removed
+21:48:15.756 [main] INFO - Dashboard pinged
+21:48:15.759 [main] INFO - Blocking user: nonExistingUser
+21:48:15.759 [main] INFO - User found
+21:48:15.763 [main] INFO - Getting all users
+21:48:15.763 [main] INFO - Users found
+21:48:15.766 [main] INFO - Removing user: testUser
+21:48:15.767 [main] INFO - User found
+21:48:15.767 [main] INFO - User is not null
+21:48:15.767 [main] INFO - User removed
+21:48:15.767 [main] INFO - Dashboard pinged
+21:53:10.059 [main] INFO - Restoring task
+21:53:10.070 [main] INFO - Converting entity to socket dto
+21:53:10.070 [main] INFO - Converting task to dto
+21:53:10.073 [main] INFO - Converting category to dto
+21:53:10.073 [main] INFO - Category converted to dto
+21:53:10.073 [main] INFO - Task converted to dto
+21:53:10.074 [main] INFO - Entity converted to socket dto
+21:53:10.075 [main] INFO - Task restored
+21:53:10.089 [main] INFO - Converting task to entity
+21:53:10.089 [main] INFO - Task converted to entity
+21:53:10.095 [main] INFO - Converting task to dto
+21:53:10.095 [main] INFO - Converting category to dto
+21:53:10.095 [main] INFO - Category converted to dto
+21:53:10.095 [main] INFO - Task converted to dto
+21:53:10.099 [main] INFO - Creating category
+21:53:10.099 [main] INFO - Category created
+21:53:10.099 [main] INFO - Sending ping to dashboard
+21:53:10.107 [main] INFO - Task is valid
+21:53:10.108 [main] INFO - Restoring task
+21:53:10.109 [main] INFO - Task not restored
+21:53:10.111 [main] INFO - Converting task to dto
+21:53:10.111 [main] INFO - Converting category to dto
+21:53:10.111 [main] INFO - Category converted to dto
+21:53:10.111 [main] INFO - Task converted to dto
+21:53:10.113 [main] INFO - Blocking task
+21:53:10.113 [main] INFO - Task not blocked nor deleted
+21:53:10.115 [main] INFO - Task is invalid
+21:53:10.117 [main] INFO - Blocking task
+21:53:10.117 [main] INFO - Task is active
+21:53:10.118 [main] INFO - Converting entity to socket dto
+21:53:10.118 [main] INFO - Converting task to dto
+21:53:10.118 [main] INFO - Converting category to dto
+21:53:10.118 [main] INFO - Category converted to dto
+21:53:10.118 [main] INFO - Task converted to dto
+21:53:10.118 [main] INFO - Entity converted to socket dto
+21:53:10.118 [main] INFO - Task blocked
+21:53:10.118 [main] INFO - Task blocked/deleted
+21:53:10.259 [main] INFO - Finding user by username: testUser
+21:53:10.260 [main] INFO - User found
+21:53:10.260 [main] INFO - Converting entity to user
+21:53:10.260 [main] INFO - Entity converted to user
+21:53:10.265 [main] INFO - Getting user with token: validToken
+21:53:10.265 [main] INFO - User found
+21:53:10.265 [main] INFO - Converting entity to user
+21:53:10.265 [main] INFO - Entity converted to user
+21:53:10.269 [main] INFO - Blocking user: testUser
+21:53:10.270 [main] INFO - User found
+21:53:10.270 [main] INFO - User is not null
+21:53:10.270 [main] INFO - User set to inactive
+21:53:10.270 [main] INFO - User updated
+21:53:10.270 [main] INFO - Dashboard pinged
+21:53:10.273 [main] INFO - Blocking user: nonExistingUser
+21:53:10.274 [main] INFO - User found
+21:53:10.280 [main] INFO - Adding user: testUser
+21:53:10.281 [main] INFO - User data is valid
+21:53:10.281 [main] INFO - Password encrypted
+21:53:10.281 [main] INFO - Converting user to entity
+21:53:10.281 [main] INFO - User converted to entity
+21:53:10.281 [main] INFO - User converted to entity
+21:53:10.281 [main] INFO - User confirmed
+21:53:10.281 [main] INFO - User persisted
+21:53:10.281 [main] INFO - Dashboard pinged
+21:53:10.285 [main] INFO - Blocking user: testUser
+21:53:10.285 [main] INFO - User found
+21:53:10.286 [main] INFO - User is not null
+21:53:10.286 [main] INFO - User set to inactive
+21:53:10.286 [main] INFO - User updated
+21:53:10.286 [main] INFO - Dashboard pinged
+21:53:10.289 [main] INFO - Removing user: testUser
+21:53:10.290 [main] INFO - User found
+21:53:10.290 [main] INFO - User is not null
+21:53:10.290 [main] INFO - User removed
+21:53:10.290 [main] INFO - Dashboard pinged
+21:53:10.293 [main] INFO - Blocking user: nonExistingUser
+21:53:10.293 [main] INFO - User found
+21:53:10.296 [main] INFO - Getting all users
+21:53:10.296 [main] INFO - Users found
+21:53:10.299 [main] INFO - Removing user: testUser
+21:53:10.299 [main] INFO - User found
+21:53:10.299 [main] INFO - User is not null
+21:53:10.300 [main] INFO - User removed
+21:53:10.300 [main] INFO - Dashboard pinged
+21:54:26.348 [main] INFO - Restoring task
+21:54:26.357 [main] INFO - Converting entity to socket dto
+21:54:26.358 [main] INFO - Converting task to dto
+21:54:26.360 [main] INFO - Converting category to dto
+21:54:26.360 [main] INFO - Category converted to dto
+21:54:26.360 [main] INFO - Task converted to dto
+21:54:26.360 [main] INFO - Entity converted to socket dto
+21:54:26.361 [main] INFO - Task restored
+21:54:26.372 [main] INFO - Converting task to entity
+21:54:26.373 [main] INFO - Task converted to entity
+21:54:26.377 [main] INFO - Converting task to dto
+21:54:26.377 [main] INFO - Converting category to dto
+21:54:26.377 [main] INFO - Category converted to dto
+21:54:26.377 [main] INFO - Task converted to dto
+21:54:26.380 [main] INFO - Creating category
+21:54:26.380 [main] INFO - Category created
+21:54:26.381 [main] INFO - Sending ping to dashboard
+21:54:26.386 [main] INFO - Task is valid
+21:54:26.388 [main] INFO - Restoring task
+21:54:26.388 [main] INFO - Task not restored
+21:54:26.390 [main] INFO - Converting task to dto
+21:54:26.390 [main] INFO - Converting category to dto
+21:54:26.391 [main] INFO - Category converted to dto
+21:54:26.391 [main] INFO - Task converted to dto
+21:54:26.392 [main] INFO - Blocking task
+21:54:26.392 [main] INFO - Task not blocked nor deleted
+21:54:26.394 [main] INFO - Task is invalid
+21:54:26.396 [main] INFO - Blocking task
+21:54:26.396 [main] INFO - Task is active
+21:54:26.396 [main] INFO - Converting entity to socket dto
+21:54:26.397 [main] INFO - Converting task to dto
+21:54:26.397 [main] INFO - Converting category to dto
+21:54:26.397 [main] INFO - Category converted to dto
+21:54:26.397 [main] INFO - Task converted to dto
+21:54:26.397 [main] INFO - Entity converted to socket dto
+21:54:26.397 [main] INFO - Task blocked
+21:54:26.397 [main] INFO - Task blocked/deleted
+21:54:26.531 [main] INFO - Finding user by username: testUser
+21:54:26.531 [main] INFO - User found
+21:54:26.531 [main] INFO - Converting entity to user
+21:54:26.531 [main] INFO - Entity converted to user
+21:54:26.536 [main] INFO - Getting user with token: validToken
+21:54:26.537 [main] INFO - User found
+21:54:26.537 [main] INFO - Converting entity to user
+21:54:26.537 [main] INFO - Entity converted to user
+21:54:26.541 [main] INFO - Blocking user: testUser
+21:54:26.542 [main] INFO - User found
+21:54:26.542 [main] INFO - User is not null
+21:54:26.542 [main] INFO - User set to inactive
+21:54:26.542 [main] INFO - User updated
+21:54:26.542 [main] INFO - Dashboard pinged
+21:54:26.546 [main] INFO - Blocking user: nonExistingUser
+21:54:26.546 [main] INFO - User found
+21:54:26.551 [main] INFO - Adding user: testUser
+21:54:26.551 [main] INFO - User data is valid
+21:54:26.552 [main] INFO - Password encrypted
+21:54:26.552 [main] INFO - Converting user to entity
+21:54:26.552 [main] INFO - User converted to entity
+21:54:26.552 [main] INFO - User converted to entity
+21:54:26.552 [main] INFO - User confirmed
+21:54:26.552 [main] INFO - User persisted
+21:54:26.552 [main] INFO - Dashboard pinged
+21:54:26.556 [main] INFO - Blocking user: testUser
+21:54:26.556 [main] INFO - User found
+21:54:26.556 [main] INFO - User is not null
+21:54:26.556 [main] INFO - User set to inactive
+21:54:26.556 [main] INFO - User updated
+21:54:26.557 [main] INFO - Dashboard pinged
+21:54:26.559 [main] INFO - Removing user: testUser
+21:54:26.560 [main] INFO - User found
+21:54:26.560 [main] INFO - User is not null
+21:54:26.560 [main] INFO - User removed
+21:54:26.560 [main] INFO - Dashboard pinged
+21:54:26.563 [main] INFO - Blocking user: nonExistingUser
+21:54:26.563 [main] INFO - User found
+21:54:26.566 [main] INFO - Getting all users
+21:54:26.566 [main] INFO - Users found
+21:54:26.569 [main] INFO - Removing user: testUser
+21:54:26.569 [main] INFO - User found
+21:54:26.570 [main] INFO - User is not null
+21:54:26.570 [main] INFO - User removed
+21:54:26.570 [main] INFO - Dashboard pinged
+21:55:28.621 [main] INFO - Restoring task
+21:55:28.630 [main] INFO - Converting entity to socket dto
+21:55:28.630 [main] INFO - Converting task to dto
+21:55:28.632 [main] INFO - Converting category to dto
+21:55:28.632 [main] INFO - Category converted to dto
+21:55:28.632 [main] INFO - Task converted to dto
+21:55:28.633 [main] INFO - Entity converted to socket dto
+21:55:28.634 [main] INFO - Task restored
+21:55:28.645 [main] INFO - Converting task to entity
+21:55:28.646 [main] INFO - Task converted to entity
+21:55:28.650 [main] INFO - Converting task to dto
+21:55:28.650 [main] INFO - Converting category to dto
+21:55:28.650 [main] INFO - Category converted to dto
+21:55:28.650 [main] INFO - Task converted to dto
+21:55:28.652 [main] INFO - Creating category
+21:55:28.653 [main] INFO - Category created
+21:55:28.653 [main] INFO - Sending ping to dashboard
+21:55:28.659 [main] INFO - Task is valid
+21:55:28.661 [main] INFO - Restoring task
+21:55:28.661 [main] INFO - Task not restored
+21:55:28.664 [main] INFO - Converting task to dto
+21:55:28.664 [main] INFO - Converting category to dto
+21:55:28.664 [main] INFO - Category converted to dto
+21:55:28.664 [main] INFO - Task converted to dto
+21:55:28.666 [main] INFO - Blocking task
+21:55:28.666 [main] INFO - Task not blocked nor deleted
+21:55:28.668 [main] INFO - Task is invalid
+21:55:28.669 [main] INFO - Blocking task
+21:55:28.670 [main] INFO - Task is active
+21:55:28.670 [main] INFO - Converting entity to socket dto
+21:55:28.670 [main] INFO - Converting task to dto
+21:55:28.670 [main] INFO - Converting category to dto
+21:55:28.670 [main] INFO - Category converted to dto
+21:55:28.670 [main] INFO - Task converted to dto
+21:55:28.670 [main] INFO - Entity converted to socket dto
+21:55:28.670 [main] INFO - Task blocked
+21:55:28.670 [main] INFO - Task blocked/deleted
+21:55:28.788 [main] INFO - Finding user by username: testUser
+21:55:28.788 [main] INFO - User found
+21:55:28.788 [main] INFO - Converting entity to user
+21:55:28.788 [main] INFO - Entity converted to user
+21:55:28.793 [main] INFO - Getting user with token: validToken
+21:55:28.793 [main] INFO - User found
+21:55:28.793 [main] INFO - Converting entity to user
+21:55:28.793 [main] INFO - Entity converted to user
+21:55:28.797 [main] INFO - Blocking user: testUser
+21:55:28.797 [main] INFO - User found
+21:55:28.797 [main] INFO - User is not null
+21:55:28.797 [main] INFO - User set to inactive
+21:55:28.797 [main] INFO - User updated
+21:55:28.798 [main] INFO - Dashboard pinged
+21:55:28.801 [main] INFO - Blocking user: nonExistingUser
+21:55:28.801 [main] INFO - User found
+21:55:28.807 [main] INFO - Adding user: testUser
+21:55:28.807 [main] INFO - User data is valid
+21:55:28.808 [main] INFO - Password encrypted
+21:55:28.808 [main] INFO - Converting user to entity
+21:55:28.808 [main] INFO - User converted to entity
+21:55:28.808 [main] INFO - User converted to entity
+21:55:28.808 [main] INFO - User confirmed
+21:55:28.808 [main] INFO - User persisted
+21:55:28.808 [main] INFO - Dashboard pinged
+21:55:28.812 [main] INFO - Blocking user: testUser
+21:55:28.813 [main] INFO - User found
+21:55:28.813 [main] INFO - User is not null
+21:55:28.813 [main] INFO - User set to inactive
+21:55:28.813 [main] INFO - User updated
+21:55:28.813 [main] INFO - Dashboard pinged
+21:55:28.816 [main] INFO - Removing user: testUser
+21:55:28.816 [main] INFO - User found
+21:55:28.817 [main] INFO - User is not null
+21:55:28.817 [main] INFO - User removed
+21:55:28.817 [main] INFO - Dashboard pinged
+21:55:28.819 [main] INFO - Blocking user: nonExistingUser
+21:55:28.819 [main] INFO - User found
+21:55:28.822 [main] INFO - Getting all users
+21:55:28.822 [main] INFO - Users found
+21:55:28.825 [main] INFO - Removing user: testUser
+21:55:28.825 [main] INFO - User found
+21:55:28.825 [main] INFO - User is not null
+21:55:28.825 [main] INFO - User removed
+21:55:28.826 [main] INFO - Dashboard pinged
+21:56:16.053 [main] INFO - Restoring task
+21:56:16.061 [main] INFO - Converting entity to socket dto
+21:56:16.061 [main] INFO - Converting task to dto
+21:56:16.063 [main] INFO - Converting category to dto
+21:56:16.063 [main] INFO - Category converted to dto
+21:56:16.063 [main] INFO - Task converted to dto
+21:56:16.063 [main] INFO - Entity converted to socket dto
+21:56:16.064 [main] INFO - Task restored
+21:56:16.074 [main] INFO - Converting task to entity
+21:56:16.075 [main] INFO - Task converted to entity
+21:56:16.079 [main] INFO - Converting task to dto
+21:56:16.079 [main] INFO - Converting category to dto
+21:56:16.079 [main] INFO - Category converted to dto
+21:56:16.079 [main] INFO - Task converted to dto
+21:56:16.082 [main] INFO - Creating category
+21:56:16.082 [main] INFO - Category created
+21:56:16.082 [main] INFO - Sending ping to dashboard
+21:56:16.088 [main] INFO - Task is valid
+21:56:16.090 [main] INFO - Restoring task
+21:56:16.090 [main] INFO - Task not restored
+21:56:16.092 [main] INFO - Converting task to dto
+21:56:16.092 [main] INFO - Converting category to dto
+21:56:16.092 [main] INFO - Category converted to dto
+21:56:16.092 [main] INFO - Task converted to dto
+21:56:16.094 [main] INFO - Blocking task
+21:56:16.094 [main] INFO - Task not blocked nor deleted
+21:56:16.095 [main] INFO - Task is invalid
+21:56:16.097 [main] INFO - Blocking task
+21:56:16.098 [main] INFO - Task is active
+21:56:16.098 [main] INFO - Converting entity to socket dto
+21:56:16.098 [main] INFO - Converting task to dto
+21:56:16.098 [main] INFO - Converting category to dto
+21:56:16.098 [main] INFO - Category converted to dto
+21:56:16.098 [main] INFO - Task converted to dto
+21:56:16.098 [main] INFO - Entity converted to socket dto
+21:56:16.098 [main] INFO - Task blocked
+21:56:16.098 [main] INFO - Task blocked/deleted
+21:56:16.214 [main] INFO - Finding user by username: testUser
+21:56:16.215 [main] INFO - User found
+21:56:16.215 [main] INFO - Converting entity to user
+21:56:16.215 [main] INFO - Entity converted to user
+21:56:16.219 [main] INFO - Getting user with token: validToken
+21:56:16.219 [main] INFO - User found
+21:56:16.219 [main] INFO - Converting entity to user
+21:56:16.219 [main] INFO - Entity converted to user
+21:56:16.223 [main] INFO - Blocking user: testUser
+21:56:16.224 [main] INFO - User found
+21:56:16.224 [main] INFO - User is not null
+21:56:16.224 [main] INFO - User set to inactive
+21:56:16.224 [main] INFO - User updated
+21:56:16.224 [main] INFO - Dashboard pinged
+21:56:16.228 [main] INFO - Blocking user: nonExistingUser
+21:56:16.229 [main] INFO - User found
+21:56:16.235 [main] INFO - Adding user: testUser
+21:56:16.235 [main] INFO - User data is valid
+21:56:16.235 [main] INFO - Password encrypted
+21:56:16.235 [main] INFO - Converting user to entity
+21:56:16.235 [main] INFO - User converted to entity
+21:56:16.236 [main] INFO - User converted to entity
+21:56:16.236 [main] INFO - User confirmed
+21:56:16.236 [main] INFO - User persisted
+21:56:16.236 [main] INFO - Dashboard pinged
+21:56:16.240 [main] INFO - Blocking user: testUser
+21:56:16.241 [main] INFO - User found
+21:56:16.241 [main] INFO - User is not null
+21:56:16.241 [main] INFO - User set to inactive
+21:56:16.241 [main] INFO - User updated
+21:56:16.241 [main] INFO - Dashboard pinged
+21:56:16.244 [main] INFO - Removing user: testUser
+21:56:16.245 [main] INFO - User found
+21:56:16.245 [main] INFO - User is not null
+21:56:16.245 [main] INFO - User removed
+21:56:16.245 [main] INFO - Dashboard pinged
+21:56:16.249 [main] INFO - Blocking user: nonExistingUser
+21:56:16.249 [main] INFO - User found
+21:56:16.252 [main] INFO - Getting all users
+21:56:16.252 [main] INFO - Users found
+21:56:16.254 [main] INFO - Removing user: testUser
+21:56:16.255 [main] INFO - User found
+21:56:16.255 [main] INFO - User is not null
+21:56:16.255 [main] INFO - User removed
+21:56:16.255 [main] INFO - Dashboard pinged
+22:10:20.039 [main] INFO - Restoring task
+22:10:20.048 [main] INFO - Converting entity to socket dto
+22:10:20.049 [main] INFO - Converting task to dto
+22:10:20.050 [main] INFO - Converting category to dto
+22:10:20.050 [main] INFO - Category converted to dto
+22:10:20.051 [main] INFO - Task converted to dto
+22:10:20.051 [main] INFO - Entity converted to socket dto
+22:10:20.051 [main] INFO - Task restored
+22:10:20.062 [main] INFO - Converting task to entity
+22:10:20.062 [main] INFO - Task converted to entity
+22:10:20.067 [main] INFO - Converting task to dto
+22:10:20.067 [main] INFO - Converting category to dto
+22:10:20.067 [main] INFO - Category converted to dto
+22:10:20.067 [main] INFO - Task converted to dto
+22:10:20.070 [main] INFO - Creating category
+22:10:20.070 [main] INFO - Category created
+22:10:20.070 [main] INFO - Sending ping to dashboard
+22:10:20.076 [main] INFO - Task is valid
+22:10:20.077 [main] INFO - Restoring task
+22:10:20.078 [main] INFO - Task not restored
+22:10:20.080 [main] INFO - Converting task to dto
+22:10:20.080 [main] INFO - Converting category to dto
+22:10:20.081 [main] INFO - Category converted to dto
+22:10:20.081 [main] INFO - Task converted to dto
+22:10:20.082 [main] INFO - Blocking task
+22:10:20.082 [main] INFO - Task not blocked nor deleted
+22:10:20.084 [main] INFO - Task is invalid
+22:10:20.086 [main] INFO - Blocking task
+22:10:20.086 [main] INFO - Task is active
+22:10:20.086 [main] INFO - Converting entity to socket dto
+22:10:20.086 [main] INFO - Converting task to dto
+22:10:20.086 [main] INFO - Converting category to dto
+22:10:20.086 [main] INFO - Category converted to dto
+22:10:20.086 [main] INFO - Task converted to dto
+22:10:20.086 [main] INFO - Entity converted to socket dto
+22:10:20.087 [main] INFO - Task blocked
+22:10:20.087 [main] INFO - Task blocked/deleted
+22:10:20.205 [main] INFO - Finding user by username: testUser
+22:10:20.205 [main] INFO - User found
+22:10:20.205 [main] INFO - Converting entity to user
+22:10:20.206 [main] INFO - Entity converted to user
+22:10:20.212 [main] INFO - Getting user with token: validToken
+22:10:20.212 [main] INFO - User found
+22:10:20.212 [main] INFO - Converting entity to user
+22:10:20.212 [main] INFO - Entity converted to user
+22:10:20.216 [main] INFO - Blocking user: testUser
+22:10:20.217 [main] INFO - User found
+22:10:20.217 [main] INFO - User is not null
+22:10:20.217 [main] INFO - User set to inactive
+22:10:20.217 [main] INFO - User updated
+22:10:20.217 [main] INFO - Dashboard pinged
+22:10:20.221 [main] INFO - Blocking user: nonExistingUser
+22:10:20.221 [main] INFO - User found
+22:10:20.227 [main] INFO - Adding user: testUser
+22:10:20.227 [main] INFO - User data is valid
+22:10:20.228 [main] INFO - Password encrypted
+22:10:20.228 [main] INFO - Converting user to entity
+22:10:20.228 [main] INFO - User converted to entity
+22:10:20.228 [main] INFO - User converted to entity
+22:10:20.228 [main] INFO - User confirmed
+22:10:20.228 [main] INFO - User persisted
+22:10:20.228 [main] INFO - Dashboard pinged
+22:10:20.232 [main] INFO - Blocking user: testUser
+22:10:20.233 [main] INFO - User found
+22:10:20.233 [main] INFO - User is not null
+22:10:20.233 [main] INFO - User set to inactive
+22:10:20.233 [main] INFO - User updated
+22:10:20.233 [main] INFO - Dashboard pinged
+22:10:20.236 [main] INFO - Removing user: testUser
+22:10:20.237 [main] INFO - User found
+22:10:20.237 [main] INFO - User is not null
+22:10:20.237 [main] INFO - User removed
+22:10:20.237 [main] INFO - Dashboard pinged
+22:10:20.242 [main] INFO - Blocking user: nonExistingUser
+22:10:20.243 [main] INFO - User found
+22:10:20.247 [main] INFO - Getting all users
+22:10:20.247 [main] INFO - Users found
+22:10:20.251 [main] INFO - Removing user: testUser
+22:10:20.252 [main] INFO - User found
+22:10:20.252 [main] INFO - User is not null
+22:10:20.252 [main] INFO - User removed
+22:10:20.252 [main] INFO - Dashboard pinged
+22:10:20.349 [main] INFO - Checking for timeouts...
+22:10:20.353 [main] INFO - User with token token has been logged out due to inactivity.
+22:10:20.357 [main] INFO - Sent logout notification to user with token token
+22:10:20.360 [main] INFO - Creating timeout...
+22:20:14.923 [main] INFO - Restoring task
+22:20:14.930 [main] INFO - Converting entity to socket dto
+22:20:14.931 [main] INFO - Converting task to dto
+22:20:14.932 [main] INFO - Converting category to dto
+22:20:14.933 [main] INFO - Category converted to dto
+22:20:14.933 [main] INFO - Task converted to dto
+22:20:14.933 [main] INFO - Entity converted to socket dto
+22:20:14.934 [main] INFO - Task restored
+22:20:14.944 [main] INFO - Converting task to entity
+22:20:14.944 [main] INFO - Task converted to entity
+22:20:14.948 [main] INFO - Converting task to dto
+22:20:14.948 [main] INFO - Converting category to dto
+22:20:14.948 [main] INFO - Category converted to dto
+22:20:14.949 [main] INFO - Task converted to dto
+22:20:14.952 [main] INFO - Creating category
+22:20:14.952 [main] INFO - Category created
+22:20:14.952 [main] INFO - Sending ping to dashboard
+22:20:14.959 [main] INFO - Task is valid
+22:20:14.961 [main] INFO - Restoring task
+22:20:14.961 [main] INFO - Task not restored
+22:20:14.963 [main] INFO - Converting task to dto
+22:20:14.963 [main] INFO - Converting category to dto
+22:20:14.963 [main] INFO - Category converted to dto
+22:20:14.963 [main] INFO - Task converted to dto
+22:20:14.965 [main] INFO - Blocking task
+22:20:14.965 [main] INFO - Task not blocked nor deleted
+22:20:14.967 [main] INFO - Task is invalid
+22:20:14.969 [main] INFO - Blocking task
+22:20:14.970 [main] INFO - Task is active
+22:20:14.970 [main] INFO - Converting entity to socket dto
+22:20:14.970 [main] INFO - Converting task to dto
+22:20:14.970 [main] INFO - Converting category to dto
+22:20:14.971 [main] INFO - Category converted to dto
+22:20:14.971 [main] INFO - Task converted to dto
+22:20:14.971 [main] INFO - Entity converted to socket dto
+22:20:14.971 [main] INFO - Task blocked
+22:20:14.971 [main] INFO - Task blocked/deleted
+22:20:15.082 [main] INFO - Finding user by username: testUser
+22:20:15.082 [main] INFO - User found
+22:20:15.082 [main] INFO - Converting entity to user
+22:20:15.083 [main] INFO - Entity converted to user
+22:20:15.087 [main] INFO - Getting user with token: validToken
+22:20:15.088 [main] INFO - User found
+22:20:15.088 [main] INFO - Converting entity to user
+22:20:15.088 [main] INFO - Entity converted to user
+22:20:15.092 [main] INFO - Blocking user: testUser
+22:20:15.092 [main] INFO - User found
+22:20:15.092 [main] INFO - User is not null
+22:20:15.092 [main] INFO - User set to inactive
+22:20:15.092 [main] INFO - User updated
+22:20:15.093 [main] INFO - Dashboard pinged
+22:20:15.096 [main] INFO - Blocking user: nonExistingUser
+22:20:15.097 [main] INFO - User found
+22:20:15.103 [main] INFO - Adding user: testUser
+22:20:15.103 [main] INFO - User data is valid
+22:20:15.103 [main] INFO - Password encrypted
+22:20:15.104 [main] INFO - Converting user to entity
+22:20:15.104 [main] INFO - User converted to entity
+22:20:15.104 [main] INFO - User converted to entity
+22:20:15.104 [main] INFO - User confirmed
+22:20:15.104 [main] INFO - User persisted
+22:20:15.104 [main] INFO - Dashboard pinged
+22:20:15.108 [main] INFO - Blocking user: testUser
+22:20:15.108 [main] INFO - User found
+22:20:15.109 [main] INFO - User is not null
+22:20:15.109 [main] INFO - User set to inactive
+22:20:15.109 [main] INFO - User updated
+22:20:15.109 [main] INFO - Dashboard pinged
+22:20:15.111 [main] INFO - Removing user: testUser
+22:20:15.112 [main] INFO - User found
+22:20:15.112 [main] INFO - User is not null
+22:20:15.112 [main] INFO - User removed
+22:20:15.112 [main] INFO - Dashboard pinged
+22:20:15.115 [main] INFO - Blocking user: nonExistingUser
+22:20:15.115 [main] INFO - User found
+22:20:15.117 [main] INFO - Getting all users
+22:20:15.117 [main] INFO - Users found
+22:20:15.120 [main] INFO - Removing user: testUser
+22:20:15.120 [main] INFO - User found
+22:20:15.120 [main] INFO - User is not null
+22:20:15.120 [main] INFO - User removed
+22:20:15.121 [main] INFO - Dashboard pinged
+22:20:15.213 [main] INFO - Checking for timeouts...
+22:20:15.216 [main] INFO - User with token token has been logged out due to inactivity.
+22:20:15.221 [main] INFO - Sent logout notification to user with token token
+22:20:15.224 [main] INFO - Creating timeout...
+22:21:43.569 [main] INFO - Restoring task
+22:21:43.576 [main] INFO - Converting entity to socket dto
+22:21:43.577 [main] INFO - Converting task to dto
+22:21:43.578 [main] INFO - Converting category to dto
+22:21:43.578 [main] INFO - Category converted to dto
+22:21:43.578 [main] INFO - Task converted to dto
+22:21:43.578 [main] INFO - Entity converted to socket dto
+22:21:43.579 [main] INFO - Task restored
+22:21:43.589 [main] INFO - Converting task to entity
+22:21:43.590 [main] INFO - Task converted to entity
+22:21:43.594 [main] INFO - Converting task to dto
+22:21:43.594 [main] INFO - Converting category to dto
+22:21:43.594 [main] INFO - Category converted to dto
+22:21:43.594 [main] INFO - Task converted to dto
+22:21:43.597 [main] INFO - Creating category
+22:21:43.597 [main] INFO - Category created
+22:21:43.597 [main] INFO - Sending ping to dashboard
+22:21:43.604 [main] INFO - Task is valid
+22:21:43.605 [main] INFO - Restoring task
+22:21:43.606 [main] INFO - Task not restored
+22:21:43.608 [main] INFO - Converting task to dto
+22:21:43.608 [main] INFO - Converting category to dto
+22:21:43.608 [main] INFO - Category converted to dto
+22:21:43.608 [main] INFO - Task converted to dto
+22:21:43.610 [main] INFO - Blocking task
+22:21:43.610 [main] INFO - Task not blocked nor deleted
+22:21:43.611 [main] INFO - Task is invalid
+22:21:43.613 [main] INFO - Blocking task
+22:21:43.613 [main] INFO - Task is active
+22:21:43.613 [main] INFO - Converting entity to socket dto
+22:21:43.614 [main] INFO - Converting task to dto
+22:21:43.614 [main] INFO - Converting category to dto
+22:21:43.614 [main] INFO - Category converted to dto
+22:21:43.614 [main] INFO - Task converted to dto
+22:21:43.614 [main] INFO - Entity converted to socket dto
+22:21:43.614 [main] INFO - Task blocked
+22:21:43.614 [main] INFO - Task blocked/deleted
+22:21:43.726 [main] INFO - Finding user by username: testUser
+22:21:43.726 [main] INFO - User found
+22:21:43.726 [main] INFO - Converting entity to user
+22:21:43.726 [main] INFO - Entity converted to user
+22:21:43.731 [main] INFO - Getting user with token: validToken
+22:21:43.731 [main] INFO - User found
+22:21:43.731 [main] INFO - Converting entity to user
+22:21:43.731 [main] INFO - Entity converted to user
+22:21:43.735 [main] INFO - Blocking user: testUser
+22:21:43.735 [main] INFO - User found
+22:21:43.735 [main] INFO - User is not null
+22:21:43.735 [main] INFO - User set to inactive
+22:21:43.736 [main] INFO - User updated
+22:21:43.736 [main] INFO - Dashboard pinged
+22:21:43.739 [main] INFO - Blocking user: nonExistingUser
+22:21:43.739 [main] INFO - User found
+22:21:43.745 [main] INFO - Adding user: testUser
+22:21:43.746 [main] INFO - User data is valid
+22:21:43.746 [main] INFO - Password encrypted
+22:21:43.746 [main] INFO - Converting user to entity
+22:21:43.746 [main] INFO - User converted to entity
+22:21:43.746 [main] INFO - User converted to entity
+22:21:43.746 [main] INFO - User confirmed
+22:21:43.747 [main] INFO - User persisted
+22:21:43.747 [main] INFO - Dashboard pinged
+22:21:43.751 [main] INFO - Blocking user: testUser
+22:21:43.751 [main] INFO - User found
+22:21:43.752 [main] INFO - User is not null
+22:21:43.752 [main] INFO - User set to inactive
+22:21:43.752 [main] INFO - User updated
+22:21:43.752 [main] INFO - Dashboard pinged
+22:21:43.755 [main] INFO - Removing user: testUser
+22:21:43.755 [main] INFO - User found
+22:21:43.756 [main] INFO - User is not null
+22:21:43.756 [main] INFO - User removed
+22:21:43.756 [main] INFO - Dashboard pinged
+22:21:43.758 [main] INFO - Blocking user: nonExistingUser
+22:21:43.759 [main] INFO - User found
+22:21:43.762 [main] INFO - Getting all users
+22:21:43.762 [main] INFO - Users found
+22:21:43.765 [main] INFO - Removing user: testUser
+22:21:43.765 [main] INFO - User found
+22:21:43.765 [main] INFO - User is not null
+22:21:43.765 [main] INFO - User removed
+22:21:43.766 [main] INFO - Dashboard pinged
+22:21:43.870 [main] INFO - Checking for timeouts...
+22:21:43.872 [main] INFO - User with token token has been logged out due to inactivity.
+22:21:43.876 [main] INFO - Sent logout notification to user with token token
+22:21:43.880 [main] INFO - Creating timeout...
+22:25:07.632 [main] INFO - Restoring task
+22:25:07.640 [main] INFO - Converting entity to socket dto
+22:25:07.640 [main] INFO - Converting task to dto
+22:25:07.642 [main] INFO - Converting category to dto
+22:25:07.642 [main] INFO - Category converted to dto
+22:25:07.643 [main] INFO - Task converted to dto
+22:25:07.643 [main] INFO - Entity converted to socket dto
+22:25:07.644 [main] INFO - Task restored
+22:25:07.655 [main] INFO - Converting task to entity
+22:25:07.656 [main] INFO - Task converted to entity
+22:25:07.660 [main] INFO - Converting task to dto
+22:25:07.660 [main] INFO - Converting category to dto
+22:25:07.660 [main] INFO - Category converted to dto
+22:25:07.660 [main] INFO - Task converted to dto
+22:25:07.663 [main] INFO - Creating category
+22:25:07.663 [main] INFO - Category created
+22:25:07.663 [main] INFO - Sending ping to dashboard
+22:25:07.669 [main] INFO - Task is valid
+22:25:07.671 [main] INFO - Restoring task
+22:25:07.671 [main] INFO - Task not restored
+22:25:07.672 [main] INFO - Converting task to dto
+22:25:07.673 [main] INFO - Converting category to dto
+22:25:07.673 [main] INFO - Category converted to dto
+22:25:07.673 [main] INFO - Task converted to dto
+22:25:07.674 [main] INFO - Blocking task
+22:25:07.674 [main] INFO - Task not blocked nor deleted
+22:25:07.676 [main] INFO - Task is invalid
+22:25:07.678 [main] INFO - Blocking task
+22:25:07.678 [main] INFO - Task is active
+22:25:07.678 [main] INFO - Converting entity to socket dto
+22:25:07.678 [main] INFO - Converting task to dto
+22:25:07.678 [main] INFO - Converting category to dto
+22:25:07.678 [main] INFO - Category converted to dto
+22:25:07.678 [main] INFO - Task converted to dto
+22:25:07.678 [main] INFO - Entity converted to socket dto
+22:25:07.679 [main] INFO - Task blocked
+22:25:07.679 [main] INFO - Task blocked/deleted
+22:25:07.786 [main] INFO - Finding user by username: testUser
+22:25:07.787 [main] INFO - User found
+22:25:07.787 [main] INFO - Converting entity to user
+22:25:07.787 [main] INFO - Entity converted to user
+22:25:07.793 [main] INFO - Getting user with token: validToken
+22:25:07.793 [main] INFO - User found
+22:25:07.793 [main] INFO - Converting entity to user
+22:25:07.794 [main] INFO - Entity converted to user
+22:25:07.798 [main] INFO - Blocking user: testUser
+22:25:07.798 [main] INFO - User found
+22:25:07.798 [main] INFO - User is not null
+22:25:07.798 [main] INFO - User set to inactive
+22:25:07.798 [main] INFO - User updated
+22:25:07.799 [main] INFO - Dashboard pinged
+22:25:07.803 [main] INFO - Blocking user: nonExistingUser
+22:25:07.803 [main] INFO - User found
+22:25:07.809 [main] INFO - Adding user: testUser
+22:25:07.810 [main] INFO - User data is valid
+22:25:07.810 [main] INFO - Password encrypted
+22:25:07.810 [main] INFO - Converting user to entity
+22:25:07.810 [main] INFO - User converted to entity
+22:25:07.810 [main] INFO - User converted to entity
+22:25:07.810 [main] INFO - User confirmed
+22:25:07.811 [main] INFO - User persisted
+22:25:07.811 [main] INFO - Dashboard pinged
+22:25:07.815 [main] INFO - Blocking user: testUser
+22:25:07.815 [main] INFO - User found
+22:25:07.815 [main] INFO - User is not null
+22:25:07.815 [main] INFO - User set to inactive
+22:25:07.816 [main] INFO - User updated
+22:25:07.816 [main] INFO - Dashboard pinged
+22:25:07.818 [main] INFO - Removing user: testUser
+22:25:07.819 [main] INFO - User found
+22:25:07.819 [main] INFO - User is not null
+22:25:07.819 [main] INFO - User removed
+22:25:07.819 [main] INFO - Dashboard pinged
+22:25:07.822 [main] INFO - Blocking user: nonExistingUser
+22:25:07.822 [main] INFO - User found
+22:25:07.826 [main] INFO - Getting all users
+22:25:07.826 [main] INFO - Users found
+22:25:07.829 [main] INFO - Removing user: testUser
+22:25:07.829 [main] INFO - User found
+22:25:07.829 [main] INFO - User is not null
+22:25:07.830 [main] INFO - User removed
+22:25:07.830 [main] INFO - Dashboard pinged
+22:25:07.945 [main] INFO - Checking for timeouts...
+22:25:07.948 [main] INFO - User with token token has been logged out due to inactivity.
+22:25:07.952 [main] INFO - Sent logout notification to user with token token
+22:25:07.956 [main] INFO - Creating timeout...
